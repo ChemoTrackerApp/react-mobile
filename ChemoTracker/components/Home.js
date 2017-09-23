@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Home from './components/Home.js';
 
-class App extends React.Component {
+class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Home />
+        <Text>This is the Home page</Text>
       </View>
     );
   }
@@ -21,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
