@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Calendar from './Calendar';
 
 class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is the Home page</Text>
+        <Calendar />
       </View>
     );
   }
@@ -13,10 +14,9 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    width: "100%",
   },
 });
 
