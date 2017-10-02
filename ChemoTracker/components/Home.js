@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Text, View, Button } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-class Home extends Component {
+class Home extends React.Component {
+  static navigationOptions = {
+    title: 'Welcome',
+  };
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text>This is the Home page</Text>
+      <View>
+        <Text>This is the home screen</Text>
+        <Button
+          onPress={() => navigate('Next')}
+          title="go to the next page"
+        />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default Home;
