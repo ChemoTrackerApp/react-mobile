@@ -8,7 +8,7 @@ class Profile extends Component {
   // const profileIcon = (<Icon size={24} name="person" color="white" />);
   static navigationOptions = {
     tabBarLabel: "Profile",
-    tabBarIcon: () => (<Icon size={24} name="person" color="white" />)
+    tabBarIcon: () => (<Icon size={24} name="person" color="#EF7A5A" />)
   }
 
   render() {

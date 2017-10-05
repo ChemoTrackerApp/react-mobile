@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class Calendar extends Component {
   static navigationOptions = {
     tabBarLabel: "Calendar",
-    tabBarIcon: () => (<Icon size={24} name="calendar" color="white" />)
+    tabBarIcon: () => (<Icon size={24} name="calendar" color="#EF7A5A" />)
   }
 
   render() {

@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class Home extends Component {
   static navigationOptions = {
     tabBarLabel: "Home",
-    tabBarIcon: () => (<Icon size={24} name="home" color="white" />)
+    tabBarIcon: () => (<Icon size={24} name="home" color="#EF7A5A" />)
   }
 
   render() {

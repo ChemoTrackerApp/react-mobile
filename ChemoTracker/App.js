@@ -19,23 +19,23 @@ const App = TabNavigator({
   tabBarPosition: 'bottom',
   tabBarOptions: {
     bottomNavigationOptions: {
-      labelColor: 'white',
-      rippleColor: 'white',
+      labelColor: '#4f4f4f',
+      rippleColor: '#C7C7CD',
       tabs: {
         Home: {
-          barBackgroundColor: '#37474F'
+          barBackgroundColor: '#fcfcfc'
         },
         Profile: {
-          barBackgroundColor: '#00796B'
+          barBackgroundColor: '#fcfcfc'
         },
         Track: {
-          barBackgroundColor: '#5D4037'
+          barBackgroundColor: '#fcfcfc'
         },
         Search: {
-          barBackgroundColor: '#f28b3c'
+          barBackgroundColor: '#fcfcfc'
         },
         Calendar: {
-          barBackgroundColor: '#5ae9fc'
+          barBackgroundColor: '#fcfcfc'
         }
       }
     }
