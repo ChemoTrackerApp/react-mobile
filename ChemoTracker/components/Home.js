@@ -1,38 +1,30 @@
-import React from 'react';
-import { StyleSheet, Text, ScrollView, Button } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Navigation from './Navigation.js';
+// import Navigation from './Navigation.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-class Home extends React.Component {
+class Home extends Component {
   static navigationOptions = {
-    title: 'Welcome',
-  };
+    tabBarLabel: "Home",
+    tabBarIcon: () => (<Icon size={24} name="home" color="white" />)
+  }
+
   render() {
-    const { navigation } = this.props.navigation;
     return (
-      <ScrollView style={styles.container}>
-        <Text>This is the home screen</Text>
-        <Navigation banner="Home Tab9" navigation={navigation}/>
-      </ScrollView>
+      <View style={styles.container}>
+        <Text>This is the Home page</Text>
+      </View>
     );
   }
 }
-
-// const Home = ({ navigation }) => (
-//   <View>
-//     <Text>HOME SCREEENNN</Text>
-//     <Navigation banner="Home Tab" navigation={navigation}/>
-//   </View>
-// );
-
-Home.navigationOptions = {
-  tabBarLabel: 'Home',
-};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

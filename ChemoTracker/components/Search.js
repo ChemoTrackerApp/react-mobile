@@ -1,14 +1,31 @@
-import React from 'react';
-import { Text, View, Button } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Navigation from './Navigation.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Search = ({ navigation }) => (
-  <Navigation banner="Search Tab" navigation={navigation} />
-);
+class Search extends Component {
+  static navigationOptions = {
+    tabBarLabel: "Search",
+    tabBarIcon: () => (<Icon size={24} name="search" color="white" />)
+  }
 
-Search.navigationOptions = {
-  tabBarLabel: 'Search',
-};
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>This is the Search page</Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default Search;
