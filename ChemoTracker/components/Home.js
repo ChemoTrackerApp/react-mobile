@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-// import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Home extends Component {
