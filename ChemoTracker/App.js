@@ -24,19 +24,7 @@ const App = TabNavigator({
       tabs: {
         Home, Profile, Track, Search, Calendar: {
           barBackgroundColor: '#fcfcfc'
-        },
-        // Profile: {
-        //   barBackgroundColor: '#fcfcfc'
-        // },
-        // Track: {
-        //   barBackgroundColor: '#fcfcfc'
-        // },
-        // Search: {
-        //   barBackgroundColor: '#fcfcfc'
-        // },
-        // Calendar: {
-        //   barBackgroundColor: '#fcfcfc'
-        // }
+        }
       }
     }
   }

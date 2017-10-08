@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from '../styles/main.js';
 
 class Profile extends Component {
   static navigationOptions = {
@@ -18,14 +19,5 @@ class Profile extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default Profile;
