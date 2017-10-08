@@ -22,21 +22,21 @@ const App = TabNavigator({
       labelColor: '#4f4f4f',
       rippleColor: '#C7C7CD',
       tabs: {
-        Home: {
+        Home, Profile, Track, Search, Calendar: {
           barBackgroundColor: '#fcfcfc'
         },
-        Profile: {
-          barBackgroundColor: '#fcfcfc'
-        },
-        Track: {
-          barBackgroundColor: '#fcfcfc'
-        },
-        Search: {
-          barBackgroundColor: '#fcfcfc'
-        },
-        Calendar: {
-          barBackgroundColor: '#fcfcfc'
-        }
+        // Profile: {
+        //   barBackgroundColor: '#fcfcfc'
+        // },
+        // Track: {
+        //   barBackgroundColor: '#fcfcfc'
+        // },
+        // Search: {
+        //   barBackgroundColor: '#fcfcfc'
+        // },
+        // Calendar: {
+        //   barBackgroundColor: '#fcfcfc'
+        // }
       }
     }
   }
