@@ -1,5 +1,8 @@
 # react-mobile
 
+NOTE: 
+- Make sure you have ```node >= v6.0 AND npm v4``` installed, or else, it wont work
+- Make sure you have Watchman installed before doing npm start
 
 ## To run the application
 ```
