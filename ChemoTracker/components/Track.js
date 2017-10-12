@@ -4,11 +4,12 @@ import { TabNavigator } from 'react-navigation';
 import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
+import color from '../styles/color.js';
 
 class Track extends Component {
   static navigationOptions = {
     tabBarLabel: "Track",
-    tabBarIcon: () => (<Icon size={24} name="heartbeat" color="#EF7A5A" />)
+    tabBarIcon: () => (<Icon size={24} name="heartbeat" color={color.navBarIcon} />)
   }
 
   render() {

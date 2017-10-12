@@ -4,11 +4,12 @@ import { TabNavigator } from 'react-navigation';
 import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/main.js';
+import color from '../styles/color.js';
 
 class Profile extends Component {
   static navigationOptions = {
     tabBarLabel: "Profile",
-    tabBarIcon: () => (<Icon size={24} name="person" color="#EF7A5A" />)
+    tabBarIcon: () => (<Icon size={24} name="person" color={color.navBarIcon} />)
   }
 
   render() {

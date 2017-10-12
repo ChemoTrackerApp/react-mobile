@@ -4,11 +4,12 @@ import { TabNavigator } from 'react-navigation';
 import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
+import color from '../styles/color.js';
 
 class Search extends Component {
   static navigationOptions = {
     tabBarLabel: "Search",
-    tabBarIcon: () => (<Icon size={24} name="search" color="#EF7A5A" />)
+    tabBarIcon: () => (<Icon size={24} name="search" color={color.navBarIcon} />)
   }
 
   render() {
