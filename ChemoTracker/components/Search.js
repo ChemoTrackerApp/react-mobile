@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
+import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
 
-class Home extends Component {
+class Search extends Component {
   static navigationOptions = {
-    tabBarLabel: "Home",
-    tabBarIcon: () => (<Icon size={24} name="home" color={color.navBarIcon} />)
+    tabBarLabel: "Search",
+    tabBarIcon: () => (<Icon size={24} name="search" color={color.navBarIcon} />)
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is the Home page</Text>
+        <Text>This is the Search page</Text>
       </View>
     );
   }
 }
 
-export default Home;
+export default Search;
