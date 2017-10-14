@@ -17,8 +17,13 @@ class Calendar extends Component {
   }
 
   renderItem(item) {
+    console.log("item", item);
     return (
-      <View style={[style.item, {height: item.height}]}><Text>{item.name}</Text></View>
+      <View style={[style.itemView, {height: item.height}]}>
+        <Text style={style.itemText}>
+          {item.text}
+        </Text>
+      </View>
     );
   }
 
@@ -70,13 +75,17 @@ class Calendar extends Component {
 }
 
 const style = StyleSheet.create({
-  item: {
+  itemView: {
     backgroundColor: 'white',
     flex: 1,
     borderRadius: 5,
     padding: 10,
     marginRight: 10,
     marginTop: 17
+  },
+  itemText: {
+    color: 'black',
+    fontSize: 16
   }
 });
 
