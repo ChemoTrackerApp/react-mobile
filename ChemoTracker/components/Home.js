@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Calendar />
+        <Text>This is the Home page</Text>
       </View>
     );
   }
