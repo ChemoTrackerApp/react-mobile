@@ -9,6 +9,9 @@ import color from '../styles/color.js';
 class Calendar extends Component {
   constructor(props){
     super(props);
+    this.onDayPress = this.onDayPress.bind(this);
+    this.onDayChange = this.onDayChange.bind(this);
+    this.rowHasChanged = this.rowHasChanged.bind(this);
   }
 
   static navigationOptions = {
@@ -33,6 +36,18 @@ class Calendar extends Component {
     );
   }
 
+  onDayPress(day) {
+    console.log("day pressed", day);
+  }
+
+  onDayChange(day) {
+    console.log("day change", day);
+  }
+
+  rowHasChanged(r1, r2) {
+    return r1.text !== r2.text;
+  }
+
   render() {
     const d = new Date();
     const date = d.getDate();
@@ -52,11 +67,11 @@ class Calendar extends Component {
           selected={today}
           pastScrollRange={20}
           futureScrollChange={20}
-          onDayPress={(day)=>{console.log('day pressed')}}
-          onDayChange={(day)=>{console.log('day changed')}}
-          rowHasChanged={(r1, r2) => {return r1.text !== r2.text}}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
+          onDayPress={(day)=> this.onDayPress(day)}
+          onDayChange={(day)=> this.onDayChange(day)}
+          rowHasChanged={(r1, r2) => this.rowHasChanged(r1, r2)}
           theme={{
             agendaDayTextColor: 'black',
             agendaDayNumColor: 'green',
