@@ -1,6 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 const calStyles = StyleSheet.create({
+  agenda: {
+    flex: 1,
+    width: 370,
+    height: 100
+  },
   itemView: {
     backgroundColor: 'white',
     flex: 1,
@@ -21,4 +26,4 @@ const calStyles = StyleSheet.create({
   }
 });
 
-export default calStyles
+export default calStyles;

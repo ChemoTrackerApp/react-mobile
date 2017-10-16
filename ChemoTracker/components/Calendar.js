@@ -79,16 +79,12 @@ class Calendar extends Component {
           onDayPress={(day)=> this.onDayPress(day)}
           onDayChange={(day)=> this.onDayChange(day)}
           rowHasChanged={(r1, r2) => this.rowHasChanged(r1, r2)}
+          style={calStyles.agenda}
           theme={{
             agendaDayTextColor: 'black',
             agendaDayNumColor: 'green',
             agendaTodayColor: 'red',
             agendaKnobColor: 'blue'
-          }}
-          style={{
-            flex: 1,
-            width: 370,
-            height: 100
           }}
         />
       </View>
