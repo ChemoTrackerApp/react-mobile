@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Agenda } from 'react-native-calendars';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
+import calStyles from '../styles/calendar.js';
 
 class Calendar extends Component {
   constructor(props){
@@ -22,8 +23,8 @@ class Calendar extends Component {
   renderItem(item) {
     console.log("item", item);
     return (
-      <View style={[style.itemView, {height: item.height}]}>
-        <Text style={style.itemText}>
+      <View style={[calStyles.itemView, {height: item.height}]}>
+        <Text style={calStyles.itemText}>
           {item.text}
         </Text>
       </View>
@@ -32,12 +33,17 @@ class Calendar extends Component {
 
   renderEmptyDate() {
     return (
-      <View style={styles.emptyDate}><Text>This is empty date!</Text></View>
+      <View style={calStyles.emptyDate}>
+        <Text style={calStyles.itemText}>
+          This is an empty date!
+        </Text>
+      </View>
     );
   }
 
   onDayPress(day) {
     console.log("day pressed", day);
+
   }
 
   onDayChange(day) {
@@ -88,20 +94,5 @@ class Calendar extends Component {
     );
   }
 }
-
-const style = StyleSheet.create({
-  itemView: {
-    backgroundColor: 'white',
-    flex: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    marginTop: 17
-  },
-  itemText: {
-    color: 'black',
-    fontSize: 16
-  }
-});
 
 export default Calendar;
