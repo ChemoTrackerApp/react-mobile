@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, Button, TouchableOpacity } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Octicons';
 import { Agenda } from 'react-native-calendars';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
@@ -13,6 +13,7 @@ class Calendar extends Component {
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
+    this.createEvent = this.createEvent.bind(this);
   }
 
   static navigationOptions = {
@@ -35,10 +36,20 @@ class Calendar extends Component {
     return (
       <View style={calStyles.emptyDate}>
         <Text style={calStyles.itemText}>
-          This is an empty date!
+          No events for this date
         </Text>
+        <TouchableOpacity onPress={this.createEvent}>
+          <Icon
+            size={24}
+            name="plus"
+            color='#000000' />
+        </TouchableOpacity>
       </View>
     );
+  }
+
+  createEvent() {
+    console.log("Create event!");
   }
 
   onDayPress(day) {
