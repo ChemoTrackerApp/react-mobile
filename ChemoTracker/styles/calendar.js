@@ -14,7 +14,10 @@ const calStyles = StyleSheet.create({
     fontSize: 16
   },
   emptyDate: {
-    backgroundColor: '#FCFCFC'
+    padding: 10,
+    marginRight: 10,
+    marginTop: 17,
+    flex: 1
   }
 });
 

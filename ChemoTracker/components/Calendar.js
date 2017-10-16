@@ -65,6 +65,7 @@ class Calendar extends Component {
       '2017-10-23': [{text: 'item 2 - any js object'}],
       '2017-10-24': [],
       '2017-10-25': [{text: 'item 3 - any js object'},{text: 'any js object'}],
+      [today]: []
     }
     return (
       <View style={styles.container}>
