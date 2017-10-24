@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
   navBar: {
     height: 100,
-    backgroundColor: color.navBarIcon
+    backgroundColor: color.searchNavBar
   },
   section: {
     flex: 1,
@@ -34,11 +34,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   label: {
-      color: color.navBarIcon, 
-      fontWeight: 'bold', 
-      fontSize: 20, 
-      marginTop: 5 
-    }
+    color: color.searchNavBar, 
+    fontWeight: 'bold', 
+    fontSize: 20, 
+    marginTop: 5 
+  },
+  button: {
+    marginTop: 33,
+    marginLeft: 15
+  }
 });
 
 export default styles;

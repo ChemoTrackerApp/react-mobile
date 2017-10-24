@@ -9,7 +9,7 @@ import color from '../styles/color.js';
 class Search extends Component {
   static navigationOptions = {
     tabBarLabel: "Search",
-    tabBarIcon: () => (<FontAwesomeIcon size={24} name="search" color={color.navBarIcon} />)
+    tabBarIcon: () => (<FontAwesomeIcon size={ 24 } name="search" color={ color.navBarIcon } />)
   }
 
   state = {
@@ -23,10 +23,12 @@ class Search extends Component {
 
   handleQuestionSubmit = (text) => {
     console.log("handleQuestionSubmit")
+    this.props.navigation.navigate('PatientEducation', { searchQuery: this.state.question })
   }
 
   handleForumSubmit = () => {
     console.log("handleForumSubmit")
+    this.props.navigation.navigate('Forum')
   }
   
 
@@ -38,11 +40,11 @@ class Search extends Component {
           <FontAwesomeIcon name = "stethoscope" size={ 100 } color={ color.searchIcon } />
           <Text style={ styles.label }>Questions?</Text>
           <TextInput 
-                    style={ styles.input } 
-                    placeholder="Search resources"
-                    placeholderTextColor={ color.searchPlaceholder }
-                    onChangeText={ this.handleTextChange }
-                    onSubmitEditing={ this.handleQuestionSubmit } 
+            style={ styles.input } 
+            placeholder="Search resources"
+            placeholderTextColor={ color.searchPlaceholder }
+            onChangeText={ this.handleTextChange }
+            onSubmitEditing={ this.handleQuestionSubmit } 
           />
         </View>
         <View style={ styles.section }>

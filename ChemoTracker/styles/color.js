@@ -4,9 +4,13 @@ const color= {
   navBarLabel: '#4F4F4F',
   navBarRipple: '#C7C7CD',
 
+  searchNavBar: '#EF7A5A',
   searchIcon: '#6495ED',
   searchPlaceholder: '#AEAEAE',
-  searchBackground: '#FFF'
+  searchBackground: '#FFF',
+
+  arrowIcon: '#FFFCFB',
+  refresh: '#AEAEAE'
 };
 
 export default color;
