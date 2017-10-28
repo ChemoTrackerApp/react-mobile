@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-const calStyles = StyleSheet.create({
+export const calStyles = StyleSheet.create({
   agenda: {
     flex: 1,
     width: 370,
@@ -26,4 +26,14 @@ const calStyles = StyleSheet.create({
   }
 });
 
-export default calStyles;
+export const headerStyles = StyleSheet.create({
+  headerBackground:{
+    backgroundColor: '#45ACEF'
+  },
+  headerTitleStyle: {
+    color: '#ffffff'
+  },
+  headerBackTitleStyle: {
+    color: '#ffffff'
+  }
+})

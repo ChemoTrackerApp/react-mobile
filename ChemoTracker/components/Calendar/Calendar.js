@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity } from 'react-native';
+import { Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import { Agenda } from 'react-native-calendars';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
-import calStyles from '../../styles/calendar.js';
+import { calStyles } from '../../styles/calendar.js';
 import CalendarEvent from './CalendarEvent/event.js';
 
 class Calendar extends Component {
@@ -83,6 +83,7 @@ class Calendar extends Component {
     }
     return (
       <View style={styles.container}>
+        <StatusBar hidden={true}/>
         <Agenda
           items={calendarItems}
           selected={today}

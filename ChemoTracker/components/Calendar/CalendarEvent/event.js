@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity } from 'react-native';
+import { Text, View, Button, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../../styles/main.js';
 import color from '../../../styles/color.js';
@@ -15,7 +15,7 @@ class CalendarEvent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is the calendar event page</Text>
+        <StatusBar hidden={true}/>
       </View>
     )
   }
