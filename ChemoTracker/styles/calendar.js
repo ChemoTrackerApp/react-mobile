@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { width, height, totalSize } from 'react-native-dimension';
 export const calStyles = StyleSheet.create({
   agenda: {
     flex: 1,
-    width: 370,
-    height: 100
+    width: width(100),
+    height: height(100)
   },
   itemView: {
     backgroundColor: 'white',
@@ -35,5 +36,13 @@ export const headerStyles = StyleSheet.create({
   },
   headerBackTitleStyle: {
     color: '#000000'
+  }
+});
+
+export const eventStyles = StyleSheet.create({
+  eventTitle: {
+    height: 50,
+    flex: 1,
+    width: width(80)
   }
 })
