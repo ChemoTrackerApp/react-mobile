@@ -3,13 +3,15 @@ import { Text, View, Button, TouchableOpacity } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import { Agenda } from 'react-native-calendars';
-import styles from '../styles/main.js';
-import color from '../styles/color.js';
-import calStyles from '../styles/calendar.js';
+import styles from '../../styles/main.js';
+import color from '../../styles/color.js';
+import calStyles from '../../styles/calendar.js';
+import CalendarEvent from './CalendarEvent/event.js';
 
 class Calendar extends Component {
   constructor(props){
     super(props);
+    console.log("props", props);
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
@@ -50,6 +52,7 @@ class Calendar extends Component {
 
   createEvent() {
     console.log("Create event!");
+    this.props.navigation.navigate('CalendarEvent');
   }
 
   onDayPress(day) {
