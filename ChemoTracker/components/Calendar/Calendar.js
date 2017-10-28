@@ -12,10 +12,15 @@ class Calendar extends Component {
   constructor(props){
     super(props);
     console.log("props", props);
+    this.state = {
+      currentDay: ''
+    }
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
+    this.editEvent = this.editEvent.bind(this);
     this.createEvent = this.createEvent.bind(this);
+    this.toDateString = this.toDateString.bind(this);
   }
 
   static navigationOptions = {
@@ -27,20 +32,26 @@ class Calendar extends Component {
     console.log("item", item);
     return (
       <View style={[calStyles.itemView, {height: item.height}]}>
-        <Text style={calStyles.itemText}>
+        <Text
+          style={calStyles.itemText}>
           {item.text}
         </Text>
       </View>
     );
   }
 
-  renderEmptyDate() {
+  renderEmptyDate(day) {
+    console.log("empty date", day);
+    const dayEmpty = new Date(day);
+    const dateString = this.toDateString(dayEmpty); // need to fix the day
+    console.log("dateString", dateString);
     return (
       <View style={calStyles.emptyDate}>
         <Text style={calStyles.itemText}>
           No events for this date
         </Text>
-        <TouchableOpacity onPress={this.createEvent}>
+        <TouchableOpacity
+          onPress={this.createEvent}>
           <Icon
             size={24}
             name="plus"
@@ -50,14 +61,33 @@ class Calendar extends Component {
     );
   }
 
+  toDateString(fullDate) {
+    const date = fullDate.getDate();
+    const month = fullDate.getMonth()+1
+    const year = fullDate.getFullYear();
+
+    return `${year}-${month}-${date}`;
+  }
+
   createEvent() {
     console.log("Create event!");
+    // this.props.screenProps = {
+    //   day: date
+    // }
+    this.props.navigation.navigate('CalendarEvent');
+  }
+
+  editEvent(date) {
+    console.log("Edit Event!");
+    this.props.screenProps = {
+      day: date
+    }
     this.props.navigation.navigate('CalendarEvent');
   }
 
   onDayPress(day) {
     console.log("day pressed", day);
-
+    this.setState({currentDay: day});
   }
 
   onDayChange(day) {
@@ -70,15 +100,25 @@ class Calendar extends Component {
 
   render() {
     const d = new Date();
-    const date = d.getDate();
-    const month = d.getMonth()+1;
-    const year = d.getFullYear();
-    const today = `${year}-${month}-${date}`;
+    const today = this.toDateString(d);
     const calendarItems = {
-      '2017-10-22': [{text: 'item 1 - any js object'}],
-      '2017-10-23': [{text: 'item 2 - any js object'}],
+      '2017-10-22': [{
+        text: 'item 1 - any js object',
+        dateString: '2017-10-22'
+      }],
+      '2017-10-23': [{
+        text: 'item 2 - any js object',
+        dateString: '2017-10-23'
+      }],
       '2017-10-24': [],
-      '2017-10-25': [{text: 'item 3 - any js object'},{text: 'any js object'}],
+      '2017-10-25': [{
+          text: 'item 3 - any js object',
+          dateString: '2017-10-25'
+        },
+        {
+          text: 'any js object',
+          dateString: '2017-10-25'
+      }],
       [today]: []
     }
     return (

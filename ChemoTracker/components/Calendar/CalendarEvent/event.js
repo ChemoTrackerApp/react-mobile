@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { TextInput, View, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../../styles/main.js';
 import color from '../../../styles/color.js';
-import calStyles from '../../../styles/calendar.js';
+import { eventStyles } from '../../../styles/calendar.js';
 
 class CalendarEvent extends Component {
+
+  constructor(props) {
+    super(props);
+
+  }
 
   static navigationOptions = {
     tabBarLabel: "Calendar",
@@ -15,6 +20,11 @@ class CalendarEvent extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <TextInput
+          style={eventStyles.eventTitle}
+          placeholder="Title"
+        />
+
       </View>
     )
   }
