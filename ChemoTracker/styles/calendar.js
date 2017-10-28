@@ -28,12 +28,12 @@ export const calStyles = StyleSheet.create({
 
 export const headerStyles = StyleSheet.create({
   headerBackground:{
-    backgroundColor: '#45ACEF'
+    backgroundColor: '#F4FAFC'
   },
   headerTitleStyle: {
-    color: '#ffffff'
+    color: '#000000'
   },
   headerBackTitleStyle: {
-    color: '#ffffff'
+    color: '#000000'
   }
 })
