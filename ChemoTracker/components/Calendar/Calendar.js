@@ -71,9 +71,9 @@ class Calendar extends Component {
 
   createEvent() {
     console.log("Create event!");
-    // this.props.screenProps = {
-    //   day: date
-    // }
+    this.props.screenProps = {
+      day: '2017-10-28'
+    }
     this.props.navigation.navigate('CalendarEvent');
   }
 
