@@ -51,7 +51,7 @@ class Calendar extends Component {
           No events for this date
         </Text>
         <TouchableOpacity
-          onPress={this.createEvent}>
+          onPress={() => this.createEvent(dateString)}>
           <Icon
             size={24}
             name="plus"
@@ -62,19 +62,25 @@ class Calendar extends Component {
   }
 
   toDateString(fullDate) {
-    const date = fullDate.getDate();
-    const month = fullDate.getMonth()+1
+    let date = fullDate.getDate();
+    let month = fullDate.getMonth()+1
     const year = fullDate.getFullYear();
+    if(date < 10) {
+      date = `0${date}`;
+    }
+    if(month < 10) {
+      month = `0${month}`;
+    }
 
     return `${year}-${month}-${date}`;
   }
 
-  createEvent() {
+  createEvent(d) {
     console.log("Create event!");
-    this.props.screenProps = {
-      day: '2017-10-28'
-    }
-    this.props.navigation.navigate('CalendarEvent');
+    this.props.navigation.navigate(
+      'CalendarEvent',
+      { date: d }
+    );
   }
 
   editEvent(date) {
@@ -125,6 +131,7 @@ class Calendar extends Component {
       <View style={styles.container}>
         <StatusBar hidden={true}/>
         <Agenda
+          ref={(agenda) => { this.agenda = agenda; }}
           items={calendarItems}
           selected={today}
           pastScrollRange={20}

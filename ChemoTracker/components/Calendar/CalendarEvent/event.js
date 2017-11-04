@@ -12,7 +12,7 @@ class CalendarEvent extends Component {
     super(props);
     console.log("props", this.props);
     this.state = {
-      date: '2017-10-28'
+      date: props.navigation.state.params.date
     }
   }
 
@@ -22,6 +22,7 @@ class CalendarEvent extends Component {
   }
 
   render() {
+    console.log("props",this.props)
     return (
       <View style={styles.container}>
         <TextInput
@@ -48,7 +49,6 @@ class CalendarEvent extends Component {
             dateInput: {
               marginLeft: 36
             }
-            // ... You can check the source to find the other keys.
           }}
           onDateChange={(date) => {this.setState({date: date})}}
         />
