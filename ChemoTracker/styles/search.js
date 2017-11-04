@@ -3,18 +3,13 @@ import { StyleSheet } from 'react-native';
 import color from '../styles/color.js';
 
 const styles = StyleSheet.create({
+  button: {
+    marginTop: 33,
+    marginLeft: 15
+  },
   container: {
     flex: 1,
     backgroundColor: color.searchBackground
-  },
-  navBar: {
-    height: 100,
-    backgroundColor: color.searchNavBar
-  },
-  section: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   input: {
     borderWidth: 0,
@@ -39,9 +34,26 @@ const styles = StyleSheet.create({
     fontSize: 20, 
     marginTop: 5 
   },
-  button: {
-    marginTop: 33,
-    marginLeft: 15
+  listContainer: { 
+    borderTopWidth: 0, 
+    borderBottomWidth: 0 
+  },
+  listItemContainer: { 
+    borderBottomWidth: 0 
+  },
+  navBar: {
+    height: 100,
+    backgroundColor: color.searchNavBar
+  },
+  section: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  separator: {
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderColor: "#CED0CE"
   }
 });
 
