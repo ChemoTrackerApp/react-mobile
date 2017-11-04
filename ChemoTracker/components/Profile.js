@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
 
-let res = '../res/profile-background.jpg';
-let profilePic = '../res/carrie.jpg';
+//let res = '../res/profile-background.jpg';
+//let profilePic = '../res/carrie.jpg';
 
 class Profile extends Component {
 	static navigationOptions = {
@@ -35,12 +35,6 @@ class Profile extends Component {
 export default Profile;
 
 class Cell extends React.Component {
-	render() {
-
-	}
-}
-
-class PofileTop extends React.Component {
 	render() {
 
 	}

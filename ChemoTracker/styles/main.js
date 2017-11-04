@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   profileTopContainer: {
-    height: 250,
+    height: 300,
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.6)',
     position: 'absolute',
@@ -24,20 +24,20 @@ const styles = StyleSheet.create({
     right: 0,
   },
   profileBackground: {
-    height: 250,
+    height: 300,
     width: '100%',
   },
   profileImage: {
-    height: 130,
-    borderRadius: 65,
-    width: 130,
-    top: 40,
+    height: 150,
+    borderRadius: 75,
+    width: 150,
+    top: 60,
   },
   profileNameText: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
-    top: 50,
+    top: 75,
   }
 });
 
