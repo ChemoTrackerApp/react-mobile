@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Navigation from './Navigation.js';
+import ProfileTop from './ProfileTop.js'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
@@ -17,15 +18,7 @@ class Profile extends Component {
 	render() {
     	return (
       	<View style={styles.profileMainContainer}>
-					<View style={styles.profileTopContainer}>
-						<Image source={require('../res/profile-background.jpg')} style={styles.profileBackground}>
-							<View style={styles.profileTopContainer}/>
-						</Image>
-					</View>
-					<Image source={require('../res/carrie.jpg')} style={styles.profileImage}/>
-					<View>
-						<Text style={styles.profileNameText}> Carrie Bradshaw </Text>
-					</View>
+					<ProfileTop />
 					<View style={{flex: 1, backgroundColor: 'powderblue'}} />
       	</View>
     	);
@@ -33,15 +26,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-class Cell extends React.Component {
-	render() {
-
-	}
-}
-
-class ProfileBottom extends React.Component {
-	render() {
-
-	}
-}
