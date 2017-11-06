@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -38,6 +39,32 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     top: 20,
+  },
+  profileCell: {
+    height: 70,
+    alignItems: 'center',
+    flexDirection:'row',
+  },
+  profileTable: {
+    top: 300,
+    position: 'absolute',
+  },
+  profileDetailTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    position: 'absolute',
+    paddingRight: 30,
+  },
+  profileDetailDescription: {
+    fontSize: 20,
+    position: 'absolute',
+  },
+  profileTitleTextBox: {
+    width: '50%',
+    alignItems: 'flex-end',
+  },
+  profileDetailTextBox: {
+    width: '50%',
   }
 });
 
