@@ -11,11 +11,17 @@ class CalendarEvent extends Component {
   constructor(props) {
     super(props);
     console.log("props", this.props);
+    const params = props.navigation.state.params;
     this.state = {
-      date: props.navigation.state.params.date,
-      datetime: `${props.navigation.state.params.date} 20:00`
+      date: params.date,
+      time: params.time,
+      datetimeFrom: `${params.date} ${params.time}`,
+      datetimeTo: `${params.date} ${params.time}`
     }
     this.buttonPressed = this.buttonPressed.bind(this);
+    this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
+    this.toTimeString = this.toTimeString.bind(this);
+    this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
   }
 
   static navigationOptions = {
@@ -23,8 +29,41 @@ class CalendarEvent extends Component {
     tabBarIcon: () => (<Icon size={24} name="calendar" color={color.navBarIcon} />)
   }
 
+  componentWillMount() {
+    const dateStringTo = this.state.datetimeTo;
+    const dateTimeArray = dateStringTo.split(' ');
+    const timeString = dateTimeArray[1];
+    const timeArray = timeString.split(':');
+    let hour = this.convertToDoubleDigit(parseInt(timeArray[0]) + 1);
+    if(hour === 24) {
+      hour = '00';
+    }
+    this.setState({
+      datetimeTo: `${this.props.navigation.state.params.date} ${hour}:00`
+    });
+  }
+
+  convertToDoubleDigit(digit) {
+    if(digit < 10) {
+      return `0${digit}`;
+    }
+    return digit;
+  }
+
   buttonPressed() {
     console.log("buttonPressed");
+  }
+
+  toTimeString(fullDate) {
+
+  }
+
+  setDateTimeFrom(dt) {
+    console.log("dt", dt);
+    this.setState({
+      datetimeFrom: dt,
+      datetimeTo: dt
+    });
   }
 
   render() {
@@ -39,7 +78,7 @@ class CalendarEvent extends Component {
         <Text>From</Text>
           <DatePicker
             style={{width: 200}}
-            date={this.state.datetime}
+            date={this.state.datetimeFrom}
             mode="datetime"
             format="YYYY-MM-DD HH:mm"
             confirmBtnText="Confirm"
@@ -56,12 +95,12 @@ class CalendarEvent extends Component {
               }
             }}
             minuteInterval={10}
-            onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+            onDateChange={(dt) => {this.setDateTimeFrom}}
           />
         <Text>To</Text>
           <DatePicker
             style={{width: 200}}
-            date={this.state.datetime}
+            date={this.state.datetimeTo}
             mode="datetime"
             format="YYYY-MM-DD HH:mm"
             confirmBtnText="Confirm"
@@ -78,7 +117,7 @@ class CalendarEvent extends Component {
               }
             }}
             minuteInterval={10}
-            onDateChange={(datetime) => {this.setState({datetime1: datetime});}}
+            onDateChange={(dt) => {this.setState({datetimeTo: dt});}}
           />
         <View style={{flexDirection: 'row', height: 80, padding: 20}}>
           <Button title="Cancel" onPress={this.buttonPressed}/>

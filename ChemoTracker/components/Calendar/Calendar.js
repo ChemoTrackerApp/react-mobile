@@ -7,6 +7,7 @@ import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
 import { calStyles } from '../../styles/calendar.js';
 import CalendarEvent from './CalendarEvent/event.js';
+import _ from 'lodash';
 
 class Calendar extends Component {
   constructor(props){
@@ -21,6 +22,9 @@ class Calendar extends Component {
     this.editEvent = this.editEvent.bind(this);
     this.createEvent = this.createEvent.bind(this);
     this.toDateString = this.toDateString.bind(this);
+    this.getTimeString = this.getTimeString.bind(this);
+    this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
+    this.getDateStringFromDay = this.getDateStringFromDay.bind(this);
   }
 
   static navigationOptions = {
@@ -41,17 +45,20 @@ class Calendar extends Component {
   }
 
   renderEmptyDate(day) {
-    console.log("empty date", day);
     const dayEmpty = new Date(day);
-    const dateString = this.toDateString(dayEmpty); // need to fix the day
-    console.log("dateString", dateString);
+    console.log("dayEmpty", dayEmpty);
+    let dateString = this.getDateStringFromDay(dayEmpty);
+    const timeString = this.getTimeString(dayEmpty);
+    if(timeString === "00:00") {
+      // TO DO: change into the next day's dateString
+    }
     return (
       <View style={calStyles.emptyDate}>
         <Text style={calStyles.itemText}>
           No events for this date
         </Text>
         <TouchableOpacity
-          onPress={() => this.createEvent(dateString)}>
+          onPress={() => this.createEvent(dateString, timeString)}>
           <Icon
             size={24}
             name="plus"
@@ -62,32 +69,63 @@ class Calendar extends Component {
   }
 
   toDateString(fullDate) {
-    let date = fullDate.getDate();
-    let month = fullDate.getMonth()+1
-    const year = fullDate.getFullYear();
-    if(date < 10) {
-      date = `0${date}`;
-    }
-    if(month < 10) {
-      month = `0${month}`;
-    }
-
+    const fullDateString = fullDate.toLocaleDateString();
+    const dateArray = fullDateString.split('/');
+    let month = this.convertToDoubleDigit(dateArray[0]);
+    let date = this.convertToDoubleDigit(dateArray[1]);
+    const year = dateArray[2];
     return `${year}-${month}-${date}`;
   }
 
-  createEvent(d) {
+  getDateStringFromDay(date) {
+    const dateISO = date.toISOString();
+    const indexTime = dateISO.indexOf('T');
+    const dateSubString = dateISO.substring(0, indexTime);
+    return dateSubString;
+  }
+
+  getTimeString(d) {
+    let today = new Date();
+    let todayClone = _.clone(today);
+    const offset = new Date().getTimezoneOffset();
+    today.setMinutes(today.getMinutes() - offset); //turn into local time date object
+    const todayISO = today.toISOString();
+    const todaySubstring = todayISO.substring(0, todayISO.indexOf('T'));
+    const dateISO = d.toISOString();
+    const dateSubstring = dateISO.substring(0, dateISO.indexOf('T'));
+    let timeString = '';
+    if(dateSubstring === todaySubstring) {
+      // get time now + 1 hour, eg 22.00 if 21.36 right now
+      let hour = this.convertToDoubleDigit(todayClone.getHours() + 1);
+      if(hour === 24) {
+        hour = '00';
+      }
+      timeString = `${hour}:00`;
+    } else {
+      // set to 8 AM
+      timeString = '08:00';
+    }
+
+    return timeString;
+  }
+
+  convertToDoubleDigit(digit) {
+    if(digit < 10) {
+      return `0${digit}`;
+    }
+    return digit;
+  }
+
+  createEvent(d, t) {
     console.log("Create event!");
     this.props.navigation.navigate(
       'CalendarEvent',
-      { date: d }
+      { date: d, time: t }
     );
   }
 
   editEvent(date) {
     console.log("Edit Event!");
-    this.props.screenProps = {
-      day: date
-    }
     this.props.navigation.navigate('CalendarEvent');
   }
 
