@@ -51,8 +51,7 @@ class Calendar extends Component {
     const timeString = this.getTimeString(dayEmpty);
     if(timeString === "00:00") {
       // parse dateString, and add 1 to the day
-      let day = moment(dateString);
-      console.log("Day moment", day);
+      dateString = moment(dateString).add(1, 'days').format('YYYY-MM-DD');
     }
     return (
       <View style={calStyles.emptyDate}>
@@ -71,12 +70,8 @@ class Calendar extends Component {
   }
 
   toDateString(fullDate) {
-    const fullDateString = moment().format('L');
-    const dateArray = fullDateString.split('/');
-    let month = dateArray[0];
-    let date = dateArray[1];
-    const year = dateArray[2];
-    return `${year}-${month}-${date}`;
+    const fullDateString = moment(fullDate).format('YYYY-MM-DD');
+    return fullDateString;
   }
 
   getDateStringFromDay(date) {
@@ -90,10 +85,12 @@ class Calendar extends Component {
     let todayClone = _.clone(today);
     const offset = new Date().getTimezoneOffset();
     today.setMinutes(today.getMinutes() - offset); //turn into local time date object
+
     const todayISO = today.toISOString();
     const todaySubstring = todayISO.substring(0, todayISO.indexOf('T'));
     const dateISO = d.toISOString();
     const dateSubstring = dateISO.substring(0, dateISO.indexOf('T'));
+
     let timeString = '';
     if(dateSubstring === todaySubstring) {
       // get time now + 1 hour, eg 22.00 if 21.36 right now
