@@ -37,10 +37,13 @@ class Calendar extends Component {
     console.log("item", item);
     return (
       <View style={[calStyles.itemView, {height: item.height}]}>
-        <Text
-          style={calStyles.itemText}>
-          {item.text}
-        </Text>
+        <TouchableOpacity
+          onPress={() => this.editEvent(item)}>
+          <Text
+            style={calStyles.itemText}>
+            {item.text}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -50,7 +53,7 @@ class Calendar extends Component {
     let dateString = this.getDateStringFromDay(dayEmpty);
     const timeString = this.getTimeString(dayEmpty);
     if(timeString === "00:00") {
-      // parse dateString, and add 1 to the day
+      // add 1 to the day
       dateString = moment(dateString).add(1, 'days').format('YYYY-MM-DD');
     }
     return (
@@ -122,9 +125,16 @@ class Calendar extends Component {
     );
   }
 
-  editEvent(date) {
+  editEvent(item) {
     console.log("Edit Event!");
-    this.props.navigation.navigate('CalendarEvent');
+    this.props.navigation.navigate(
+      'CalendarEvent',
+      {
+        date: item.dateString,
+        time: item.timeString,
+        title: item.text
+      }
+    );
   }
 
   onDayPress(day) {
@@ -146,20 +156,24 @@ class Calendar extends Component {
     const calendarItems = {
       '2017-10-22': [{
         text: 'item 1 - any js object',
-        dateString: '2017-10-22'
+        dateString: '2017-10-22',
+        timeString: '10:00'
       }],
       '2017-10-23': [{
         text: 'item 2 - any js object',
-        dateString: '2017-10-23'
+        dateString: '2017-10-23',
+        timeString: '15:00'
       }],
       '2017-10-24': [],
       '2017-10-25': [{
           text: 'item 3 - any js object',
-          dateString: '2017-10-25'
+          dateString: '2017-10-25',
+          timeString: '09:00'
         },
         {
           text: 'any js object',
-          dateString: '2017-10-25'
+          dateString: '2017-10-25',
+          timeString: '12:00'
       }],
       [today]: []
     }

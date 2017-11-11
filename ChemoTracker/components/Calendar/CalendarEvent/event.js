@@ -16,12 +16,14 @@ class CalendarEvent extends Component {
       date: params.date,
       time: params.time,
       datetimeFrom: `${params.date} ${params.time}`,
-      datetimeTo: `${params.date} ${params.time}`
+      datetimeTo: `${params.date} ${params.time}`,
+      title: params.title
     }
     this.buttonPressed = this.buttonPressed.bind(this);
     this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
     this.toTimeString = this.toTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
+    this.onTitleChange = this.onTitleChange.bind(this);
   }
 
   static navigationOptions = {
@@ -66,14 +68,23 @@ class CalendarEvent extends Component {
     });
   }
 
+  onTitleChange(text) {
+    console.log("new text", text);
+    this.setState({
+      title: text
+    });
+  }
+
   render() {
-    console.log("props",this.props)
+    console.log("state",this.state)
     return (
       <View style={styles.container}>
         <ScrollView>
           <TextInput
             style={eventStyles.eventTitle}
             placeholder="Title"
+            value={this.state.title ? this.state.title : ''}
+            onChangeText={this.onTitleChange}
           />
         <Text>From</Text>
           <DatePicker
