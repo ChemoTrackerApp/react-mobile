@@ -47,11 +47,12 @@ class Calendar extends Component {
 
   renderEmptyDate(day) {
     const dayEmpty = new Date(day);
-    console.log("dayEmpty", dayEmpty);
     let dateString = this.getDateStringFromDay(dayEmpty);
     const timeString = this.getTimeString(dayEmpty);
     if(timeString === "00:00") {
-      // TO DO: change into the next day's dateString
+      // parse dateString, and add 1 to the day
+      let day = moment(dateString);
+      console.log("Day moment", day);
     }
     return (
       <View style={calStyles.emptyDate}>
@@ -80,9 +81,8 @@ class Calendar extends Component {
 
   getDateStringFromDay(date) {
     const dateISO = date.toISOString();
-    const indexTime = dateISO.indexOf('T');
-    const dateSubString = dateISO.substring(0, indexTime);
-    return dateSubString;
+    const dateString = moment(dateISO, 'YYYY-MM-DD').format('YYYY-MM-DD');
+    return dateString;
   }
 
   getTimeString(d) {
