@@ -8,6 +8,7 @@ import color from '../../styles/color.js';
 import { calStyles } from '../../styles/calendar.js';
 import CalendarEvent from './CalendarEvent/event.js';
 import _ from 'lodash';
+import moment from 'moment';
 
 class Calendar extends Component {
   constructor(props){
@@ -69,10 +70,10 @@ class Calendar extends Component {
   }
 
   toDateString(fullDate) {
-    const fullDateString = fullDate.toLocaleDateString();
+    const fullDateString = moment().format('L');
     const dateArray = fullDateString.split('/');
-    let month = this.convertToDoubleDigit(dateArray[0]);
-    let date = this.convertToDoubleDigit(dateArray[1]);
+    let month = dateArray[0];
+    let date = dateArray[1];
     const year = dateArray[2];
     return `${year}-${month}-${date}`;
   }
