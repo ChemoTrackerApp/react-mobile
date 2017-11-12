@@ -5,6 +5,8 @@ import DatePicker from 'react-native-datepicker';
 import styles from '../../../styles/main.js';
 import color from '../../../styles/color.js';
 import { eventStyles } from '../../../styles/calendar.js';
+import _ from 'lodash';
+import moment from 'moment';
 
 class CalendarEvent extends Component {
 
@@ -20,8 +22,10 @@ class CalendarEvent extends Component {
       title: params.title
     }
     this.buttonPressed = this.buttonPressed.bind(this);
+    this.getTimeTo = this.getTimeTo.bind(this);
+    this.addOneToDateString = this.addOneToDateString.bind(this);
+    this.subtractOneToDateString = this.subtractOneToDateString.bind(this);
     this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
-    this.toTimeString = this.toTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
   }
@@ -33,16 +37,88 @@ class CalendarEvent extends Component {
 
   componentWillMount() {
     const dateStringTo = this.state.datetimeTo;
-    const dateTimeArray = dateStringTo.split(' ');
+    const hour = this.getTimeTo(dateStringTo);
+    let dateString  = this.state.date;
+    if(hour === "00") {
+      dateString = addOneToDateString(dateString, 'days', 'date');
+    }
+    this.setState({
+      datetimeTo: `${dateString} ${hour}:00`
+    });
+  }
+
+  buttonPressed() {
+    console.log("buttonPressed");
+  }
+
+  getTimeFrom(dateString) {
+    const dateTimeArray = dateString.split(' ');
+    const timeString = dateTimeArray[1];
+    const timeArray = timeString.split(':');
+    let hour = timeArray[0];
+    if(hour === '00') {
+      hour = '24';
+    }
+    hour = this.convertToDoubleDigit(parseInt(hour) - 1);
+    return hour;
+  }
+
+  getTimeTo(dateString) {
+    const dateTimeArray = dateString.split(' ');
     const timeString = dateTimeArray[1];
     const timeArray = timeString.split(':');
     let hour = this.convertToDoubleDigit(parseInt(timeArray[0]) + 1);
     if(hour === 24) {
       hour = '00';
     }
+    return hour;
+  }
+
+  addOneToDateString(dateString, type, formatType) {
+    let format = 'YYYY-MM-DD';
+    if(formatType === 'dateTime') {
+      format = 'YYYY-MM-DD HH:mm';
+    } else if(formatType === 'time') {
+      format = 'HH:mm';
+    }
+    return moment(dateString).add(1, type).format(format);
+  }
+
+  subtractOneToDateString(dateString, type, formatType) {
+    let format = 'YYYY-MM-DD';
+    if(formatType === 'dateTime') {
+      format = 'YYYY-MM-DD HH:mm';
+    } else if(formatType === 'time') {
+      format = 'HH:mm';
+    }
+    return moment(dateString).subtract(1, type).format(format);
+  }
+
+  setDateTimeFrom(dt) {
+    let dateString = _.clone(dt);
+    const hour = this.getTimeTo(dt);
+    if(hour === "00") {
+      dateString = this.addOneToDateString(dt, 'days', 'date');
+    }
     this.setState({
-      datetimeTo: `${this.props.navigation.state.params.date} ${hour}:00`
+      datetimeFrom: dateString
     });
+  }
+
+  setDateTimeTo(dt) {
+    let dateStringFrom = _.clone(this.state.datetimeFrom);
+    let fromDateTime = moment(this.state.datetimeFrom, 'YYYY-MM-DD HH:mm');
+    const toDateTime = moment(dt, 'YYYY-MM-DD HH:mm');
+
+    if(toDateTime.isBefore(fromDateTime)) {
+      dateStringFrom = this.subtractOneToDateString(dt, 'hours', 'dateTime');
+    }
+    // TO DO: check for 00 and 23 to change dateString
+    // also refactor the code to check it
+    this.setState({
+      datetimeFrom: dateStringFrom,
+      datetimeTo: dt
+    })
   }
 
   convertToDoubleDigit(digit) {
@@ -52,21 +128,7 @@ class CalendarEvent extends Component {
     return digit;
   }
 
-  buttonPressed() {
-    console.log("buttonPressed");
-  }
 
-  toTimeString(fullDate) {
-
-  }
-
-  setDateTimeFrom(dt) {
-    console.log("dt", dt);
-    this.setState({
-      datetimeFrom: dt,
-      datetimeTo: dt
-    });
-  }
 
   onTitleChange(text) {
     console.log("new text", text);
@@ -106,7 +168,7 @@ class CalendarEvent extends Component {
               }
             }}
             minuteInterval={10}
-            onDateChange={(dt) => {this.setDateTimeFrom}}
+            onDateChange={(dt) => {this.setDateTimeFrom(dt)}}
           />
         <Text>To</Text>
           <DatePicker
@@ -128,7 +190,7 @@ class CalendarEvent extends Component {
               }
             }}
             minuteInterval={10}
-            onDateChange={(dt) => {this.setState({datetimeTo: dt});}}
+            onDateChange={(dt) => {this.setDateTimeTo(dt)}}
           />
         <View style={{flexDirection: 'row', height: 80, padding: 20}}>
           <Button title="Cancel" onPress={this.buttonPressed}/>
