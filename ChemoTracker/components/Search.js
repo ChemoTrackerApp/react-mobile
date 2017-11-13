@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import Navigation from './Navigation.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';

@@ -7,6 +7,7 @@ import Track from './components/Track.js';
 import Profile from './components/Profile.js';
 import Search from './components/Search.js';
 import Calendar from './components/Calendar.js';
+import color from './styles/color.js';
 
 const App = TabNavigator({
   Home: { screen: Home, path: '' },
@@ -19,12 +20,14 @@ const App = TabNavigator({
   tabBarPosition: 'bottom',
   tabBarOptions: {
     bottomNavigationOptions: {
-      labelColor: '#4f4f4f',
-      rippleColor: '#C7C7CD',
+      labelColor: color.navBarLabel,
+      rippleColor: color.navBarRipple,
       tabs: {
-        Home, Profile, Track, Search, Calendar: {
-          barBackgroundColor: '#fcfcfc'
-        }
+        Home: { barBackgroundColor: color.navBarBackground },
+        Profile: { barBackgroundColor: color.navBarBackground },
+        Track: { barBackgroundColor: color.navBarBackground },
+        Search: { barBackgroundColor: color.navBarBackground },
+        Calendar: { barBackgroundColor: color.navBarBackground }
       }
     }
   }
