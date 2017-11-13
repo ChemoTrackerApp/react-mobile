@@ -15,7 +15,7 @@ class Profile extends Component {
  	}
 	render() {
     	return (
-      	<View style={styles.profileMainContainer}>
+      	<View style = { styles.profileMainContainer }>
 					<ProfileTop />
 					<ProfileDetailsTable />
       	</View>
