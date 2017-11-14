@@ -22,11 +22,10 @@ class CalendarEvent extends Component {
       title: params.title
     }
     this.buttonPressed = this.buttonPressed.bind(this);
-    this.getTimeTo = this.getTimeTo.bind(this);
     this.addOneToDateString = this.addOneToDateString.bind(this);
     this.subtractOneToDateString = this.subtractOneToDateString.bind(this);
     this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
-    this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
+    this.setDateTimeTo = this.setDateTimeTo.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
   }
 
@@ -36,42 +35,15 @@ class CalendarEvent extends Component {
   }
 
   componentWillMount() {
-    const dateStringTo = this.state.datetimeTo;
-    const hour = this.getTimeTo(dateStringTo);
-    let dateString  = this.state.date;
-    if(hour === "00") {
-      dateString = addOneToDateString(dateString, 'days', 'date');
-    }
+    const dateStringFrom = moment(this.state.datetimeFrom, 'YYYY-MM-DD HH:mm');
+    const dateStringTo = this.addOneToDateString(dateStringFrom, 'hours', 'dateTime');
     this.setState({
-      datetimeTo: `${dateString} ${hour}:00`
+      datetimeTo: dateStringTo
     });
   }
 
   buttonPressed() {
     console.log("buttonPressed");
-  }
-
-  getTimeFrom(dateString) {
-    const dateTimeArray = dateString.split(' ');
-    const timeString = dateTimeArray[1];
-    const timeArray = timeString.split(':');
-    let hour = timeArray[0];
-    if(hour === '00') {
-      hour = '24';
-    }
-    hour = this.convertToDoubleDigit(parseInt(hour) - 1);
-    return hour;
-  }
-
-  getTimeTo(dateString) {
-    const dateTimeArray = dateString.split(' ');
-    const timeString = dateTimeArray[1];
-    const timeArray = timeString.split(':');
-    let hour = this.convertToDoubleDigit(parseInt(timeArray[0]) + 1);
-    if(hour === 24) {
-      hour = '00';
-    }
-    return hour;
   }
 
   addOneToDateString(dateString, type, formatType) {
@@ -94,41 +66,37 @@ class CalendarEvent extends Component {
     return moment(dateString).subtract(1, type).format(format);
   }
 
-  setDateTimeFrom(dt) {
-    let dateString = _.clone(dt);
-    const hour = this.getTimeTo(dt);
-    if(hour === "00") {
-      dateString = this.addOneToDateString(dt, 'days', 'date');
+  setDateTimeFrom(dtFrom) {
+    let dateStringTo = _.clone(this.state.datetimeTo);
+    let fromDateTime = moment(dtFrom, 'YYYY-MM-DD HH:mm');
+    const toDateTime = moment(this.state.datetimeTo, 'YYYY-MM-DD HH:mm');
+
+    // case when `From` is >= `To`
+    if(fromDateTime.isAfter(toDateTime) || fromDateTime.isSame(toDateTime)) {
+      dateStringTo = this.addOneToDateString(dtFrom, 'hours', 'dateTime');
     }
+
     this.setState({
-      datetimeFrom: dateString
+      datetimeFrom: dtFrom,
+      datetimeTo: dateStringTo
     });
   }
 
-  setDateTimeTo(dt) {
+  setDateTimeTo(dtTo) {
     let dateStringFrom = _.clone(this.state.datetimeFrom);
     let fromDateTime = moment(this.state.datetimeFrom, 'YYYY-MM-DD HH:mm');
-    const toDateTime = moment(dt, 'YYYY-MM-DD HH:mm');
+    const toDateTime = moment(dtTo, 'YYYY-MM-DD HH:mm');
 
-    if(toDateTime.isBefore(fromDateTime)) {
-      dateStringFrom = this.subtractOneToDateString(dt, 'hours', 'dateTime');
+    // case when `To` is <= `From`
+    if(toDateTime.isBefore(fromDateTime) || toDateTime.isSame(fromDateTime) ) {
+      dateStringFrom = this.subtractOneToDateString(dtTo, 'hours', 'dateTime');
     }
-    // TO DO: check for 00 and 23 to change dateString
-    // also refactor the code to check it
+
     this.setState({
       datetimeFrom: dateStringFrom,
-      datetimeTo: dt
+      datetimeTo: dtTo
     })
   }
-
-  convertToDoubleDigit(digit) {
-    if(digit < 10) {
-      return `0${digit}`;
-    }
-    return digit;
-  }
-
-
 
   onTitleChange(text) {
     console.log("new text", text);
