@@ -21,12 +21,13 @@ class CalendarEvent extends Component {
       datetimeTo: `${params.date} ${params.time}`,
       title: params.title
     }
-    this.buttonPressed = this.buttonPressed.bind(this);
     this.addOneToDateString = this.addOneToDateString.bind(this);
     this.subtractOneToDateString = this.subtractOneToDateString.bind(this);
     this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
     this.setDateTimeTo = this.setDateTimeTo.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
+    this.cancelEvent = this.cancelEvent.bind(this);
+    this.submitEvent = this.submitEvent.bind(this);
   }
 
   static navigationOptions = {
@@ -40,10 +41,6 @@ class CalendarEvent extends Component {
     this.setState({
       datetimeTo: dateStringTo
     });
-  }
-
-  buttonPressed() {
-    console.log("buttonPressed");
   }
 
   addOneToDateString(dateString, type, formatType) {
@@ -103,6 +100,17 @@ class CalendarEvent extends Component {
     this.setState({
       title: text
     });
+  }
+
+  cancelEvent() {
+    console.log("cancel event");
+    this.props.navigation.navigate('Calendar');
+  }
+
+  submitEvent() {
+    console.log("submit event");
+    //submit to backend
+    //navigate back to calendar
   }
 
   render() {
@@ -165,8 +173,8 @@ class CalendarEvent extends Component {
             onDateChange={(dt) => {this.setDateTimeTo(dt)}}
           />
         <View style={{flexDirection: 'row', height: 80, padding: 20}}>
-          <Button title="Cancel" onPress={this.buttonPressed}/>
-          <Button title="Save" onPress={this.buttonPressed}/>
+          <Button title="Cancel" onPress={this.cancelEvent}/>
+          <Button title="Save" onPress={this.submitEvent}/>
         </View>
         </ScrollView>
       </View>
