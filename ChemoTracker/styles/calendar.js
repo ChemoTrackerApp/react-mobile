@@ -45,5 +45,11 @@ export const eventStyles = StyleSheet.create({
     fontSize: 24,
     flex: 1,
     width: width(80)
+  },
+  eventDateTimePickerText: {
+    height: 30,
+    fontSize: 20,
+    flex: 1,
+    width: width(80)
   }
 })

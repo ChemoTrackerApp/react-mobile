@@ -116,7 +116,9 @@ class CalendarEvent extends Component {
             value={this.state.title ? this.state.title : ''}
             onChangeText={this.onTitleChange}
           />
-        <Text>From</Text>
+          <Text style={eventStyles.eventDateTimePickerText}>
+            From
+          </Text>
           <DatePicker
             style={{width: 200}}
             date={this.state.datetimeFrom}
@@ -138,7 +140,9 @@ class CalendarEvent extends Component {
             minuteInterval={10}
             onDateChange={(dt) => {this.setDateTimeFrom(dt)}}
           />
-        <Text>To</Text>
+          <Text style={eventStyles.eventDateTimePickerText}>
+            To
+          </Text>
           <DatePicker
             style={{width: 200}}
             date={this.state.datetimeTo}
