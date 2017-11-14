@@ -41,7 +41,8 @@ export const headerStyles = StyleSheet.create({
 
 export const eventStyles = StyleSheet.create({
   eventTitle: {
-    height: 50,
+    height: 70,
+    fontSize: 24,
     flex: 1,
     width: width(80)
   }
