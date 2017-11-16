@@ -23,7 +23,10 @@ export const calStyles = StyleSheet.create({
     padding: 10,
     marginRight: 10,
     marginTop: 17,
-    flex: 1
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white'
   }
 });
 
