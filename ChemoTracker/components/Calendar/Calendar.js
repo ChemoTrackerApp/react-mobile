@@ -44,7 +44,7 @@ class Calendar extends Component {
             {item.text}
           </Text>
           <Text
-            style={calStyles.itemText}>
+            style={calStyles.itemTime}>
             {item.timeStringFrom} - {item.timeStringTo}
           </Text>
         </TouchableOpacity>

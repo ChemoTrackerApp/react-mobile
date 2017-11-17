@@ -19,6 +19,10 @@ export const calStyles = StyleSheet.create({
     color: 'black',
     fontSize: 16
   },
+  itemTime: {
+    color: 'black',
+    fontSize: 14
+  },
   emptyDate: {
     padding: 10,
     marginRight: 10,
