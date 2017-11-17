@@ -43,6 +43,10 @@ class Calendar extends Component {
             style={calStyles.itemText}>
             {item.text}
           </Text>
+          <Text
+            style={calStyles.itemText}>
+            {item.timeStringFrom} - {item.timeStringTo}
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -121,7 +125,13 @@ class Calendar extends Component {
     console.log("Create event!");
     this.props.navigation.navigate(
       'CalendarEvent',
-      { date: d, time: t }
+      {
+        date: d,
+        time: {
+          from: t,
+          to: t
+        }
+      }
     );
   }
 
@@ -131,7 +141,10 @@ class Calendar extends Component {
       'CalendarEvent',
       {
         date: item.dateString,
-        time: item.timeString,
+        time: {
+          from: item.timeStringFrom,
+          to: item.timeStringTo
+        },
         title: item.text
       }
     );
@@ -157,23 +170,27 @@ class Calendar extends Component {
       '2017-10-22': [{
         text: 'item 1 - any js object',
         dateString: '2017-10-22',
-        timeString: '10:00'
+        timeStringFrom: '10:00',
+        timeStringTo: '12:00'
       }],
       '2017-10-23': [{
         text: 'item 2 - any js object',
         dateString: '2017-10-23',
-        timeString: '15:00'
+        timeStringFrom: '15:00',
+        timeStringTo: '15:30'
       }],
       '2017-10-24': [],
       '2017-10-25': [{
           text: 'item 3 - any js object',
           dateString: '2017-10-25',
-          timeString: '09:00'
+          timeStringFrom: '09:00',
+          timeStringTo: '10:00'
         },
         {
           text: 'any js object',
           dateString: '2017-10-25',
-          timeString: '12:00'
+          timeStringFrom: '12:00',
+          timeStringTo: '13:00'
       }],
       [today]: []
     }

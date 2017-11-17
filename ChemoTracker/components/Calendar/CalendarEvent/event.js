@@ -16,9 +16,10 @@ class CalendarEvent extends Component {
     const params = props.navigation.state.params;
     this.state = {
       date: params.date,
-      time: params.time,
-      datetimeFrom: `${params.date} ${params.time}`,
-      datetimeTo: `${params.date} ${params.time}`,
+      timeFrom: params.time.from,
+      timeTo: params.time.to,
+      datetimeFrom: `${params.date} ${params.time.from}`,
+      datetimeTo: `${params.date} ${params.time.to}`,
       title: params.title
     }
     this.addOneToDateString = this.addOneToDateString.bind(this);
@@ -37,9 +38,13 @@ class CalendarEvent extends Component {
 
   componentWillMount() {
     const dateStringFrom = moment(this.state.datetimeFrom, 'YYYY-MM-DD HH:mm');
-    const dateStringTo = this.addOneToDateString(dateStringFrom, 'hours', 'dateTime');
+    const dateStringTo = moment(this.state.datetimeTo, 'YYYY-MM-DD HH:mm');
+    let dateTimeStringTo = this.state.datetimeTo;
+    if(dateStringFrom.isSame(dateStringTo)) {
+      dateTimeStringTo = this.addOneToDateString(dateStringFrom, 'hours', 'dateTime')
+    }
     this.setState({
-      datetimeTo: dateStringTo
+      datetimeTo: dateTimeStringTo
     });
   }
 
