@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
+import { Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import Calendar from './Calendar/Calendar.js';
 import CalendarEvent from './Calendar/CalendarEvent/event.js';
 import { headerStyles } from '../styles/calendar.js';
+import CalendarHeader from './Calendar/CalendarHeader.js';
+
+let navOptions = ({navigation}) => (
+  {
+    title: 'Calendar',
+    headerStyle: headerStyles.headerBackground,
+    headerTitleStyle: headerStyles.headerTitleStyle,
+    headerBackTitleStyle: headerStyles.headerBackTitleStyle,
+    headerRight: <CalendarHeader navigation={navigation.state} navigate={navigation.navigate}/>
+  }
+)
 
 const CalendarTab = StackNavigator({
   Calendar: {
     screen: Calendar,
     path: 'calendar',
-    navigationOptions: {
-      title: 'Calendar',
-      headerStyle: headerStyles.headerBackground,
-      headerTitleStyle: headerStyles.headerTitleStyle,
-      headerBackTitleStyle: headerStyles.headerBackTitleStyle
-    }
+    navigationOptions: navOptions
   },
   CalendarEvent: {
     screen: CalendarEvent,

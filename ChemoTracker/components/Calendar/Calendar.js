@@ -7,13 +7,14 @@ import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
 import { calStyles } from '../../styles/calendar.js';
 import CalendarEvent from './CalendarEvent/event.js';
+import CalendarHeader from './CalendarHeader.js';
 import _ from 'lodash';
 import moment from 'moment';
 
 class Calendar extends Component {
   constructor(props){
     super(props);
-    console.log("props", props);
+    console.log("props of calendar", props);
     this.state = {
       currentDay: ''
     }
@@ -153,6 +154,7 @@ class Calendar extends Component {
   onDayPress(day) {
     console.log("day pressed", day);
     this.setState({currentDay: day});
+    this.props.navigation.setParams({date: day});
   }
 
   onDayChange(day) {
