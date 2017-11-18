@@ -22,7 +22,6 @@ class Calendar extends Component {
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
     this.editEvent = this.editEvent.bind(this);
-    this.createEvent = this.createEvent.bind(this);
     this.toDateString = this.toDateString.bind(this);
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
@@ -66,13 +65,6 @@ class Calendar extends Component {
         <Text style={calStyles.itemText}>
           No events for this date
         </Text>
-        <TouchableOpacity
-          onPress={() => this.createEvent(dateString, timeString)}>
-          <Icon
-            size={24}
-            name="plus"
-            color='#000000' />
-        </TouchableOpacity>
       </View>
     );
   }
@@ -120,20 +112,6 @@ class Calendar extends Component {
       return `0${digit}`;
     }
     return digit;
-  }
-
-  createEvent(d, t) {
-    console.log("Create event!");
-    this.props.navigation.navigate(
-      'CalendarEvent',
-      {
-        date: d,
-        time: {
-          from: t,
-          to: t
-        }
-      }
-    );
   }
 
   editEvent(item) {
