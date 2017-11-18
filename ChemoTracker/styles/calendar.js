@@ -43,10 +43,18 @@ export const headerStyles = StyleSheet.create({
   },
   headerBackTitleStyle: {
     color: '#000000'
+  },
+  headerPlus: {
+    marginRight: 10
   }
 });
 
 export const eventStyles = StyleSheet.create({
+  eventDetailView: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 30
+  },
   eventTitle: {
     height: 70,
     fontSize: 24,
@@ -58,5 +66,17 @@ export const eventStyles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     width: width(80)
+  },
+  cancelSaveView: {
+    flexDirection: 'row',
+    height: 80,
+  },
+  cancelSaveButton: {
+    width: 140,
+    height: 70,
+    backgroundColor: 'red'
+  },
+  buttonText: {
+    fontSize: 20
   }
 })

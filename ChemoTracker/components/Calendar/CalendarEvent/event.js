@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, ScrollView, Button } from 'react-native';
+import { TextInput, Text, View, ScrollView, Button, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 import DatePicker from 'react-native-datepicker';
 import styles from '../../../styles/main.js';
@@ -123,64 +123,74 @@ class CalendarEvent extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <TextInput
-            style={eventStyles.eventTitle}
-            placeholder="Title"
-            value={this.state.title ? this.state.title : ''}
-            onChangeText={this.onTitleChange}
-          />
-          <Text style={eventStyles.eventDateTimePickerText}>
-            From
-          </Text>
-          <DatePicker
-            style={{width: 200}}
-            date={this.state.datetimeFrom}
-            mode="datetime"
-            format="YYYY-MM-DD HH:mm"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-            }}
-            minuteInterval={10}
-            onDateChange={(dt) => {this.setDateTimeFrom(dt)}}
-          />
-          <Text style={eventStyles.eventDateTimePickerText}>
-            To
-          </Text>
-          <DatePicker
-            style={{width: 200}}
-            date={this.state.datetimeTo}
-            mode="datetime"
-            format="YYYY-MM-DD HH:mm"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-            }}
-            minuteInterval={10}
-            onDateChange={(dt) => {this.setDateTimeTo(dt)}}
-          />
-        <View style={{flexDirection: 'row', height: 80, padding: 20}}>
-          <Button title="Cancel" onPress={this.cancelEvent}/>
-          <Button title="Save" onPress={this.submitEvent}/>
-        </View>
+          <View style={eventStyles.eventDetailView}>
+            <TextInput
+              style={eventStyles.eventTitle}
+              placeholder="Title"
+              value={this.state.title ? this.state.title : ''}
+              onChangeText={this.onTitleChange}
+            />
+            <Text style={eventStyles.eventDateTimePickerText}>
+              From
+            </Text>
+            <DatePicker
+              style={{width: 200}}
+              date={this.state.datetimeFrom}
+              mode="datetime"
+              format="YYYY-MM-DD HH:mm"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              minuteInterval={10}
+              onDateChange={(dt) => {this.setDateTimeFrom(dt)}}
+            />
+            <Text style={eventStyles.eventDateTimePickerText}>
+              To
+            </Text>
+            <DatePicker
+              style={{width: 200}}
+              date={this.state.datetimeTo}
+              mode="datetime"
+              format="YYYY-MM-DD HH:mm"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              minuteInterval={10}
+              onDateChange={(dt) => {this.setDateTimeTo(dt)}}
+            />
+          </View>
+          <View style={eventStyles.cancelSaveView}>
+            <TouchableOpacity
+              onPress={this.cancelEvent}
+              style={eventStyles.cancelSaveButton}>
+              <Text style={eventStyles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.submitEvent}
+              style={eventStyles.cancelSaveButton}>
+              <Text style={eventStyles.buttonText}>Save</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     )

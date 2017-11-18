@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
-import { calStyles } from '../../styles/calendar.js';
+import { headerStyles } from '../../styles/calendar.js';
 import CalendarEvent from './CalendarEvent/event.js';
 import _ from 'lodash';
 import moment from 'moment';
@@ -87,11 +87,12 @@ class CalendarHeader extends Component {
   render() {
     return(
       <TouchableOpacity
-        onPress={this.createEvent}>
+        onPress={this.createEvent}
+        style={headerStyles.headerPlus}>
         <Icon
           size={24}
           name="plus"
-          color='#000000' />
+          color={color.iconPlusColor} />
       </TouchableOpacity>
     )
   }
