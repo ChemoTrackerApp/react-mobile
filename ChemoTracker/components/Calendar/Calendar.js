@@ -15,9 +15,6 @@ class Calendar extends Component {
   constructor(props){
     super(props);
     console.log("props of calendar", props);
-    this.state = {
-      currentDay: ''
-    }
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
@@ -131,7 +128,6 @@ class Calendar extends Component {
 
   onDayPress(day) {
     console.log("day pressed", day);
-    this.setState({currentDay: day});
     this.props.navigation.setParams({date: day});
   }
 

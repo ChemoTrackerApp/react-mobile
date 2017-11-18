@@ -12,22 +12,27 @@ import moment from 'moment';
 class CalendarHeader extends Component {
   constructor(props) {
     super(props);
-    this.handleCreate = this.handleCreate.bind(this);
+    this.state = {
+      date: {}
+    };
     this.createEvent = this.createEvent.bind(this);
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
     console.log("props in create header", props);
   }
 
-  handleCreate() {
-    console.log("handleCreate", this.navigation.props.params);
-  }
-
   createEvent() {
     const p = this.props;
-    const d = new Date(p.navigation.params.date.timestamp);
-    let dateString = p.navigation.params.date.dateString;
-    const timeString = this.getTimeString(d);
+    let d = moment();
+    let dateString = moment().format('YYYY-MM-DD');
+    let timeString = this.getTimeString(d);
+
+    if(p.navigation.params) {
+      d = new Date(p.navigation.params.date.timestamp);
+      dateString = p.navigation.params.date.dateString;
+      timeString = this.getTimeString(d);
+    }
+
     if(timeString === "00:00") {
       // add 1 to the day
       dateString = moment(dateString).add(1, 'days').format('YYYY-MM-DD');
@@ -45,6 +50,7 @@ class CalendarHeader extends Component {
   }
 
   getTimeString(d) {
+    console.log("d in header getTimeString", d);
     let today = new Date();
     let todayClone = _.clone(today);
     const offset = new Date().getTimezoneOffset();
