@@ -144,26 +144,26 @@ class Calendar extends Component {
     const today = this.toDateString(d);
     const calendarItems = {
       '2017-10-22': [{
-        text: 'item 1 - any js object',
+        text: 'item 1',
         dateString: '2017-10-22',
         timeStringFrom: '10:00',
         timeStringTo: '12:00'
       }],
       '2017-10-23': [{
-        text: 'item 2 - any js object',
+        text: 'item 2',
         dateString: '2017-10-23',
         timeStringFrom: '15:00',
         timeStringTo: '15:30'
       }],
       '2017-10-24': [],
       '2017-10-25': [{
-          text: 'item 3 - any js object',
+          text: 'item 3',
           dateString: '2017-10-25',
           timeStringFrom: '09:00',
           timeStringTo: '10:00'
         },
         {
-          text: 'any js object',
+          text: 'item 4',
           dateString: '2017-10-25',
           timeStringFrom: '12:00',
           timeStringTo: '13:00'
