@@ -63,7 +63,7 @@ export const eventStyles = StyleSheet.create({
   },
   eventDateTimePickerText: {
     height: 30,
-    fontSize: 20,
+    fontSize: 18,
     flex: 1,
     width: width(80)
   },
@@ -72,11 +72,14 @@ export const eventStyles = StyleSheet.create({
     height: 80,
   },
   cancelSaveButton: {
-    width: 140,
-    height: 70,
-    backgroundColor: 'red'
+    width: width(50),
+    height: 50,
+    borderColor: '#f7f7f7',
+    borderWidth: 0.5
   },
   buttonText: {
-    fontSize: 20
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'green'
   }
 })
