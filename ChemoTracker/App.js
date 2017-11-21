@@ -7,6 +7,7 @@ import Track from './components/Track.js';
 import Profile from './components/Profile.js';
 import Search from './components/Search.js';
 import PatientEducation from './components/PatientEducation.js';
+import PatientEducationResult from './components/PatientEducationResult.js';
 import Forum from './components/Forum.js';
 import Calendar from './components/Calendar.js';
 import color from './styles/color.js';
@@ -14,6 +15,7 @@ import color from './styles/color.js';
 const SearchNavigator = StackNavigator({
   Search: { screen: Search, path: 'search' },
   PatientEducation: { screen: PatientEducation, path: 'patient-education' },
+  PatientEducationResult: { screen: PatientEducationResult, path: 'patient-education-result' },
   Forum: { screen: Forum, path: 'forum' }
 }, {
   initialRouteName: 'Search',

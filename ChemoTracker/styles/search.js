@@ -45,6 +45,29 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: color.searchNavBar
   },
+  postContainer: {
+    flex:1,
+    backgroundColor: '#F6F6EF',
+    flexDirection: 'column',
+    paddingRight: 10,
+    paddingLeft: 10,
+  },
+  postHeader:{
+    fontSize: 20,
+    textAlign: 'left',
+    marginTop: 10,
+    marginBottom: 10,
+    color: '#FF6600',
+  },
+  postSeparator: {
+    height: 1,
+    backgroundColor: '#CCCCCC',
+  },
+  postText: {
+    fontSize: 14,
+    marginBottom: 3,
+    paddingBottom: 10
+  },
   section: {
     flex: 1,
     alignItems: 'center',

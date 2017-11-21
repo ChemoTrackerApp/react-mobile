@@ -70,6 +70,12 @@ class PatientEducation extends Component {
     );
   };
 
+  handleClick = (item) => {
+    console.log("handleClick")
+    console.log(item);
+    this.props.navigation.navigate('PatientEducationResult', { data: item })
+  }
+
   renderSeparator = () => {
     return (
       <View
@@ -113,6 +119,7 @@ class PatientEducation extends Component {
                 subtitle={item.email}
                 avatar={{ uri: item.picture.thumbnail }}
                 containerStyle={ styles.listItemContainer }
+                onPress={ () => this.handleClick(item) }
               />
             )}
             keyExtractor={item => item.email}
