@@ -50,6 +50,11 @@ export const headerStyles = StyleSheet.create({
 });
 
 export const eventStyles = StyleSheet.create({
+  eventContainer: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 30
+  },
   eventDetailView: {
     marginLeft: 20,
     marginRight: 20,
@@ -67,14 +72,27 @@ export const eventStyles = StyleSheet.create({
     flex: 1,
     width: width(80)
   },
-  cancelSaveView: {
+  locationView: {
     flexDirection: 'row',
-    height: 80,
+    height: 50,
+    marginTop: 10,
+    alignItems: 'center'
+  },
+  eventLocation: {
+    height: 50,
+    fontSize: 18,
+    width: width(75)
+  },
+  cancelSaveView: {
+    flexDirection: 'row'
   },
   cancelSaveButton: {
     width: width(50),
-    height: 50,
-    borderColor: '#f7f7f7',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f7f7f7',
+    borderColor: '#ffffff',
     borderWidth: 0.5
   },
   buttonText: {

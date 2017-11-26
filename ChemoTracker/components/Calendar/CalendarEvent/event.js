@@ -20,13 +20,14 @@ class CalendarEvent extends Component {
       timeTo: params.time.to,
       datetimeFrom: `${params.date} ${params.time.from}`,
       datetimeTo: `${params.date} ${params.time.to}`,
-      title: params.title
+      title: params.title,
+      location: ''
     }
     this.addOneToDateString = this.addOneToDateString.bind(this);
     this.subtractOneToDateString = this.subtractOneToDateString.bind(this);
     this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
     this.setDateTimeTo = this.setDateTimeTo.bind(this);
-    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onTextInputChange = this.onTextInputChange.bind(this);
     this.cancelEvent = this.cancelEvent.bind(this);
     this.submitEvent = this.submitEvent.bind(this);
   }
@@ -100,10 +101,10 @@ class CalendarEvent extends Component {
     })
   }
 
-  onTitleChange(text) {
+  onTextInputChange(key, text) {
     console.log("new text", text);
     this.setState({
-      title: text
+      [key]: text
     });
   }
 
@@ -128,7 +129,7 @@ class CalendarEvent extends Component {
               style={eventStyles.eventTitle}
               placeholder="Title"
               value={this.state.title ? this.state.title : ''}
-              onChangeText={this.onTitleChange}
+              onChangeText={text => this.onTextInputChange('title', text)}
             />
             <Text style={eventStyles.eventDateTimePickerText}>
               From
@@ -178,7 +179,18 @@ class CalendarEvent extends Component {
               minuteInterval={10}
               onDateChange={(dt) => {this.setDateTimeTo(dt)}}
             />
+
+            <View style={eventStyles.locationView}>
+              <Icon size={24} name="location" color={color.eventIcon} />
+              <TextInput
+                style={eventStyles.eventLocation}
+                placeholder="Location"
+                value={this.state.location ? this.state.location : ''}
+                onChangeText={text => this.onTextInputChange('location', text)}
+              />
+            </View>
           </View>
+
           <View style={eventStyles.cancelSaveView}>
             <TouchableOpacity
               onPress={this.cancelEvent}
