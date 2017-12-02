@@ -83,6 +83,9 @@ export const eventStyles = StyleSheet.create({
     fontSize: 18,
     width: width(75)
   },
+  mapText: {
+    fontSize: 18
+  },
   cancelSaveView: {
     flexDirection: 'row'
   },
@@ -100,4 +103,14 @@ export const eventStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'green'
   }
-})
+});
+
+export const mapStyles = StyleSheet.create({
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+});

@@ -7,6 +7,7 @@ import color from '../../../styles/color.js';
 import { eventStyles } from '../../../styles/calendar.js';
 import _ from 'lodash';
 import moment from 'moment';
+import Maps from './maps.js';
 
 class CalendarEvent extends Component {
 
@@ -28,6 +29,7 @@ class CalendarEvent extends Component {
     this.setDateTimeFrom = this.setDateTimeFrom.bind(this);
     this.setDateTimeTo = this.setDateTimeTo.bind(this);
     this.onTextInputChange = this.onTextInputChange.bind(this);
+    this.openMaps = this.openMaps.bind(this);
     this.cancelEvent = this.cancelEvent.bind(this);
     this.submitEvent = this.submitEvent.bind(this);
   }
@@ -106,6 +108,10 @@ class CalendarEvent extends Component {
     this.setState({
       [key]: text
     });
+  }
+
+  openMaps() {
+    this.props.navigation.navigate('Maps');
   }
 
   cancelEvent() {
@@ -188,6 +194,10 @@ class CalendarEvent extends Component {
                 value={this.state.location ? this.state.location : ''}
                 onChangeText={text => this.onTextInputChange('location', text)}
               />
+              <TouchableOpacity
+                onPress={this.openMaps}>
+                <Text style={eventStyles.mapText}>Map</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
