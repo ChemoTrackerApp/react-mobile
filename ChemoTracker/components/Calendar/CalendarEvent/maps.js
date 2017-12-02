@@ -4,9 +4,10 @@ import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../../styles/main.js';
 import color from '../../../styles/color.js';
 import { mapStyles } from '../../../styles/calendar.js';
+import MapView from 'react-native-maps';
+import Geocoder from 'react-native-geocoding';
 import _ from 'lodash';
 import moment from 'moment';
-import MapView from 'react-native-maps';
 
 class Maps extends Component {
 
@@ -22,6 +23,10 @@ class Maps extends Component {
     this.onPress = this.onPress.bind(this);
   }
 
+  componentDidMount() {
+    Geocoder.setApiKey('AIzaSyCfebotirPL68tLvuahALuqhBil3kTJstk');
+  }
+
   static navigationOptions = {
     tabBarLabel: "Calendar",
     tabBarIcon: () => (<Icon size={24} name="calendar" color={color.navBarIcon} />)
@@ -33,9 +38,23 @@ class Maps extends Component {
 
   onPress(place) {
     console.log("coordinate pressed", place.coordinate);
-    this.setState({
-      coordinate: place.coordinate
-    });
+
+    const lat = place.coordinate.latitude;
+    const lng = place.coordinate.longitude;
+
+    Geocoder.getFromLatLng(lat, lng).then(
+      json => {
+        console.log("address", json.results[0].formatted_address);
+        this.setState({
+          location: json.results[0].formatted_address,
+          coordinate: place.coordinate
+        });
+      },
+      error => {
+        console.log("error", error);
+      }
+    );
+
   }
 
   render() {
