@@ -15,9 +15,11 @@ class Maps extends Component {
     console.log("props", this.props);
     const params = props.navigation.state.params;
     this.state = {
-      location: ''
+      location: '',
+      coordinate: {}
     }
     this.mapRendered = this.mapRendered.bind(this);
+    this.onPress = this.onPress.bind(this);
   }
 
   static navigationOptions = {
@@ -29,19 +31,35 @@ class Maps extends Component {
     console.log("map is rendered");
   }
 
+  onPress(place) {
+    console.log("coordinate pressed", place.coordinate);
+    this.setState({
+      coordinate: place.coordinate
+    });
+  }
+
   render() {
+    const { location, coordinate } = this.state;
     return (
       <View style={styles.container}>
         <MapView
           style={mapStyles.map}
+          provider={"google"}
           onMapReady={this.mapRendered}
+          onPress={e => this.onPress(e.nativeEvent)}
           initialRegion={{
             latitude: 37.78825,
             longitude: -122.4324,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-        />
+        >
+          {_.isEmpty(coordinate) ? null :
+            <MapView.Marker
+              coordinate={coordinate}
+            />
+          }
+        </MapView>
       </View>
     )
   }
