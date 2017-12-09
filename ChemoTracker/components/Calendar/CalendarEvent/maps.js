@@ -30,6 +30,8 @@ class Maps extends Component {
     }
     this.mapRendered = this.mapRendered.bind(this);
     this.onPress = this.onPress.bind(this);
+    this.searchLocation = this.searchLocation.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
 
   componentDidMount() {
@@ -63,7 +65,30 @@ class Maps extends Component {
         console.log("error", error);
       }
     );
+  }
 
+  searchLocation(query) {
+    this.setState({location: query})
+  }
+
+  onBlur() {
+    console.log("location now", this.state.location);
+    Geocoder.getFromLocation(this.state.location).then(
+      json => {
+        var location = json.results[0].geometry.location;
+        this.setState({
+          location: json.results[0].formatted_address,
+          coordinate: {
+            latitude: location.lat,
+            longitude: location.lng
+          }
+        });
+      },
+      error => {
+        console.log("not found");
+        // give alert saying location not found
+      }
+    );
   }
 
   render() {
@@ -72,13 +97,14 @@ class Maps extends Component {
       <View style={styles.container}>
         <ScrollView>
           <SearchBar
-            onSearchChange={() => console.log('On Search Change')}
+            onSearchChange={(query) => {
+              this.searchLocation(query);
+            }}
             height={height(8)}
-            onFocus={() => console.log('On Focus')}
-            onBlur={() => console.log('On Blur')}
             placeholder={'Search...'}
             autoCorrect={false}
             returnKeyType={'search'}
+            onBlur={() => this.onBlur()}
             inputStyle={StyleSheet.flatten(mapStyles.searchBar)}
           />
           <View style={mapStyles.mapContainer}>
