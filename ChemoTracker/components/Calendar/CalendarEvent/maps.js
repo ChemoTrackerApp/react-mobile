@@ -29,7 +29,7 @@ class Maps extends Component {
       coordinate: {}
     }
     this.mapRendered = this.mapRendered.bind(this);
-    this.onPress = this.onPress.bind(this);
+    this.onPressLocation = this.onPressLocation.bind(this);
     this.searchLocation = this.searchLocation.bind(this);
     this.onBlur = this.onBlur.bind(this);
   }
@@ -47,7 +47,7 @@ class Maps extends Component {
     console.log("map is rendered");
   }
 
-  onPress(place) {
+  onPressLocation(place) {
     console.log("coordinate pressed", place.coordinate);
 
     const lat = place.coordinate.latitude;
@@ -60,6 +60,7 @@ class Maps extends Component {
           location: json.results[0].formatted_address,
           coordinate: place.coordinate
         });
+        this.search.setText(json.results[0].formatted_address);
       },
       error => {
         console.log("error", error);
@@ -108,13 +109,14 @@ class Maps extends Component {
             returnKeyType={'search'}
             onBlur={() => this.onBlur()}
             inputStyle={StyleSheet.flatten(mapStyles.searchBar)}
+            ref={ref => { this.search = ref; }}
           />
           <View style={mapStyles.mapContainer}>
             <MapView
               style={StyleSheet.flatten(mapStyles.map)}
               provider={"google"}
               onMapReady={this.mapRendered}
-              onPress={e => this.onPress(e.nativeEvent)}
+              onPress={e => this.onPressLocation(e.nativeEvent)}
               initialRegion={{
                 latitude: 37.78825,
                 longitude: -122.4324,
