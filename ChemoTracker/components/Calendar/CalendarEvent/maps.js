@@ -75,14 +75,16 @@ class Maps extends Component {
     console.log("location now", this.state.location);
     Geocoder.getFromLocation(this.state.location).then(
       json => {
-        var location = json.results[0].geometry.location;
+        const location = json.results[0].geometry.location;
+        const coord = {
+          latitude: location.lat,
+          longitude: location.lng
+        }
         this.setState({
           location: json.results[0].formatted_address,
-          coordinate: {
-            latitude: location.lat,
-            longitude: location.lng
-          }
+          coordinate: coord
         });
+        this.map.animateToCoordinate(coord, 100);
       },
       error => {
         console.log("not found");
@@ -109,7 +111,7 @@ class Maps extends Component {
           />
           <View style={mapStyles.mapContainer}>
             <MapView
-              style={mapStyles.map}
+              style={StyleSheet.flatten(mapStyles.map)}
               provider={"google"}
               onMapReady={this.mapRendered}
               onPress={e => this.onPress(e.nativeEvent)}
@@ -119,6 +121,7 @@ class Maps extends Component {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
+              ref={ref => { this.map = ref; }}
             >
               {_.isEmpty(coordinate) ? null :
                 <MapView.Marker
