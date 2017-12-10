@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Octicons';
 import DatePicker from 'react-native-datepicker';
 import styles from '../../../styles/main.js';
 import color from '../../../styles/color.js';
-import { eventStyles } from '../../../styles/calendar.js';
+import { eventStyles, datePickerStyles } from '../../../styles/calendar.js';
 import _ from 'lodash';
 import moment from 'moment';
 import Maps from './maps.js';
@@ -147,17 +147,7 @@ class CalendarEvent extends Component {
               format="YYYY-MM-DD HH:mm"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
+              customStyles={datePickerStyles}
               minuteInterval={10}
               onDateChange={(dt) => {this.setDateTimeFrom(dt)}}
             />
@@ -171,17 +161,7 @@ class CalendarEvent extends Component {
               format="YYYY-MM-DD HH:mm"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: 'absolute',
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
+              customStyles={datePickerStyles}
               minuteInterval={10}
               onDateChange={(dt) => {this.setDateTimeTo(dt)}}
             />

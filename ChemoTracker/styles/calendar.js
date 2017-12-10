@@ -105,6 +105,18 @@ export const eventStyles = StyleSheet.create({
   }
 });
 
+export const datePickerStyles = {
+  dateIcon: {
+    position: 'absolute',
+    left: 0,
+    top: 4,
+    marginLeft: 0
+  },
+  dateInput: {
+    marginLeft: 36
+  }
+};
+
 export const mapStyles = StyleSheet.create({
   mapContainer: {
     height: height(92)
