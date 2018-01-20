@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
-import { headerStyles } from '../../styles/calendar.js';
+import { headerStyles, eventStyles } from '../../styles/calendar.js';
 import CalendarEvent from './CalendarEvent/event.js';
 import _ from 'lodash';
 import moment from 'moment';
@@ -13,12 +13,21 @@ class CalendarHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: {}
+      date: {},
+      page: props.state
     };
     this.createEvent = this.createEvent.bind(this);
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
-    console.log("props in create header", props);
+    this.submitEvent = this.submitEvent.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.state !== nextProps.state) {
+      this.setState({
+        page: nextProps.state
+      });
+    }
   }
 
   createEvent() {
@@ -84,16 +93,33 @@ class CalendarHeader extends Component {
     return digit;
   }
 
+  submitEvent() {
+    console.log("submit event");
+    //submit to backend
+    //navigate back to calendar
+  }
+
   render() {
+    const { page } = this.state;
+    console.log("page: ", page);
     return(
-      <TouchableOpacity
-        onPress={this.createEvent}
-        style={headerStyles.headerPlus}>
-        <Icon
-          size={24}
-          name="plus"
-          color={color.iconPlusColor} />
-      </TouchableOpacity>
+      <View>
+        {page === 'agenda' ?
+          <TouchableOpacity
+            onPress={this.createEvent}
+            style={headerStyles.headerPlus}>
+            <Icon
+              size={24}
+              name="plus"
+              color={color.iconPlusColor} />
+          </TouchableOpacity> :
+          <TouchableOpacity
+            onPress={this.submitEvent}
+            style={eventStyles.cancelSaveButton}>
+            <Text style={eventStyles.buttonText}>Save</Text>
+          </TouchableOpacity>
+        }
+      </View>
     )
   }
 }

@@ -8,13 +8,29 @@ import CalendarHeader from './Calendar/CalendarHeader.js';
 import Maps from './Calendar/CalendarEvent/maps.js';
 import { headerStyles } from '../styles/calendar.js';
 
-let navOptions = ({navigation}) => (
+const navOptions = ({navigation}) => (
   {
     title: 'Calendar',
     headerStyle: headerStyles.headerBackground,
     headerTitleStyle: headerStyles.headerTitleStyle,
     headerBackTitleStyle: headerStyles.headerBackTitleStyle,
-    headerRight: <CalendarHeader navigation={navigation.state} navigate={navigation.navigate}/>
+    headerRight: <CalendarHeader
+      state={'agenda'}
+      navigation={navigation.state}
+      navigate={navigation.navigate}/>
+  }
+)
+
+const navOptionsEvent = ({navigation}) => (
+  {
+    title: 'Event',
+    headerStyle: headerStyles.headerBackground,
+    headerTitleStyle: headerStyles.headerTitleStyle,
+    headerBackTitleStyle: headerStyles.headerBackTitleStyle,
+    headerRight: <CalendarHeader
+      state={'event'}
+      navigation={navigation.state}
+      navigate={navigation.navigate}/>
   }
 )
 
@@ -27,12 +43,7 @@ const CalendarTab = StackNavigator({
   CalendarEvent: {
     screen: CalendarEvent,
     path: 'calendar/event',
-    navigationOptions: {
-      title: 'Event',
-      headerStyle: headerStyles.headerBackground,
-      headerTitleStyle: headerStyles.headerTitleStyle,
-      headerBackTitleStyle: headerStyles.headerBackTitleStyle
-    }
+    navigationOptions: navOptionsEvent
   },
   Maps: {
     screen: Maps,
