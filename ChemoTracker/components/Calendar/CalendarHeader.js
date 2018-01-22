@@ -14,7 +14,8 @@ class CalendarHeader extends Component {
     super(props);
     this.state = {
       date: {},
-      page: props.state
+      page: props.state,
+      type: props.navigation.params ? props.navigation.params.type : ''
     };
     this.createEvent = this.createEvent.bind(this);
     this.getTimeString = this.getTimeString.bind(this);
@@ -26,6 +27,12 @@ class CalendarHeader extends Component {
     if(this.props.state !== nextProps.state) {
       this.setState({
         page: nextProps.state
+      });
+    }
+
+    if(this.props.navigation.params !== nextProps.navigation.params) {
+      this.setState({
+        type: nextProps.navigation.params.type
       });
     }
   }
@@ -53,7 +60,8 @@ class CalendarHeader extends Component {
         time: {
           from: timeString,
           to: timeString
-        }
+        },
+        type: 'create'
       }
     );
   }
@@ -95,13 +103,12 @@ class CalendarHeader extends Component {
 
   submitEvent() {
     console.log("submit event");
-    //submit to backend
-    //navigate back to calendar
+    // submit event to backend
+    this.props.navigation.navigate('Calendar'); // navigate back to Calendar
   }
 
   render() {
-    const { page } = this.state;
-    console.log("page: ", page);
+    const { page, type } = this.state;
     return(
       <View>
         {page === 'agenda' ?
@@ -113,11 +120,11 @@ class CalendarHeader extends Component {
               name="plus"
               color={color.iconPlusColor} />
           </TouchableOpacity> :
-          <TouchableOpacity
-            onPress={this.submitEvent}
-            style={eventStyles.cancelSaveButton}>
-            <Text style={eventStyles.buttonText}>Save</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.submitEvent}
+              style={eventStyles.cancelSaveButton}>
+              <Text style={eventStyles.buttonText}>Save</Text>
+            </TouchableOpacity>
         }
       </View>
     )

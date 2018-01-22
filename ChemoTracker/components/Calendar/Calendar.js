@@ -121,7 +121,8 @@ class Calendar extends Component {
           from: item.timeStringFrom,
           to: item.timeStringTo
         },
-        title: item.text
+        title: item.text,
+        type: 'edit'
       }
     );
   }

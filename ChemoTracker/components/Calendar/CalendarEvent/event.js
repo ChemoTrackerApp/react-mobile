@@ -30,8 +30,8 @@ class CalendarEvent extends Component {
     this.setDateTimeTo = this.setDateTimeTo.bind(this);
     this.onTextInputChange = this.onTextInputChange.bind(this);
     this.openMaps = this.openMaps.bind(this);
-    this.cancelEvent = this.cancelEvent.bind(this);
-    this.submitEvent = this.submitEvent.bind(this);
+    // this.cancelEvent = this.cancelEvent.bind(this);
+    // this.submitEvent = this.submitEvent.bind(this);
   }
 
   static navigationOptions = {
@@ -114,16 +114,16 @@ class CalendarEvent extends Component {
     this.props.navigation.navigate('Maps');
   }
 
-  cancelEvent() {
-    console.log("cancel event");
-    this.props.navigation.navigate('Calendar');
-  }
-
-  submitEvent() {
-    console.log("submit event");
-    //submit to backend
-    //navigate back to calendar
-  }
+  // cancelEvent() {
+  //   console.log("cancel event");
+  //   this.props.navigation.navigate('Calendar');
+  // }
+  //
+  // submitEvent() {
+  //   console.log("submit event");
+  //   //submit to backend
+  //   //navigate back to calendar
+  // }
 
   render() {
     console.log("state",this.state)
@@ -181,7 +181,7 @@ class CalendarEvent extends Component {
             </View>
           </View>
 
-          <View style={eventStyles.cancelSaveView}>
+          {/* <View style={eventStyles.cancelSaveView}>
             <TouchableOpacity
               onPress={this.cancelEvent}
               style={eventStyles.cancelSaveButton}>
@@ -192,7 +192,7 @@ class CalendarEvent extends Component {
               style={eventStyles.cancelSaveButton}>
               <Text style={eventStyles.buttonText}>Save</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </ScrollView>
       </View>
     )
