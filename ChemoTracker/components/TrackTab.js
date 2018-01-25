@@ -1,94 +1,83 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Dimensions } from 'react-native';
 import { TabView, TabNavigator, StackNavigator } from 'react-navigation';
-import TopBarNav  from 'top-bar-nav';
-import Icon from 'react-native-vector-icons/Octicons';
-// import Home from './Home.js';
-// import Track from './SymptomTracking/Track.js';
-// import Intervention from './SymptomTracking/Intervention.js';
-// import TrackHeader from './SymptomTracking/TrackHeader.js';
-// import { headerStyles } from '../styles/SymptomTracking/track.js';
+import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import color from '../styles/color.js';
 
-
-// const TrackTab = TabNavigator({
-//   Nausea: { screen: Home, path: '' },
-//   Vomiting: { screen: Home, path: '' },
-//   Fatigue: { screen: Home, path: '' },
-//   Diarrhea: { screen: Home, path: '' },
-//   Constipation: { screen: Home, path: '' },
-//   Mucositis: { screen: Home, path: '' },
-//   HandFootSyndrome: { screen: Home, path: '' },
-//   Rash: { screen: Home, path: '' },
-//   NailChanges: { screen: Home, path: '' }
-// }, {
-//   tabBarPosition: 'top',
-//   animationEnabled: true,
-//   tabBarOptions: {
-//
-//   }
-// })
-
-const Scene = ({ index }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text style={{ fontSize: 20 }}>{index}</Text>
-  </View>
-);
-const ROUTES = {
-  Scene,
-  // ideally you would have a ROUTES object with multiple React component scenes
+const initialLayout = {
+  height: 0,
+  width: Dimensions.get('window').width,
 };
-const ROUTESTACK = [
-  { label: 'React', title: 'Scene' }, // label is what you see in the top bar
-  { label: 'Native', title: 'Scene' }, // title is just the name of the Component being rendered.  See the renderScene property below
-  { label: 'Is', title: 'Scene' },
-  { label: 'Cool', title: 'Scene' }
-];
 
-class TrackTab extends React.Component {
+const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
+const SecondRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
+
+class TrackTab extends Component {
+  static navigationOptions = {
+    tabBarLabel: "Track",
+    tabBarIcon: () => (<Icon size={24} name="heartbeat" color={color.navBarIcon} />)
+  }
+
+  state = {
+    index: 0,
+    routes: [
+      { key: 'nausea', title: 'Nausea' },
+      { key: 'vomiting', title: 'Vomiting' },
+      { key: 'fatigue', title: 'Fatigue' },
+      { key: 'diarrhea', title: 'Diarrhea' },
+      { key: 'constipation', title: 'Constipation' },
+      { key: 'mucositis', title: 'Mucositis' },
+      { key: 'handfootsyndrome', title: 'Hand Foot Syndrome' },
+      { key: 'rash', title: 'Rash' },
+      { key: 'nailchanges', title: 'Nail Changes'}
+    ],
+  };
+
+  _handleIndexChange = index => this.setState({ index });
+
+  _renderHeader = props => (
+    <TabBar
+    {...props}
+    scrollEnabled
+    style={styles.tabbar}
+    />
+  );
+
+
+  _renderScene = SceneMap({
+    nausea: FirstRoute,
+    vomiting: SecondRoute,
+    fatigue: FirstRoute,
+    diarrhea: SecondRoute,
+    constipation: FirstRoute,
+    mucositis: SecondRoute,
+    handfootsyndrome: FirstRoute,
+    rash: SecondRoute,
+    nailchanges: FirstRoute
+  });
+
   render() {
     return (
-      <View style={{ flex: 1}}>
-        <TopBarNav
-          // routeStack and renderScene are required props
-          routeStack={ROUTESTACK}
-          renderScene={(route, i) => {
-            // This is a lot like the now deprecated Navigator component
-            let Component = ROUTES[route.title];
-            return <Component index={i} />;
-          }}
-          // Below are optional props
-          headerStyle={[styles.headerStyle, { paddingTop: 20 }]} // probably want to add paddingTop: 20 if using TopBarNav for the  entire height of screen on iOS
-          labelStyle={styles.labelStyle}
-          underlineStyle={styles.underlineStyle}
-          imageStyle={styles.imageStyle}
-          sidePadding={40} // Can't set sidePadding in headerStyle because it's needed to calculate the width of the tabs
-          inactiveOpacity={1}
-          fadeLabels={false}
-        />
-      </View>
+      <TabViewAnimated
+        style={styles.container}
+        navigationState={this.state}
+        renderScene={this._renderScene}
+        renderHeader={this._renderHeader}
+        onIndexChange={this._handleIndexChange}
+        initialLayout={initialLayout}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-  headerStyle: {
-    borderBottomWidth: 1,
-    borderColor: '#e6faff',
-    backgroundColor: '#3385ff'
+  container: {
+    flex: 1,
   },
-  labelStyle: {
-    fontSize: 15,
-    fontWeight: '500',
-    color: '#fff'
-  },
-  imageStyle: {
-    height: 20,
-    width: 20,
-    tintColor: '#e6faff'
-  },
-  underlineStyle: {
-    height: 3.6,
-    backgroundColor: '#e6faff'
+  tabbar: {
+    paddingTop: 20,
+    backgroundColor:'#6539c2' //, "#661A87"),
   }
 });
 
