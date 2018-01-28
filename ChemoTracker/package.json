@@ -31,6 +31,7 @@
     "react-native-tableview-simple": "^0.17.1",
     "react-native-vector-icons": "^4.4.0",
     "react-navigation": "^1.0.0-beta.11",
-    "react-native-tab-view": "^0.0.74"
+    "react-native-tab-view": "^0.0.74",
+    "apsl-react-native-button": "^3.0.0"
   }
 }

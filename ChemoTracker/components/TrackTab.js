@@ -4,14 +4,12 @@ import { TabView, TabNavigator, StackNavigator } from 'react-navigation';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import color from '../styles/color.js';
+import trackStackNav from './SymptomTracking/Track.js';
 
 const initialLayout = {
   height: 0,
   width: Dimensions.get('window').width,
 };
-
-const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
-const SecondRoute = () => <View style={[ styles.container, { backgroundColor: '#673ab7' } ]} />;
 
 class TrackTab extends Component {
   static navigationOptions = {
@@ -46,15 +44,15 @@ class TrackTab extends Component {
 
 
   _renderScene = SceneMap({
-    nausea: FirstRoute,
-    vomiting: SecondRoute,
-    fatigue: FirstRoute,
-    diarrhea: SecondRoute,
-    constipation: FirstRoute,
-    mucositis: SecondRoute,
-    handfootsyndrome: FirstRoute,
-    rash: SecondRoute,
-    nailchanges: FirstRoute
+    nausea: trackStackNav,
+    vomiting: trackStackNav,
+    fatigue: trackStackNav,
+    diarrhea: trackStackNav,
+    constipation: trackStackNav,
+    mucositis: trackStackNav,
+    handfootsyndrome: trackStackNav,
+    rash: trackStackNav,
+    nailchanges: trackStackNav
   });
 
   render() {
@@ -77,7 +75,7 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     paddingTop: 20,
-    backgroundColor:'#6539c2' //, "#661A87"),
+    backgroundColor:'#33B3A6'
   }
 });
 

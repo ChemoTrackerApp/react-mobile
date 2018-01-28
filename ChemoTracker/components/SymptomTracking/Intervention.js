@@ -7,11 +7,11 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../../styles/SymptomTracking/intervention.js';
 import color from '../../styles/color.js';
 
-class Intervention extends Component {
+class InterventionScreen extends Component {
   static navigationOptions = {
     tabBarLabel: "Track",
     tabBarIcon: () => (<FontAwesomeIcon size={ 24 } name="heartbeat" color={ color.navBarIcon } />)
-  } 
+  }
 
   constructor(props){
     super(props);
@@ -19,7 +19,7 @@ class Intervention extends Component {
   }
 
   state = {
-    data: { 
+    data: {
       interventions: [
 	      "Take your antinausea medications as directed by your oncology team",
 	      "Contact your oncology team for further management"
@@ -43,6 +43,7 @@ class Intervention extends Component {
 
   dismissButton() {
     console.log("dismissButton");
+    this.props.navigation.navigate("Form");
   }
 
   render() {
@@ -52,28 +53,28 @@ class Intervention extends Component {
         <View style={styles.interventionsSection}>
           <EvilIcons name = "exclamation" size={55} color={color.trackTitle}/>
           <View style={styles.interventionsContent}>
-            { 
+            {
               this.state.data.interventions.map((desc, index) => {
                 return (<Text key={index} style={styles.interventionsText}> {desc} </Text>);
-              }) 
+              })
             }
           </View>
         </View>
         <View style={styles.tipsSection}>
           <Text style={styles.content}>Helpful Tips</Text>
-          { 
+          {
             this.state.data.tips.map((item, itemIndex) => {
               return (
                 <View key={itemIndex} style={styles.tipsSubsection}>
-                  { 
+                  {
                     itemIndex % 2 == 0 ? null : <MaterialIcon name={item.icon} size={40} color={color.trackTitle}/>
                   }
-              
+
                   <View key={itemIndex} style={styles.tipsContent}>
                   {
                     item.descriptions.map((tip, tipIndex) => {
-                      const combineStyles = itemIndex % 2 == 0 ? StyleSheet.flatten([styles.tipsText, styles.alignLeft]) : 
-                        StyleSheet.flatten([styles.tipsText, styles.alignRight]); 
+                      const combineStyles = itemIndex % 2 == 0 ? StyleSheet.flatten([styles.tipsText, styles.alignLeft]) :
+                        StyleSheet.flatten([styles.tipsText, styles.alignRight]);
                       return (<Text key={tipIndex} style={combineStyles}> {tip} </Text>);
                     })
                   }
@@ -83,7 +84,7 @@ class Intervention extends Component {
                   }
                 </View>
               );
-            }) 
+            })
           }
         </View>
         <View style={styles.dismissSection}>
@@ -96,4 +97,4 @@ class Intervention extends Component {
   }
 }
 
-export default Intervention;
+export default InterventionScreen;
