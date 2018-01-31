@@ -1,4 +1,5 @@
 import React from 'react';
+import color from './color.js';
 import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   profileMainContainer: {
@@ -68,17 +69,22 @@ const styles = StyleSheet.create({
   profileSectionTitleBox: {
     height: 18,
     paddingLeft: 20,
+    flexDirection: 'row',
   },
   profileSectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#EF7A5A',
+    color: color.orange,
+    paddingRight: 5,
   },
   profileDetails: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  editIcon: {
+    paddingTop: 2,
+  }
 });
 
 export default styles;
