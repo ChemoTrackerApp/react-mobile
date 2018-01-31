@@ -3,7 +3,6 @@ import { Text, View, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import styles from '../../styles/profile-main.js';
 import color from '../../styles/color.js';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Cell extends Component {
   constructor(props) {
@@ -18,9 +17,6 @@ class Cell extends Component {
         <View style = {styles.profileSectionTitleBox}>
           <View>
             <Text style = {styles.profileSectionTitle}> {this.sectionTitle} </Text>
-          </View>
-          <View style = {styles.editIcon}>
-            <Icon size={17} name="edit" color={color.navBarIcon} />
           </View>
         </View>
         <View style = {styles.profileDetails}>

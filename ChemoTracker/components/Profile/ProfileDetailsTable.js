@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import CategoryCell from './Cell.js';
 import styles from '../../styles/profile-main.js';
@@ -23,11 +23,11 @@ class ProfileDetailsTable extends Component {
   }
   render() {
     return (
-      <View style = {styles.profileTable}>
+      <ScrollView style = {styles.profileTable}>
         <CategoryCell sectionTitle = "Personal Details"  data = {this.peronalDetailsData}/>
         <CategoryCell sectionTitle = "Medical History" data = {this.peronalDetailsData}/>
         <CategoryCell sectionTitle = "Drug Allergies" data = {this.peronalDetailsData}/>
-      </View>
+      </ScrollView>
     );
   }
 }
