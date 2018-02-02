@@ -23,9 +23,10 @@ class ProfileDetailsTable extends Component {
   }
   render() {
     return (
-      <ScrollView style = {styles.profileTable}>
+      <ScrollView style = {styles.profileTable} pagingEnabled={true} showsVerticalScrollIndicator={true}>
         <CategoryCell sectionTitle = "Personal Details"  data = {this.peronalDetailsData}/>
         <CategoryCell sectionTitle = "Medical History" data = {this.peronalDetailsData}/>
+        <CategoryCell sectionTitle = "Drug Allergies" data = {this.peronalDetailsData}/>
         <CategoryCell sectionTitle = "Drug Allergies" data = {this.peronalDetailsData}/>
       </ScrollView>
     );

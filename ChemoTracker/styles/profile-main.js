@@ -1,6 +1,8 @@
 import React from 'react';
 import color from './color.js';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const Viewport = Dimensions.get('window');
+const height = Viewport.height - 355;
 const styles = StyleSheet.create({
   profileMainContainer: {
     flex: 1,
@@ -29,11 +31,21 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     width: 150,
   },
+  overlayProfileImage: {
+    position: 'absolute',
+  },
+  editProfileImage: {
+    opacity: 0.5,
+    paddingLeft: 110,
+    paddingTop: 180
+  },
   profileNameText: {
     fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
-    top: 20,
+  },
+  profileNameTextBox: {
+    paddingTop: 20
   },
   profileSectionCell: {
     flexDirection:'column',
@@ -43,7 +55,7 @@ const styles = StyleSheet.create({
   },
   profileTable: {
     top: 300,
-    position: 'absolute',
+    height: height,
   },
   profileDetailCell: {
     flexDirection:'column',
