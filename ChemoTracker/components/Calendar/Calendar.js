@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
+import { Text, ScrollView, ListView, View, Button, TouchableOpacity, StatusBar } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
-import { Agenda } from 'react-native-calendars';
+import { Agenda, Calendar } from 'react-native-calendars';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
 import { calStyles } from '../../styles/calendar.js';
@@ -11,9 +11,13 @@ import CalendarHeader from './CalendarHeader.js';
 import _ from 'lodash';
 import moment from 'moment';
 
-class Calendar extends Component {
+class Calendars extends Component {
   constructor(props){
     super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state={
+      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+    };
     console.log("props of calendar", props);
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
@@ -129,6 +133,9 @@ class Calendar extends Component {
 
   onDayPress(day) {
     console.log("day pressed", day);
+    this.setState({
+      selected: day.dateString
+    });
     this.props.navigation.setParams({date: day});
   }
 
@@ -170,11 +177,21 @@ class Calendar extends Component {
           timeStringTo: '13:00'
       }],
       [today]: []
+    };
+
+    const calTheme = {
+      selectedDayBackgroundColor: '#FFFFFF',
+      selectedDayTextColor: '#EF7A5A',
+      todayTextColor: '#FFFFFF',
+      dayTextColor: '#FFFFFF',
+      calendarBackground: '#13B2A0',
+      monthTextColor: 'white',
+      arrowColor: 'white'
     }
     return (
-      <View style={styles.container}>
+      <View style={calStyles.container}>
         <StatusBar hidden={true}/>
-        <Agenda
+        {/* <Agenda
           ref={(agenda) => { this.agenda = agenda; }}
           items={calendarItems}
           selected={today}
@@ -192,10 +209,29 @@ class Calendar extends Component {
             agendaTodayColor: 'red',
             agendaKnobColor: '#F36024'
           }}
+        /> */}
+        <Calendar
+          hideExtraDays
+          onDayPress={this.onDayPress}
+          markedDates={{
+            [this.state.selected]: {
+              selected: true,
+              disableTouchEvent: true,
+              selectedColor: 'orange'
+            }
+          }}
+          style={calStyles.calendar}
+          theme={calTheme}
         />
+        <ScrollView style={calStyles.history}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(rowData) => <Text>{rowData}</Text>}
+          />
+        </ScrollView>
       </View>
     );
   }
 }
 
-export default Calendar;
+export default Calendars;

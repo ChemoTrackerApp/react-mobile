@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
-import Calendar from './Calendar/Calendar.js';
+import Calendars from './Calendar/Calendar.js';
 import CalendarEvent from './Calendar/CalendarEvent/event.js';
 import CalendarHeader from './Calendar/CalendarHeader.js';
 import Maps from './Calendar/CalendarEvent/maps.js';
@@ -36,9 +36,8 @@ const navOptionsEvent = ({navigation}) => (
 
 const CalendarTab = StackNavigator({
   Calendar: {
-    screen: Calendar,
-    path: 'calendar',
-    navigationOptions: navOptions
+    screen: Calendars,
+    path: 'calendar'
   },
   CalendarEvent: {
     screen: CalendarEvent,
@@ -54,6 +53,6 @@ const CalendarTab = StackNavigator({
       headerBackTitleStyle: headerStyles.headerBackTitleStyle
     }
   }
-})
+}, {headerMode: 'none'})
 
 export default CalendarTab;

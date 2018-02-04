@@ -31,6 +31,20 @@ export const calStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'white'
+  },
+  calendar: {
+    marginTop: width(5),
+    flex: 2,
+    backgroundColor: '#13B2A0'
+  },
+  container: {
+    backgroundColor: '#000000',
+    width: width(100),
+    flex: 1
+  },
+  history: {
+    backgroundColor: '#FFFFFF',
+    flex: 1
   }
 });
 
