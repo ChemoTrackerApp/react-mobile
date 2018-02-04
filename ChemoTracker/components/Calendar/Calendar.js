@@ -144,28 +144,28 @@ class Calendar extends Component {
     const d = new Date();
     const today = this.toDateString(d);
     const calendarItems = {
-      '2017-10-22': [{
+      '2018-02-02': [{
         text: 'item 1',
-        dateString: '2017-10-22',
+        dateString: '2018-02-02',
         timeStringFrom: '10:00',
         timeStringTo: '12:00'
       }],
-      '2017-10-23': [{
+      '2018-02-03': [{
         text: 'item 2',
-        dateString: '2017-10-23',
+        dateString: '2018-02-03',
         timeStringFrom: '15:00',
         timeStringTo: '15:30'
       }],
-      '2017-10-24': [],
-      '2017-10-25': [{
+      '2018-02-04': [],
+      '2018-02-05': [{
           text: 'item 3',
-          dateString: '2017-10-25',
+          dateString: '2018-02-05',
           timeStringFrom: '09:00',
           timeStringTo: '10:00'
         },
         {
           text: 'item 4',
-          dateString: '2017-10-25',
+          dateString: '2018-02-05',
           timeStringFrom: '12:00',
           timeStringTo: '13:00'
       }],
@@ -178,8 +178,8 @@ class Calendar extends Component {
           ref={(agenda) => { this.agenda = agenda; }}
           items={calendarItems}
           selected={today}
-          pastScrollRange={20}
-          futureScrollChange={20}
+          pastScrollRange={0}
+          futureScrollChange={0}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           onDayPress={(day)=> this.onDayPress(day)}
@@ -190,7 +190,7 @@ class Calendar extends Component {
             agendaDayTextColor: 'black',
             agendaDayNumColor: 'green',
             agendaTodayColor: 'red',
-            agendaKnobColor: 'blue'
+            agendaKnobColor: '#F36024'
           }}
         />
       </View>

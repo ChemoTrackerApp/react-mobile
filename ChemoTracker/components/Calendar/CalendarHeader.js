@@ -110,7 +110,7 @@ class CalendarHeader extends Component {
   render() {
     const { page, type } = this.state;
     return(
-      <View>
+      <View style={headerStyles.headerContainer}>
         {page === 'agenda' ?
           <TouchableOpacity
             onPress={this.createEvent}
@@ -118,7 +118,7 @@ class CalendarHeader extends Component {
             <Icon
               size={24}
               name="plus"
-              color={color.iconPlusColor} />
+              color={color.iconCalendarColor} />
           </TouchableOpacity> :
             <TouchableOpacity
               onPress={this.submitEvent}

@@ -3,7 +3,8 @@ const color= {
   navBarBackground: '#FCFCFC',
   navBarLabel: '#4F4F4F',
   navBarRipple: '#C7C7CD',
-  eventIcon: '#bababa'
+  eventIcon: '#bababa',
+  iconCalendarColor: '#FFFFFF'
 };
 
 export default color;

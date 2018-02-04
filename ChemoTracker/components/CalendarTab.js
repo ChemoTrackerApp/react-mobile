@@ -11,7 +11,7 @@ import { headerStyles } from '../styles/calendar.js';
 const navOptions = ({navigation}) => (
   {
     title: 'Calendar',
-    headerStyle: headerStyles.headerBackground,
+    headerStyle: headerStyles.headerContainer,
     headerTitleStyle: headerStyles.headerTitleStyle,
     headerBackTitleStyle: headerStyles.headerBackTitleStyle,
     headerRight: <CalendarHeader
@@ -24,7 +24,7 @@ const navOptions = ({navigation}) => (
 const navOptionsEvent = ({navigation}) => (
   {
     title: 'Event',
-    headerStyle: headerStyles.headerBackground,
+    headerStyle: headerStyles.headerContainer,
     headerTitleStyle: headerStyles.headerTitleStyle,
     headerBackTitleStyle: headerStyles.headerBackTitleStyle,
     headerRight: <CalendarHeader
@@ -49,7 +49,7 @@ const CalendarTab = StackNavigator({
     screen: Maps,
     navigationOptions: {
       title: 'Maps',
-      headerStyle: headerStyles.headerBackground,
+      headerStyle: headerStyles.headerContainer,
       headerTitleStyle: headerStyles.headerTitleStyle,
       headerBackTitleStyle: headerStyles.headerBackTitleStyle
     }

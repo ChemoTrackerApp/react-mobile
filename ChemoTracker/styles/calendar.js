@@ -35,14 +35,20 @@ export const calStyles = StyleSheet.create({
 });
 
 export const headerStyles = StyleSheet.create({
-  headerBackground:{
-    backgroundColor: '#F4FAFC'
+  headerContainer: {
+    marginTop: 0,
+    paddingTop: 0,
+    top: 0,
+    height: 40,
+    backgroundColor: '#13B2A0'
   },
   headerTitleStyle: {
-    color: '#000000'
+    color: '#ffffff',
+    marginBottom: 20
   },
   headerBackTitleStyle: {
-    color: '#000000'
+    color: 'white',
+    marginBottom: 20
   },
   headerPlus: {
     marginRight: 10
@@ -91,17 +97,14 @@ export const eventStyles = StyleSheet.create({
   },
   cancelSaveButton: {
     width: width(50),
-    height: 60,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f7f7f7',
-    borderColor: '#ffffff',
-    borderWidth: 0.5
+    marginBottom: 20
   },
   buttonText: {
     fontSize: 20,
     textAlign: 'center',
-    color: 'green'
+    color: '#FFFFFF'
   }
 });
 
