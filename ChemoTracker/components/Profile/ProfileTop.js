@@ -30,7 +30,9 @@ class ProfileTop extends Component {
       <View style = {styles.profileTopContainer}>
         <LinearGradient colors = {[color.profileBackgroundDarkPurple, color.profileBackgroundLightPurple]} style = {styles.profileTopContainer}>
 						<View style={styles.overlayProfileImage}>
-							<Image source = {require('../../res/carrie.jpg')} style = {styles.profileImage}></Image>
+							{
+								image ? <Image source = {{ uri: image }} style = {styles.profileImage}></Image> : <Image source = {require('../../res/carrie.jpg')} style = {styles.profileImage}></Image>
+							}
 						</View>
 						<View style={styles.editProfileImage}>
 							<TouchableHighlight onPress={this.onPress}>
