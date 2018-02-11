@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableHighlight, CameraRoll } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, CameraRoll } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { LinearGradient, ImagePicker} from 'expo';
 import styles from '../../styles/profile-main.js';
@@ -35,9 +35,9 @@ class ProfileTop extends Component {
 							}
 						</View>
 						<View style={styles.editProfileImage}>
-							<TouchableHighlight onPress={this.onPress}>
+							<TouchableWithoutFeedback onPress={this.onPress}>
 								<Icon size={17} name="camera" color={color.white}/>
-							</TouchableHighlight>
+							</TouchableWithoutFeedback>
 						</View>
 						<View style={styles.profileNameTextBox}>
 							<Text style = {styles.profileNameText}>Carrie</Text>

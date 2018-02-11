@@ -3,6 +3,7 @@ import color from './color.js';
 import { StyleSheet, Dimensions } from 'react-native';
 const Viewport = Dimensions.get('window');
 const height = Viewport.height - 355;
+const inputWidth = Viewport.width - 75;
 const styles = StyleSheet.create({
   profileMainContainer: {
     flex: 1,
@@ -63,6 +64,23 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     width: '50%'
   },
+  horizontalLine: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#d3d3d3',
+    width: inputWidth,
+    paddingTop: 4,
+  },
+  profileEditDetailCell: {
+    flexDirection:'column',
+    paddingTop: 15,
+    paddingLeft: 25,
+    width: '100%'
+  },
+  profileTextInput: {
+    height: 15,
+    width: inputWidth,
+    fontSize: 15
+  },
   profileDetailTitle: {
     fontSize: 13,
     fontWeight: 'bold',
@@ -95,7 +113,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   editIcon: {
-    paddingTop: 2,
+    width: 50
   }
 });
 
