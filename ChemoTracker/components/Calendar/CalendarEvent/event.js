@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Octicons';
 import DatePicker from 'react-native-datepicker';
 import styles from '../../../styles/main.js';
 import color from '../../../styles/color.js';
-import { eventStyles, datePickerStyles } from '../../../styles/calendar.js';
+import { historyStyles, eventStyles, datePickerStyles } from '../../../styles/calendar.js';
 import _ from 'lodash';
 import moment from 'moment';
 import Maps from './maps.js';
@@ -30,6 +30,7 @@ class CalendarEvent extends Component {
     this.setDateTimeTo = this.setDateTimeTo.bind(this);
     this.onTextInputChange = this.onTextInputChange.bind(this);
     this.openMaps = this.openMaps.bind(this);
+    this.history = this.history.bind(this);
     // this.cancelEvent = this.cancelEvent.bind(this);
     // this.submitEvent = this.submitEvent.bind(this);
   }
@@ -125,11 +126,44 @@ class CalendarEvent extends Component {
   //   //navigate back to calendar
   // }
 
+  history() {
+    const dataSource = [
+      { symptom: 'Nausea',
+        rating: 3
+      },
+      { symptom: 'Fatigue',
+        rating: 3
+      },
+      { symptom: 'Constipation',
+        rating: 2
+      },
+      { symptom: 'Vomit',
+        rating: 1
+      },
+      { symptom: 'Diarrhea',
+        rating: 2
+      }
+    ];
+    return dataSource.map((data, i) => {
+      return (
+        <View key={i} style={historyStyles.historyContainer}>
+          <TouchableOpacity style={historyStyles.symptomContainer}>
+            <Text style={historyStyles.historyText}>{data.symptom}</Text>
+            <View style={historyStyles.rating}>
+              <Text style={historyStyles.ratingText}>{data.rating}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+    });
+  }
+
   render() {
-    console.log("state",this.state)
+    console.log("state",this.state);
     return (
-      <View style={styles.container}>
-        <ScrollView>
+      <View style={historyStyles.container}>
+        {this.history()}
+        {/*<ScrollView>
           <View style={eventStyles.eventDetailView}>
             <TextInput
               style={eventStyles.eventTitle}
@@ -166,7 +200,7 @@ class CalendarEvent extends Component {
               onDateChange={(dt) => {this.setDateTimeTo(dt)}}
             />
 
-            <View style={eventStyles.locationView}>
+            {/* <View style={eventStyles.locationView}>
               <Icon size={24} name="location" color={color.eventIcon} />
               <TextInput
                 style={eventStyles.eventLocation}
@@ -181,7 +215,7 @@ class CalendarEvent extends Component {
             </View>
           </View>
 
-          {/* <View style={eventStyles.cancelSaveView}>
+         <View style={eventStyles.cancelSaveView}>
             <TouchableOpacity
               onPress={this.cancelEvent}
               style={eventStyles.cancelSaveButton}>
@@ -192,8 +226,8 @@ class CalendarEvent extends Component {
               style={eventStyles.cancelSaveButton}>
               <Text style={eventStyles.buttonText}>Save</Text>
             </TouchableOpacity>
-          </View> */}
-        </ScrollView>
+          </View>
+        </ScrollView> */}
       </View>
     )
   }

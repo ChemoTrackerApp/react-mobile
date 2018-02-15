@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
+import { Button, TouchableOpacity } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import Calendar from './Calendar/Calendar.js';
@@ -8,12 +8,13 @@ import CalendarHeader from './Calendar/CalendarHeader.js';
 import Maps from './Calendar/CalendarEvent/maps.js';
 import { headerStyles } from '../styles/calendar.js';
 
+
+
 const navOptions = ({navigation}) => (
   {
     title: 'Calendar',
     headerStyle: headerStyles.headerContainer,
     headerTitleStyle: headerStyles.headerTitleStyle,
-    headerBackTitleStyle: headerStyles.headerBackTitleStyle,
     headerRight: <CalendarHeader
       state={'agenda'}
       navigation={navigation.state}
@@ -23,10 +24,15 @@ const navOptions = ({navigation}) => (
 
 const navOptionsEvent = ({navigation}) => (
   {
-    title: 'Event',
+    title: 'History',
     headerStyle: headerStyles.headerContainer,
     headerTitleStyle: headerStyles.headerTitleStyle,
-    headerBackTitleStyle: headerStyles.headerBackTitleStyle,
+    headerTintColor: 'white',
+    headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() }}
+                  style={headerStyles.headerLeft}>
+                  <Icon size={24} name="chevron-left"
+                      color='#FFFFFF'/>
+                </TouchableOpacity>,
     headerRight: <CalendarHeader
       state={'event'}
       navigation={navigation.state}
@@ -50,8 +56,7 @@ const CalendarTab = StackNavigator({
     navigationOptions: {
       title: 'Maps',
       headerStyle: headerStyles.headerContainer,
-      headerTitleStyle: headerStyles.headerTitleStyle,
-      headerBackTitleStyle: headerStyles.headerBackTitleStyle
+      headerTitleStyle: headerStyles.headerTitleStyle
     }
   }
 })

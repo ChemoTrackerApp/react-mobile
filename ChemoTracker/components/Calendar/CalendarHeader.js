@@ -109,6 +109,11 @@ class CalendarHeader extends Component {
 
   render() {
     const { page, type } = this.state;
+    // <TouchableOpacity
+    //   onPress={this.submitEvent}
+    //   style={eventStyles.cancelSaveButton}>
+    //   <Text style={eventStyles.buttonText}>Save</Text>
+    // </TouchableOpacity>
     return(
       <View style={headerStyles.headerContainer}>
         {page === 'agenda' ?
@@ -119,12 +124,7 @@ class CalendarHeader extends Component {
               size={24}
               name="plus"
               color={color.iconCalendarColor} />
-          </TouchableOpacity> :
-            <TouchableOpacity
-              onPress={this.submitEvent}
-              style={eventStyles.cancelSaveButton}>
-              <Text style={eventStyles.buttonText}>Save</Text>
-            </TouchableOpacity>
+          </TouchableOpacity> : null
         }
       </View>
     )

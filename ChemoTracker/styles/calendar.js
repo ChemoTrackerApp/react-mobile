@@ -44,14 +44,56 @@ export const headerStyles = StyleSheet.create({
   },
   headerTitleStyle: {
     color: '#ffffff',
-    marginBottom: 20
+    marginBottom: 15
   },
-  headerBackTitleStyle: {
-    color: 'white',
-    marginBottom: 20
+  headerLeft: {
+    marginLeft: 15,
+    marginBottom: 15
   },
   headerPlus: {
     marginRight: 10
+  }
+});
+
+export const historyStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    backgroundColor: '#FAFAFA',
+  },
+  historyContainer: {
+    width: width(97),
+    height: 80,
+    marginLeft: 15,
+    paddingRight: 15
+  },
+  historyText: {
+    fontSize: 18,
+    color: '#686661',
+    marginLeft: 10,
+    width: width(70)
+  },
+  symptomContainer: {
+    borderBottomWidth: 2.5,
+    borderBottomColor: '#F2F2F2',
+    height: 60,
+    paddingBottom: 15,
+    paddingTop: 25,
+    flex: 1,
+    flexDirection: 'row'
+  },
+  rating: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#0B6767'
+  },
+  ratingText: {
+    fontSize: 18,
+    color: '#FFFFFF',
+    marginLeft: 15,
+    marginTop: 7.5
   }
 });
 
