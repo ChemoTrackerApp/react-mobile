@@ -114,6 +114,25 @@ const styles = StyleSheet.create({
   },
   editIcon: {
     width: 50
+  },
+  autocomplete: {
+    alignSelf: "stretch",
+    height: 50,
+    margin: 10,
+    marginTop: 50,
+    backgroundColor: "#FFF",
+    borderColor: "lightblue",
+    borderWidth: 1
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#F5FCFF"
+  },
+  picker: {
+    borderWidth: 1,
+    borderColor: color.lightGray,
+    borderRadius: 10,
+    width: inputWidth,
   }
 });
 

@@ -28,7 +28,7 @@ class ProfileTop extends Component {
 		let { image } = this.state;
 		return (
       <View style = {styles.profileTopContainer}>
-        <LinearGradient colors = {[color.profileBackgroundDarkPurple, color.profileBackgroundLightPurple]} style = {styles.profileTopContainer}>
+        <LinearGradient colors = {[color.profileBackgroundDarkBlue, color.profileBackgroundLightBlue]} style = {styles.profileTopContainer}>
 						<View style={styles.overlayProfileImage}>
 							{
 								image ? <Image source = {{ uri: image }} style = {styles.profileImage}></Image> : <Image source = {require('../../res/carrie.jpg')} style = {styles.profileImage}></Image>
@@ -36,7 +36,7 @@ class ProfileTop extends Component {
 						</View>
 						<View style={styles.editProfileImage}>
 							<TouchableWithoutFeedback onPress={this.onPress}>
-								<Icon size={17} name="camera" color={color.white}/>
+								<Icon size={25} name="camera" color={color.white}/>
 							</TouchableWithoutFeedback>
 						</View>
 						<View style={styles.profileNameTextBox}>
