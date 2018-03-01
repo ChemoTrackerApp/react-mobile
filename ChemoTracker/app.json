@@ -1,10 +1,6 @@
 {
   "expo": {
-<<<<<<< HEAD
-    "sdkVersion": "21.0.0"
-=======
     "sdkVersion": "21.0.0",
     "orientation": "portrait"
->>>>>>> master
   }
 }
