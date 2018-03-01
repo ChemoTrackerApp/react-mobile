@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   label: {
-    color: color.searchNavBar, 
+    color: color.searchText, 
     fontWeight: 'bold', 
     fontSize: 20, 
     marginTop: 5 
