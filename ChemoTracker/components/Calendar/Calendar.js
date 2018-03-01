@@ -42,7 +42,7 @@ class Calendar extends Component {
           </Text>
           <Text
             style={calStyles.itemTime}>
-            {item.timeStringFrom} - {item.timeStringTo}
+            {item.timeStringFrom}
           </Text>
         </TouchableOpacity>
       </View>
@@ -144,27 +144,33 @@ class Calendar extends Component {
     const d = new Date();
     const today = this.toDateString(d);
     const calendarItems = {
+      '2018-01-28': [{
+        text: 'Symptom History',
+        dateString: '2018-01-28',
+        timeStringFrom: '10:00',
+        timeStringTo: '12:00'
+      }],
       '2018-02-02': [{
-        text: 'item 1',
+        text: 'Symptom History',
         dateString: '2018-02-02',
         timeStringFrom: '10:00',
         timeStringTo: '12:00'
       }],
       '2018-02-03': [{
-        text: 'item 2',
+        text: 'Symptom History',
         dateString: '2018-02-03',
         timeStringFrom: '15:00',
         timeStringTo: '15:30'
       }],
       '2018-02-04': [],
       '2018-02-05': [{
-          text: 'item 3',
+          text: 'Symptom History',
           dateString: '2018-02-05',
           timeStringFrom: '09:00',
           timeStringTo: '10:00'
         },
         {
-          text: 'item 4',
+          text: 'Symptom History',
           dateString: '2018-02-05',
           timeStringFrom: '12:00',
           timeStringTo: '13:00'
@@ -178,7 +184,7 @@ class Calendar extends Component {
           ref={(agenda) => { this.agenda = agenda; }}
           items={calendarItems}
           selected={today}
-          pastScrollRange={0}
+          pastScrollRange={5}
           futureScrollChange={0}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
