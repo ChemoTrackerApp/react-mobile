@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     paddingTop: 20,
-    backgroundColor:'#33B3A6'
+    backgroundColor:'#066368'
   }
 });
 
