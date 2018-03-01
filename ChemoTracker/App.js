@@ -3,15 +3,15 @@ import { Platform } from 'react-native';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import { TabNavigator } from 'react-navigation';
 import Home from './components/Home.js';
-import Track from './components/Track.js';
 import Profile from './components/Profile.js';
 import Search from './components/Search.js';
 import Calendar from './components/Calendar.js';
+import TrackTab from './components/TrackTab.js';
 import color from './styles/color.js';
 
 const App = TabNavigator({
   Home: { screen: Home, path: '' },
-  Track: { screen: Track, path: 'track' },
+  Track: { screen: TrackTab, path: 'track' },
   Search: { screen: Search, path: 'search' },
   Calendar: { screen: Calendar, path: 'calendar' },
   Profile: { screen: Profile, path: 'profile' }
