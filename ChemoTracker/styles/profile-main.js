@@ -4,6 +4,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const Viewport = Dimensions.get('window');
 const height = Viewport.height - 355;
 const inputWidth = Viewport.width - 75;
+const descriptionWidth = (Viewport.width - 80)/2;
 const styles = StyleSheet.create({
   profileMainContainer: {
     flex: 1,
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   profileDetailDescriptionTextBox: {
-    height: 15,
+    width: descriptionWidth,
   },
   profileDetailDescription: {
     fontSize: 15,
