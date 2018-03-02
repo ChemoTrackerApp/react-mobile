@@ -59,15 +59,31 @@ class ProfileDetailsTable extends Component {
         inputType: "text",
       }]
     }
+    this.sections = [{
+        title: "Personal Details",
+        data: {this.peronalDetailsData.datap},
+      }, {
+        title: "Contact Information",
+        data: {this.peronalDetailsData.datac},
+      }, {
+        title: "Allergies",
+        data: {this.peronalDetailsData.dataa},
+      }, {
+        title: "Medical Information",
+        data: {this.peronalDetailsData.datam},
+      }, {
+        title: "Cancer History",
+        data: {this.peronalDetailsData.datacr},
+      }
+    ];
+
   }
   render() {
     return (
       <ScrollView style = {styles.profileTable} pagingEnabled={true} showsVerticalScrollIndicator={true}>
-        <CategoryCell sectionTitle = "Personal Details"  data = {this.peronalDetailsData.datap}/>
-        <CategoryCell sectionTitle = "Contact Information" data = {this.peronalDetailsData.datac}/>
-        <CategoryCell sectionTitle = "Allergies" data = {this.peronalDetailsData.dataa}/>
-        <CategoryCell sectionTitle = "Medical Information" data = {this.peronalDetailsData.datam}/>
-        <CategoryCell sectionTitle = "Cancer History" data = {this.peronalDetailsData.datacr}/>
+        this.sections.map((section) => {
+          <CategoryCell sectionTitle = {section.title}  data = {section.data}/>
+        });
       </ScrollView>
     );
   }

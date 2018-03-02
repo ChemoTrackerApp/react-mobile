@@ -7,9 +7,10 @@ import color from '../../styles/color.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class ProfileTop extends Component {
-	state = {
-    image: null,
-  };
+	constructor(props) {
+    super(props);
+		this.state.image = null;
+	}
 
 	onPress = async () => {
   	let result = await ImagePicker.launchImageLibraryAsync({
