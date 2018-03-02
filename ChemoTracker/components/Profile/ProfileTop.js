@@ -9,7 +9,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class ProfileTop extends Component {
 	constructor(props) {
     super(props);
-		this.state.image = null;
+		this.state = {
+			image: null
+		}
 	}
 
 	onPress = async () => {

@@ -61,31 +61,33 @@ class ProfileDetailsTable extends Component {
     }
     this.sections = [{
         title: "Personal Details",
-        data: {this.peronalDetailsData.datap},
+        data: this.peronalDetailsData.datap,
       }, {
         title: "Contact Information",
-        data: {this.peronalDetailsData.datac},
+        data: this.peronalDetailsData.datac,
       }, {
         title: "Allergies",
-        data: {this.peronalDetailsData.dataa},
+        data: this.peronalDetailsData.dataa,
       }, {
         title: "Medical Information",
-        data: {this.peronalDetailsData.datam},
+        data: this.peronalDetailsData.datam,
       }, {
         title: "Cancer History",
-        data: {this.peronalDetailsData.datacr},
+        data: this.peronalDetailsData.datacr,
       }
     ];
-
   }
   render() {
     return (
       <ScrollView style = {styles.profileTable} pagingEnabled={true} showsVerticalScrollIndicator={true}>
-        this.sections.map((section) => {
-          <CategoryCell sectionTitle = {section.title}  data = {section.data}/>
-        });
+      {this.renderCells()}
       </ScrollView>
     );
+  }
+  renderCells(){
+    return this.sections.map((section) => {
+        return(<CategoryCell key={section.title} sectionTitle={section.title}  data={section.data}/>)
+    });
   }
 }
 
