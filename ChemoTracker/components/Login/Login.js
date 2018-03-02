@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, Button, View, Alert, Image } from 'react-native';
 
-import styles from '../styles/login_screen.js';
+import styles from '../../styles/login_screen.js';
 
 export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Image
-          source={require('./chemotracker.png')}
+          source={require('../../chemotracker.png')}
           style={styles.logo}
         />
         <TextInput
