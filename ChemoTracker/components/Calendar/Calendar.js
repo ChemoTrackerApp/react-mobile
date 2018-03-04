@@ -10,6 +10,7 @@ import CalendarEvent from './CalendarEvent/event.js';
 import CalendarHeader from './CalendarHeader.js';
 import _ from 'lodash';
 import moment from 'moment';
+import { getSymptoms } from '../../services/symptomTracking.js';
 
 class Calendar extends Component {
   constructor(props){
@@ -23,6 +24,25 @@ class Calendar extends Component {
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
     this.getDateStringFromDay = this.getDateStringFromDay.bind(this);
+  }
+
+  componentWillMount() {
+    getSymptoms()
+    .then(symptomsList => {
+      console.log(symptomsList);
+      // getSymptomsByDate(2018, 3, 2)
+      // .then(list => {
+      //   console.log("list of symptoms: ", list);
+      // })
+      // .catch(err => {
+      //   console.log(err);
+      // })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+
   }
 
   static navigationOptions = {
@@ -184,8 +204,8 @@ class Calendar extends Component {
           ref={(agenda) => { this.agenda = agenda; }}
           items={calendarItems}
           selected={today}
-          pastScrollRange={5}
-          futureScrollChange={0}
+          pastScrollRange={6}
+          futureScrollRange={0}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           onDayPress={(day)=> this.onDayPress(day)}
