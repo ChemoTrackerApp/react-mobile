@@ -123,7 +123,7 @@ class CalendarHeader extends Component {
             <Icon
               size={24}
               name="plus"
-              color={color.iconCalendarColor} />
+              color={color.white} />
           </TouchableOpacity> : null
         }
       </View>
