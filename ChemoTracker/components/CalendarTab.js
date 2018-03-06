@@ -12,13 +12,9 @@ import { headerStyles } from '../styles/calendar.js';
 
 const navOptions = ({navigation}) => (
   {
-    title: 'Calendar',
+    title: 'Symptom History',
     headerStyle: headerStyles.headerContainer,
-    headerTitleStyle: headerStyles.headerTitleStyle,
-    headerRight: <CalendarHeader
-      state={'agenda'}
-      navigation={navigation.state}
-      navigate={navigation.navigate}/>
+    headerTitleStyle: headerStyles.headerTitleStyle
   }
 )
 

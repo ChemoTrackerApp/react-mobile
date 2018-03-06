@@ -10,12 +10,16 @@ import CalendarEvent from './CalendarEvent/event.js';
 import CalendarHeader from './CalendarHeader.js';
 import _ from 'lodash';
 import moment from 'moment';
-import { getSymptoms } from '../../services/symptomTracking.js';
+import { getSymptoms, getSymptomsByMonth, login } from '../../services/symptomTracking.js';
 
 class Calendar extends Component {
   constructor(props){
     super(props);
     console.log("props of calendar", props);
+    this.state = {
+      symptomsList: [],
+      calendarItems: {}
+    }
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
@@ -27,16 +31,74 @@ class Calendar extends Component {
   }
 
   componentWillMount() {
-    getSymptoms()
-    .then(symptomsList => {
-      console.log(symptomsList);
-      // getSymptomsByDate(2018, 3, 2)
-      // .then(list => {
-      //   console.log("list of symptoms: ", list);
-      // })
-      // .catch(err => {
-      //   console.log(err);
-      // })
+    login()
+    .then(token => {
+      getSymptoms()
+      .then(symptomsList => {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = d.getMonth()+1;
+        getSymptomsByMonth(year, month, token.key)
+        .then(list => {
+          // map the list with appropriate data for FE
+          let mappedList = [];
+          mappedList = list.Symptoms.map(item => {
+            const symptomObj = _.find(symptomsList.symptom, ['id', item.symptom]);
+            const dateTime = item.recorded_at;
+            const dateIndex = dateTime.indexOf(' ');
+            const date = dateTime.substring(0, dateIndex);
+            const timeString = (dateTime.substring(dateIndex+1, dateTime.length - 5))+'00';
+
+            return {
+              symptom: symptomObj.name,
+              grade: item.grade,
+              dateString: date,
+              timeString: timeString
+            };
+          });
+          // make the list of items in a month
+          const numDays = new Date(year, month, 0).getDate();
+          let itemList = {};
+          const groupByDate = _.groupBy(mappedList, 'dateString');
+          for(let i = 1 ; i <= numDays ; i++) {
+            const dateString = moment([year, month-1, i]).format('YYYY-MM-DD');
+            itemList[dateString] = [];
+            // get the data from the date, otherwise default to empty
+            if(groupByDate[dateString]) {
+              let ar = {};
+              let dateItem = [];
+
+              groupByDate[dateString].forEach(o => {
+                if(!ar[o.timeString]) {
+                  // add timeString to ar
+                  ar[o.timeString] = {
+                    symptoms: [{name: o.symptom, grade: o.grade}]
+                  };
+                } else{
+                  // time already exist in the array
+                  ar[o.timeString].symptoms.push({name: o.symptom, grade: o.grade});
+                }
+              });
+              const timeList = _.keys(ar);
+              timeList.forEach(key => {
+                dateItem.push({
+                  dateString: dateString,
+                  timeString: key,
+                  symptoms: ar[key].symptoms
+                })
+              });
+              itemList[dateString] = dateItem;
+            }
+          }
+          this.setState({
+            calendarItems: itemList,
+            symptomsList: symptomsList
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      })
     })
     .catch(err => {
       console.log(err);
@@ -57,12 +119,16 @@ class Calendar extends Component {
         <TouchableOpacity
           onPress={() => this.editEvent(item)}>
           <Text
-            style={calStyles.itemText}>
-            {item.text}
+            style={calStyles.itemTime}>
+            {item.timeString}
           </Text>
           <Text
-            style={calStyles.itemTime}>
-            {item.timeStringFrom}
+            style={calStyles.itemText}>
+          {
+            item.symptoms.map(symptom => {
+              return `${symptom.name} `
+            })
+          }
           </Text>
         </TouchableOpacity>
       </View>
@@ -77,13 +143,7 @@ class Calendar extends Component {
       // add 1 to the day
       dateString = moment(dateString).add(1, 'days').format('YYYY-MM-DD');
     }
-    return (
-      <View style={calStyles.emptyDate}>
-        <Text style={calStyles.itemText}>
-          No events for this date
-        </Text>
-      </View>
-    );
+    return null;
   }
 
   toDateString(fullDate) {
@@ -163,40 +223,8 @@ class Calendar extends Component {
   render() {
     const d = new Date();
     const today = this.toDateString(d);
-    const calendarItems = {
-      '2018-01-28': [{
-        text: 'Symptom History',
-        dateString: '2018-01-28',
-        timeStringFrom: '10:00',
-        timeStringTo: '12:00'
-      }],
-      '2018-02-02': [{
-        text: 'Symptom History',
-        dateString: '2018-02-02',
-        timeStringFrom: '10:00',
-        timeStringTo: '12:00'
-      }],
-      '2018-02-03': [{
-        text: 'Symptom History',
-        dateString: '2018-02-03',
-        timeStringFrom: '15:00',
-        timeStringTo: '15:30'
-      }],
-      '2018-02-04': [],
-      '2018-02-05': [{
-          text: 'Symptom History',
-          dateString: '2018-02-05',
-          timeStringFrom: '09:00',
-          timeStringTo: '10:00'
-        },
-        {
-          text: 'Symptom History',
-          dateString: '2018-02-05',
-          timeStringFrom: '12:00',
-          timeStringTo: '13:00'
-      }],
-      [today]: []
-    }
+    const { calendarItems } = this.state;
+    console.log("calendarItems", calendarItems);
     return (
       <View style={styles.container}>
         <StatusBar hidden={true}/>
@@ -205,7 +233,7 @@ class Calendar extends Component {
           items={calendarItems}
           selected={today}
           pastScrollRange={6}
-          futureScrollRange={0}
+          futureScrollRange={1}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           onDayPress={(day)=> this.onDayPress(day)}

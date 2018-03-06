@@ -40,7 +40,7 @@ export const headerStyles = StyleSheet.create({
     paddingTop: 0,
     top: 0,
     height: 40,
-    backgroundColor: '#13B2A0'
+    backgroundColor: '#006760'
   },
   headerTitleStyle: {
     color: '#ffffff',

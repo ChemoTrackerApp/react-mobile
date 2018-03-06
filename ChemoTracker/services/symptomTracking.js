@@ -1,23 +1,38 @@
 const api = 'http://ec2-52-15-106-40.us-east-2.compute.amazonaws.com:8000';
-
-const headers = {
+const header = {
   'Accept': 'application/json',
   'Content-Type': 'application/json'
 }
+
 export const getSymptoms = () => {
   return fetch(`${api}/symptom-tracker/symptoms`, {
     method: 'get',
-    headers: headers
+    headers: header
   }).then(res => {return res.json()});
 };
 
-// export const getSymptomsByDate = (y, m, d) => {
-//   const queryparams = `year=${y}&month=${m}&day=${d}`
-//   return fetch(`${api}/symptom-tracker/patientsymptoms/?${queryparams}`, {
-//     method: 'get',
-//     headers: headers
-//   }).then(res => {
-//     console.log("res", res);
-//     return res.json();
-//   });
-// }
+export const login = () => {
+  return fetch(`${api}/rest-auth/login/`, {
+    method: 'post',
+    headers: header,
+    body: JSON.stringify({
+      email: "seven@seven.com",
+      password: "mustaqeem"
+    })
+  }).then(res => {
+    return res.json()});
+}
+
+export const getSymptomsByMonth = (y, m, token) => {
+  const queryparams = `year=${y}&month=${m}`;
+  return fetch(`${api}/symptom-tracker/patientsymptoms/?${queryparams}`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {
+    return res.json();
+  });
+}
