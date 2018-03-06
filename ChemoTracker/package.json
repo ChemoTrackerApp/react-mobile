@@ -21,6 +21,9 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "rnpm": {
+    "assets": ["./assets/fonts/"]
+  },
   "dependencies": {
     "ansi-regex": "^3.0.0",
     "babel-preset-expo": "^3.0.0",
