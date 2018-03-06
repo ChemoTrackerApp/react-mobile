@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class ProfileTop extends Component {
 	constructor(props) {
     super(props);
+		console.log("props of profile top", props);
 		this.state = {
 			image: null
 		}
@@ -27,11 +28,22 @@ class ProfileTop extends Component {
     }
   };
 
+	openEditView = () => {
+		console.log("open edit view");
+		this.props.navigation.navigate('ProfileEdit');
+	}
+
 	render() {
 		let { image } = this.state;
 		return (
       <View style = {styles.profileTopContainer}>
         <LinearGradient colors = {[color.profileBackgroundDarkBlue, color.profileBackgroundLightBlue]} style = {styles.profileTopContainer}>
+						<TouchableWithoutFeedback onPress={this.openEditView}>
+							<View style={styles.editProfile}>
+								<Text style = {styles.editProfileText}>Edit</Text>
+							</View>
+						</TouchableWithoutFeedback>
+
 						<View style={styles.overlayProfileImage}>
 							{
 								image ? <Image source = {{ uri: image }} style = {styles.profileImage}></Image> : <Image source = {require('../../res/carrie.jpg')} style = {styles.profileImage}></Image>

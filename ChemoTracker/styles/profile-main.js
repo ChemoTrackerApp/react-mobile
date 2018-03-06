@@ -21,8 +21,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     position: 'absolute',
-    alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
+    flexDirection: "column"
   },
   profileBackground: {
     height: 300,
@@ -32,14 +33,17 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 75,
     width: 150,
+    alignSelf: 'center',
   },
   overlayProfileImage: {
     position: 'absolute',
+    alignSelf: 'center'
   },
   editProfileImage: {
     opacity: 0.5,
-    paddingLeft: 110,
-    paddingTop: 180
+    alignSelf: 'center',
+    paddingTop: 150,
+    paddingLeft: 110
   },
   profileNameText: {
     fontSize: 25,
@@ -47,7 +51,8 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   profileNameTextBox: {
-    paddingTop: 20
+    paddingTop: 15,
+    alignSelf: 'center'
   },
   profileSectionCell: {
     flexDirection:'column',
@@ -134,6 +139,14 @@ const styles = StyleSheet.create({
     borderColor: color.lightGray,
     borderRadius: 10,
     width: inputWidth,
+  },
+  editProfile: {
+    paddingRight: 10
+  },
+  editProfileText: {
+    fontSize: 20,
+    color: color.white,
+    alignSelf: 'flex-end',
   }
 });
 
