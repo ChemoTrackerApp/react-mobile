@@ -22,7 +22,9 @@
     "preset": "jest-expo"
   },
   "rnpm": {
-    "assets": ["./assets/fonts/"]
+    "assets": [
+      "./assets/fonts/"
+    ]
   },
   "dependencies": {
     "ansi-regex": "^3.0.0",
