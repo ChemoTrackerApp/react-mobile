@@ -16,6 +16,7 @@ const App = TabNavigator({
   Calendar: { screen: CalendarTab, path: 'calendar' },
   Profile: { screen: Profile, path: 'profile' }
 }, {
+  initialRouteName: 'Home',
   tabBarComponent: NavigationComponent,
   tabBarPosition: 'bottom',
   tabBarOptions: {

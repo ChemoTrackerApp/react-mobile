@@ -12,12 +12,13 @@ import _ from 'lodash';
 import moment from 'moment';
 import { getSymptoms, getSymptomsByMonth, login } from '../../services/symptomTracking.js';
 
+let token = '';
+
 class Calendar extends Component {
   constructor(props){
     super(props);
     console.log("props of calendar", props);
     this.state = {
-      symptomsList: [],
       calendarItems: {}
     }
     this.onDayPress = this.onDayPress.bind(this);
@@ -28,88 +29,132 @@ class Calendar extends Component {
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
     this.getDateStringFromDay = this.getDateStringFromDay.bind(this);
+    this.getItemsByMonth = this.getItemsByMonth.bind(this);
+    this.loadItemsMonthly = this.loadItemsMonthly.bind(this);
   }
 
   componentWillMount() {
-    login()
-    .then(token => {
-      getSymptoms()
-      .then(symptomsList => {
-        const d = new Date();
-        const year = d.getFullYear();
-        const month = d.getMonth()+1;
-        getSymptomsByMonth(year, month, token.key)
-        .then(list => {
-          // map the list with appropriate data for FE
-          let mappedList = [];
-          mappedList = list.Symptoms.map(item => {
-            const symptomObj = _.find(symptomsList.symptom, ['id', item.symptom]);
-            const dateTime = item.recorded_at;
-            const dateIndex = dateTime.indexOf(' ');
-            const date = dateTime.substring(0, dateIndex);
-            const timeString = (dateTime.substring(dateIndex+1, dateTime.length - 5))+'00';
-
-            return {
-              symptom: symptomObj.name,
-              grade: item.grade,
-              dateString: date,
-              timeString: timeString
-            };
-          });
-          // make the list of items in a month
-          const numDays = new Date(year, month, 0).getDate();
-          let itemList = {};
-          const groupByDate = _.groupBy(mappedList, 'dateString');
-          for(let i = 1 ; i <= numDays ; i++) {
-            const dateString = moment([year, month-1, i]).format('YYYY-MM-DD');
-            itemList[dateString] = [];
-            // get the data from the date, otherwise default to empty
-            if(groupByDate[dateString]) {
-              let ar = {};
-              let dateItem = [];
-
-              groupByDate[dateString].forEach(o => {
-                if(!ar[o.timeString]) {
-                  // add timeString to ar
-                  ar[o.timeString] = {
-                    symptoms: [{name: o.symptom, grade: o.grade}]
-                  };
-                } else{
-                  // time already exist in the array
-                  ar[o.timeString].symptoms.push({name: o.symptom, grade: o.grade});
-                }
-              });
-              const timeList = _.keys(ar);
-              timeList.forEach(key => {
-                dateItem.push({
-                  dateString: dateString,
-                  timeString: key,
-                  symptoms: ar[key].symptoms
-                })
-              });
-              itemList[dateString] = dateItem;
-            }
-          }
-          this.setState({
-            calendarItems: itemList,
-            symptomsList: symptomsList
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
-
 
   }
 
   static navigationOptions = {
     tabBarLabel: "Calendar",
     tabBarIcon: () => (<Icon size={24} name="calendar" color={color.navBarIcon} />)
+  }
+
+  loadItemsMonthly(ds){
+    login()
+    .then(t => {
+      token = t;
+      getSymptoms()
+      .then(symptomsList => {
+        this.getItemsByMonth(ds, symptomsList);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
+  getItemsByMonth(ds, symptomsList) {
+    console.log("ds: ", ds);
+    const year = moment(ds).format('YYYY');
+    const month = moment(ds).format('M');
+    console.log("ds.year", year);
+    console.log("ds.month", month);
+    getSymptomsByMonth(year, month, token.key)
+    .then(list => {
+      // map the list with appropriate data for FE
+      let mappedList = [];
+      mappedList = list.Symptoms.map(item => {
+        const symptomObj = _.find(symptomsList.symptom, ['id', item.symptom]);
+        const dateTime = item.recorded_at;
+        console.log("to local",dateTime, moment(dateTime).local());
+        const dateIndex = dateTime.indexOf(' ');
+        const date = dateTime.substring(0, dateIndex);
+        const timeString = (dateTime.substring(dateIndex+1, dateTime.length - 5))+'00';
+
+        return {
+          symptom: symptomObj.name,
+          grade: item.grade,
+          dateString: date,
+          timeString: timeString
+        };
+      });
+      // make the list of items in a month
+      const numDays = new Date(year, month, 0).getDate();
+      let itemList = {};
+      const groupByDate = _.groupBy(mappedList, 'dateString');
+      for(let i = 1 ; i <= numDays ; i++) {
+        const dateString = moment([year, month-1, i]).format('YYYY-MM-DD');
+        itemList[dateString] = [];
+        // get the data from the date, otherwise default to empty
+        if(groupByDate[dateString]) {
+          let ar = {};
+          let dateItem = [];
+
+          groupByDate[dateString].forEach(o => {
+            if(!ar[o.timeString]) {
+              // add timeString to ar
+              ar[o.timeString] = {
+                symptoms: [{name: o.symptom, grade: o.grade}]
+              };
+            } else{
+              // time already exist in the array
+              ar[o.timeString].symptoms.push({name: o.symptom, grade: o.grade});
+            }
+          });
+          const timeList = _.keys(ar);
+          timeList.forEach(key => {
+            dateItem.push({
+              dateString: dateString,
+              timeString: key,
+              symptoms: ar[key].symptoms
+            })
+          });
+          itemList[dateString] = dateItem;
+        }
+      }
+      // let m = this.state.listOfItems;
+      // let tempMonth = month;
+      // if(month < 10) tempMonth = `0${month}`;
+      // m[`${year}${tempMonth}`] = itemList; // add to complete list of calendar items
+      // // only have list for 3 months
+      // let keyList = _.keys(m);
+      // let newList = {};
+      // keyList.forEach(key => {
+      //
+      //   console.log("key", key);
+      //   console.log(key - `${year}${tempMonth}`);
+      //   if((key - `${year}${tempMonth}`) >= -1 && (key - `${year}${tempMonth}`) <= 1) {
+      //     // within range of +1/-1 of the month
+      //     newList[key] = m[key];
+      //   }
+      // });
+      // // merge with new data from itemList
+      // let newCalendarItems = {};
+      // keyList = _.keys(newList);
+      // keyList.forEach(key => {
+      //   const listOfDates = _.keys(newList[key]);
+      //   listOfDates.forEach(date => {
+      //     newCalendarItems[date] = newList[key][date];
+      //   });
+      // });
+      // const keyItems = _.keys(itemList);
+      // keyItems.forEach(key => {
+      //   newCalendarItems[key] = itemList[key];
+      // });
+      // console.log("newCalendarItems", newCalendarItems);
+      this.setState({
+        calendarItems: itemList
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   renderItem(item) {
@@ -148,6 +193,7 @@ class Calendar extends Component {
 
   toDateString(fullDate) {
     const fullDateString = moment(fullDate).format('YYYY-MM-DD');
+    console.log("fullDateString", fullDateString);
     return fullDateString;
   }
 
@@ -217,12 +263,12 @@ class Calendar extends Component {
   }
 
   rowHasChanged(r1, r2) {
-    return r1.text !== r2.text;
+    return r1.timeString !== r2.timeString;
   }
 
   render() {
     const d = new Date();
-    const today = this.toDateString(d);
+    const today = moment(d).format('YYYY-MM-DD');
     const { calendarItems } = this.state;
     console.log("calendarItems", calendarItems);
     return (
@@ -230,6 +276,10 @@ class Calendar extends Component {
         <StatusBar hidden={true}/>
         <Agenda
           ref={(agenda) => { this.agenda = agenda; }}
+          loadItemsForMonth={(m) => {
+            console.log("m in render", m)
+            return this.loadItemsMonthly(m.dateString)
+          }}
           items={calendarItems}
           selected={today}
           pastScrollRange={6}
