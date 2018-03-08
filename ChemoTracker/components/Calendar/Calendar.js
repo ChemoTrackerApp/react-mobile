@@ -25,16 +25,11 @@ class Calendar extends Component {
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
     this.editEvent = this.editEvent.bind(this);
-    this.toDateString = this.toDateString.bind(this);
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
     this.getDateStringFromDay = this.getDateStringFromDay.bind(this);
     this.getItemsByMonth = this.getItemsByMonth.bind(this);
     this.loadItemsMonthly = this.loadItemsMonthly.bind(this);
-  }
-
-  componentWillMount() {
-
   }
 
   static navigationOptions = {
@@ -63,6 +58,7 @@ class Calendar extends Component {
     console.log("ds: ", ds);
     const year = moment(ds).format('YYYY');
     const month = moment(ds).format('M');
+
     console.log("ds.year", year);
     console.log("ds.month", month);
     getSymptomsByMonth(year, month, token.key)
@@ -72,15 +68,22 @@ class Calendar extends Component {
       mappedList = list.Symptoms.map(item => {
         const symptomObj = _.find(symptomsList.symptom, ['id', item.symptom]);
         const dateTime = item.recorded_at;
-        console.log("to local",dateTime, moment(dateTime).local());
         const dateIndex = dateTime.indexOf(' ');
         const date = dateTime.substring(0, dateIndex);
-        const timeString = (dateTime.substring(dateIndex+1, dateTime.length - 5))+'00';
+        const year = moment(date).format('YYYY');
+        const month = moment(date).format('M');
+        const day = moment(date).format('D');
+        // convert to local time
+        const hour = dateTime.substring(dateIndex+1, dateTime.length - 6);
+        const utcTime = moment.utc([year, month-1, day, hour]);
+        const localDate = utcTime.local().format('YYYY-MM-DD');
+        const localHour = this.convertToDoubleDigit(utcTime.local().hours());
+        const timeString = localHour+':00';
 
         return {
           symptom: symptomObj.name,
           grade: item.grade,
-          dateString: date,
+          dateString: localDate,
           timeString: timeString
         };
       });
@@ -189,12 +192,6 @@ class Calendar extends Component {
       dateString = moment(dateString).add(1, 'days').format('YYYY-MM-DD');
     }
     return null;
-  }
-
-  toDateString(fullDate) {
-    const fullDateString = moment(fullDate).format('YYYY-MM-DD');
-    console.log("fullDateString", fullDateString);
-    return fullDateString;
   }
 
   getDateStringFromDay(date) {
