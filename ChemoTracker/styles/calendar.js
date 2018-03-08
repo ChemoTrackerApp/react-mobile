@@ -69,7 +69,7 @@ export const historyStyles = StyleSheet.create({
     paddingRight: 15
   },
   historyText: {
-    fontSize: 18,
+    fontSize: 20,
     color: '#686661',
     marginLeft: 10,
     width: width(70)
@@ -83,13 +83,13 @@ export const historyStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   },
-  rating: {
+  grade: {
     width: 40,
     height: 40,
     borderRadius: 20,
     backgroundColor: '#0B6767'
   },
-  ratingText: {
+  gradeText: {
     fontSize: 18,
     color: '#FFFFFF',
     marginLeft: 15,

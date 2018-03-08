@@ -24,7 +24,7 @@ class Calendar extends Component {
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
-    this.editEvent = this.editEvent.bind(this);
+    this.seeSymptomDetails = this.seeSymptomDetails.bind(this);
     this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
     this.getDateStringFromDay = this.getDateStringFromDay.bind(this);
@@ -165,7 +165,7 @@ class Calendar extends Component {
     return (
       <View style={[calStyles.itemView, {height: item.height}]}>
         <TouchableOpacity
-          onPress={() => this.editEvent(item)}>
+          onPress={() => this.seeSymptomDetails(item)}>
           <Text
             style={calStyles.itemTime}>
             {item.timeString}
@@ -234,19 +234,9 @@ class Calendar extends Component {
     return digit;
   }
 
-  editEvent(item) {
-    console.log("Edit Event!");
+  seeSymptomDetails(item) {
     this.props.navigation.navigate(
-      'CalendarEvent',
-      {
-        date: item.dateString,
-        time: {
-          from: item.timeStringFrom,
-          to: item.timeStringTo
-        },
-        title: item.text,
-        type: 'edit'
-      }
+      'CalendarEvent', {symptoms: item.symptoms}
     );
   }
 

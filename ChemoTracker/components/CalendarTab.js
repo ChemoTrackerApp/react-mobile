@@ -5,10 +5,7 @@ import Icon from 'react-native-vector-icons/Octicons';
 import Calendar from './Calendar/Calendar.js';
 import CalendarEvent from './Calendar/CalendarEvent/event.js';
 import CalendarHeader from './Calendar/CalendarHeader.js';
-import Maps from './Calendar/CalendarEvent/maps.js';
 import { headerStyles } from '../styles/calendar.js';
-
-
 
 const navOptions = ({navigation}) => (
   {
@@ -20,7 +17,7 @@ const navOptions = ({navigation}) => (
 
 const navOptionsEvent = ({navigation}) => (
   {
-    title: 'History',
+    title: 'Details',
     headerStyle: headerStyles.headerContainer,
     headerTitleStyle: headerStyles.headerTitleStyle,
     headerTintColor: 'white',
@@ -46,14 +43,6 @@ const CalendarTab = StackNavigator({
     screen: CalendarEvent,
     path: 'calendar/event',
     navigationOptions: navOptionsEvent
-  },
-  Maps: {
-    screen: Maps,
-    navigationOptions: {
-      title: 'Maps',
-      headerStyle: headerStyles.headerContainer,
-      headerTitleStyle: headerStyles.headerTitleStyle
-    }
   }
 })
 
