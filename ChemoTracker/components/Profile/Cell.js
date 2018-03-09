@@ -87,22 +87,9 @@ export default class Cell extends Component {
           <View>
             <Text style = {styles.profileSectionTitle}> {this.sectionTitle} </Text>
           </View>
-          <View style = {styles.editIcon}>
-            {
-              this.state.editMode ?
-                <TouchableWithoutFeedback onPress={this.turnEditStateOff} hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}>
-                  <Icon size={22} name="done" color={color.navBarIcon} />
-                </TouchableWithoutFeedback> :
-                <TouchableWithoutFeedback onPress={this.turnEditStateOn}>
-                  <Icon size={20} name="edit" color={color.navBarIcon} />
-                </TouchableWithoutFeedback>
-            }
-          </View>
         </View>
         <View style = {styles.profileDetails}>
           {
-            this.state.editMode ?
-              this.createEditViewFromDetailsData() :
               this.createViewFromDetailsData()
           }
         </View>
