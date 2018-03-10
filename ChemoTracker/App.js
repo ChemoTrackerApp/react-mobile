@@ -4,7 +4,7 @@ import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import { TabNavigator } from 'react-navigation';
 import Home from './components/Home.js';
 import Profile from './components/Profile.js';
-import Search from './components/Search.js';
+import PatientEducationTab from './components/PatientEducationTab.js';
 import CalendarTab from './components/CalendarTab.js';
 import TrackTab from './components/TrackTab.js';
 import color from './styles/color.js';
@@ -12,7 +12,7 @@ import color from './styles/color.js';
 const App = TabNavigator({
   Home: { screen: Home, path: '' },
   Track: { screen: TrackTab, path: 'track' },
-  Search: { screen: Search, path: 'search' },
+  Search: { screen: PatientEducationTab, path: 'search' },
   Calendar: { screen: CalendarTab, path: 'calendar' },
   Profile: { screen: Profile, path: 'profile' }
 }, {
