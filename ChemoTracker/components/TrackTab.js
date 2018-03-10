@@ -13,8 +13,8 @@ const initialLayout = {
 
 class TrackTab extends Component {
   static navigationOptions = {
-    tabBarLabel: "Track",
-    tabBarIcon: () => (<Icon size={24} name="heartbeat" color={color.navBarIcon} />)
+    tabBarLabel: "Home",
+    tabBarIcon: () => (<Icon size={24} name="home" color={color.navBarIcon} />)
   }
 
   state = {
