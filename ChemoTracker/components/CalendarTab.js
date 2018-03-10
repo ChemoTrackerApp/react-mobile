@@ -3,7 +3,7 @@ import { Button, TouchableOpacity } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import Calendar from './Calendar/Calendar.js';
-import CalendarEvent from './Calendar/CalendarEvent/event.js';
+import CalendarEvent from './Calendar/event.js';
 import CalendarHeader from './Calendar/CalendarHeader.js';
 import { headerStyles } from '../styles/calendar.js';
 

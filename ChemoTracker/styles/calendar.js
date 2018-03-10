@@ -23,6 +23,12 @@ export const calStyles = StyleSheet.create({
     color: 'black',
     fontSize: 14
   },
+  symptomIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10
+  },
   emptyDate: {
     padding: 10,
     marginRight: 10,
@@ -147,34 +153,5 @@ export const eventStyles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: '#FFFFFF'
-  }
-});
-
-export const datePickerStyles = {
-  dateIcon: {
-    position: 'absolute',
-    left: 0,
-    top: 4,
-    marginLeft: 0
-  },
-  dateInput: {
-    marginLeft: 36
-  }
-};
-
-export const mapStyles = StyleSheet.create({
-  mapContainer: {
-    height: height(92)
-  },
-  map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  },
-  searchBar: {
-    width: width(100),
-    flex:1
   }
 });

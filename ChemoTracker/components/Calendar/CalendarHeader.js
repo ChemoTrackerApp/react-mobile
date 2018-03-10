@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
 import { headerStyles, eventStyles } from '../../styles/calendar.js';
-import CalendarEvent from './CalendarEvent/event.js';
+import CalendarEvent from './event.js';
 import _ from 'lodash';
 import moment from 'moment';
 

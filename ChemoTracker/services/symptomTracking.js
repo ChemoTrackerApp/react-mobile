@@ -36,3 +36,12 @@ export const getSymptomsByMonth = (y, m, token) => {
     return res.json();
   });
 }
+
+export const getFilePath = (name) => {
+  switch(name) {
+    case 'fatigue': return require('../res/fatigue_icon.png');
+    case 'nausea': return require('../res/nausea_icon.png');
+    case 'diarrhea': return require('../res/diarrhea_icon.png');
+    case 'vomiting': return require('../res/vomiting_icon.png');
+  }
+}

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity, StatusBar } from 'react-native';
+import { Text, View, Button, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import { Agenda } from 'react-native-calendars';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
 import { calStyles } from '../../styles/calendar.js';
-import CalendarEvent from './CalendarEvent/event.js';
+import CalendarEvent from './event.js';
 import CalendarHeader from './CalendarHeader.js';
 import _ from 'lodash';
 import moment from 'moment';
-import { getSymptoms, getSymptomsByMonth, login } from '../../services/symptomTracking.js';
+import { getSymptoms, getSymptomsByMonth, login, getFilePath } from '../../services/symptomTracking.js';
 
 let token = '';
 
@@ -162,6 +162,7 @@ class Calendar extends Component {
 
   renderItem(item) {
     console.log("item", item);
+    let i = 0;
     return (
       <View style={[calStyles.itemView, {height: item.height}]}>
         <TouchableOpacity
@@ -174,7 +175,12 @@ class Calendar extends Component {
             style={calStyles.itemText}>
           {
             item.symptoms.map(symptom => {
-              return `${symptom.name} `
+              i++;
+              return (
+                <Image source={getFilePath(symptom.name.toLowerCase())}
+                style={calStyles.symptomIcon}
+                key={`${i}_${symptom.name}`}/>
+              )
             })
           }
           </Text>

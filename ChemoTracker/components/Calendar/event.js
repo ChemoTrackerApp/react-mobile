@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, ScrollView, Button, TouchableOpacity } from 'react-native';
+import { TextInput, Text, View, ScrollView, Button, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
-import DatePicker from 'react-native-datepicker';
-import styles from '../../../styles/main.js';
-import color from '../../../styles/color.js';
-import { historyStyles, eventStyles, datePickerStyles } from '../../../styles/calendar.js';
+import styles from '../../styles/main.js';
+import color from '../../styles/color.js';
+import { getFilePath } from '../../services/symptomTracking.js';
+import { calStyles, historyStyles, eventStyles } from '../../styles/calendar.js';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -33,12 +33,15 @@ class CalendarEvent extends Component {
           symptomsList.map((symptom, i) =>{
             return(
               <View key={i} style={historyStyles.historyContainer}>
-                <TouchableOpacity style={historyStyles.symptomContainer}>
+                <View style={historyStyles.symptomContainer}>
+                  <Image source={getFilePath(symptom.name.toLowerCase())}
+                    style={calStyles.symptomIcon}
+                    key={`${i}_${symptom.name}`}/>
                   <Text style={historyStyles.historyText}>{symptom.name}</Text>
                   <View style={historyStyles.grade}>
                     <Text style={historyStyles.gradeText}>{symptom.grade}</Text>
                   </View>
-                </TouchableOpacity>
+                </View>
               </View>
             )
           })
