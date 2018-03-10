@@ -2,9 +2,11 @@ import React from 'react';
 import color from './color.js';
 import { StyleSheet, Dimensions } from 'react-native';
 const Viewport = Dimensions.get('window');
-const height = Viewport.height - 355;
 const inputWidth = Viewport.width - 75;
 const descriptionWidth = (Viewport.width - 80)/2;
+const profileTopHeight = Viewport.height*0.35;
+const height = Viewport.height - profileTopHeight-50;
+const profileImageHeight = 150;
 const styles = StyleSheet.create({
   profileMainContainer: {
     flex: 1,
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   profileTopContainer: {
-    height: 300,
+    height: profileTopHeight,
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.6)',
     top: 0,
@@ -21,28 +23,29 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     position: 'absolute',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flex: 1,
     flexDirection: "column"
   },
   profileBackground: {
-    height: 300,
+    height: profileTopHeight,
     width: '100%',
   },
   profileImage: {
-    height: 150,
-    borderRadius: 75,
-    width: 150,
+    height: profileImageHeight,
+    borderRadius: profileImageHeight/2,
+    width: profileImageHeight,
     alignSelf: 'center',
   },
   overlayProfileImage: {
     position: 'absolute',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingTop: 50,
   },
   editProfileImage: {
     opacity: 0.5,
     alignSelf: 'center',
-    paddingTop: 150,
+    paddingTop: profileImageHeight-30,
     paddingLeft: 110
   },
   profileNameText: {
@@ -61,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileTable: {
-    top: 300,
+    top: profileTopHeight,
     height: height,
   },
   profileDetailCell: {
@@ -141,13 +144,9 @@ const styles = StyleSheet.create({
     width: inputWidth,
   },
   editProfile: {
-    paddingRight: 10
-  },
-  editProfileText: {
-    fontSize: 20,
-    color: color.white,
+    paddingTop:15,
     alignSelf: 'flex-end',
-  }
+  },
 });
 
 export default styles;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableWithoutFeedback, CameraRoll } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, CameraRoll, Button } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { LinearGradient, ImagePicker} from 'expo';
 import styles from '../../styles/profile-main.js';
@@ -38,12 +38,12 @@ class ProfileTop extends Component {
 		return (
       <View style = {styles.profileTopContainer}>
         <LinearGradient colors = {[color.profileBackgroundDarkBlue, color.profileBackgroundLightBlue]} style = {styles.profileTopContainer}>
-						<TouchableWithoutFeedback onPress={this.openEditView}>
-							<View style={styles.editProfile}>
-								<Text style = {styles.editProfileText}>Edit</Text>
-							</View>
-						</TouchableWithoutFeedback>
-
+						<View style={styles.editProfile}>
+							<Button
+								onPress = {this.openEditView}
+								title = "Edit"
+								color = {color.white}/>
+						</View>
 						<View style={styles.overlayProfileImage}>
 							{
 								image ? <Image source = {{ uri: image }} style = {styles.profileImage}></Image> : <Image source = {require('../../res/carrie.jpg')} style = {styles.profileImage}></Image>
@@ -57,6 +57,7 @@ class ProfileTop extends Component {
 						<View style={styles.profileNameTextBox}>
 							<Text style = {styles.profileNameText}>Carrie</Text>
 						</View>
+
 				</LinearGradient>
       </View>
 		);

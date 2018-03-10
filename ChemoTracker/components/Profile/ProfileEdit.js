@@ -12,16 +12,9 @@ import moment from 'moment';
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
-    const btn = <Button
-      onPress = {() => {
-        console.log(this.props)
-        console.log("save");
-        console.log(this.props.navigation.navigate("Profile"));
-      }}
-      title = "Save"
-      color = {color.white}
-    />;
+    this.state = {
+      formData: null
+    }
   }
 
   dismissView = () => {

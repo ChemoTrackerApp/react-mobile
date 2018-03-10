@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Button } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import ProfileTop from './ProfileTop.js';
 import ProfileDetailsTable from './ProfileDetailsTable.js';
