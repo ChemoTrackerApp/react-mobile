@@ -7,8 +7,15 @@ import styles from '../../styles/login_screen.js';
 
 export default class Login extends React.Component {
 
+  capi = 'http://ec2-52-15-106-40.us-east-2.compute.amazonaws.com:8000';
+
+
+
   state = {
     fontLoaded: false,
+    errorLabel: '',
+    loginUsername: '',
+		loginPassword: '',
   };
   async componentDidMount() {
    await Font.loadAsync({
@@ -17,6 +24,32 @@ export default class Login extends React.Component {
    });
    this.setState({ fontLoaded: true });
 }
+
+  async onSubmit() {
+    this.setState({errorLabel:''});
+    if (this.state.loginUsername === ''){
+      this.setState({errorLabel:'Username is required'});
+      return;
+    }
+    if (this.state.loginPassword === ''){
+      this.setState({errorLabel:'Password is required'});
+      return;
+    }
+    const response = fetch(`${api}/rest-auth/login/`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    }).then(res => {
+      return res.json();
+    });
+    if (response.error === 'None'){
+      utils.resetToScreen(this.state.navigation,'HomeView',{user:response.user,token:response.token});
+    }else{
+      this.setState({errorLabel:response.error});
+    }
+  }
 
   onPress = () => {
     Alert.alert("login pressed");
@@ -34,7 +67,7 @@ export default class Login extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require('../../chemotracker.png')}
+          source={require('../../assets/img/chemotracker.png')}
           style={styles.logo}
         />
         <TextInput

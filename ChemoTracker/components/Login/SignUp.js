@@ -16,7 +16,7 @@ export default class SignUp extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require('../../chemotracker.png')}
+          source={require('../../assets/img/chemotracker.png')}
           style={styles.logo}
         />
         <TextInput
