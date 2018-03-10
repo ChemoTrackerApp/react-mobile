@@ -7,7 +7,6 @@ import color from '../../styles/color.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { Form, Separator,InputField, LinkField, SwitchField, PickerField, DatePickerField, TimePickerField} from 'react-native-form-generator';
-import moment from 'moment';
 
 class ProfileEdit extends Component {
   constructor(props) {
