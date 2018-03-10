@@ -34,12 +34,16 @@ class CalendarEvent extends Component {
             return(
               <View key={i} style={historyStyles.historyContainer}>
                 <View style={historyStyles.symptomContainer}>
-                  <Image source={getFilePath(symptom.name.toLowerCase())}
-                    style={calStyles.symptomIcon}
-                    key={`${i}_${symptom.name}`}/>
+                  <View style={historyStyles.circleContainer}>
+                    <Image source={getFilePath(symptom.name.toLowerCase())}
+                      style={historyStyles.symptomIcon}
+                      key={`${i}_${symptom.name}`}/>
+                  </View>
                   <Text style={historyStyles.historyText}>{symptom.name}</Text>
-                  <View style={historyStyles.grade}>
-                    <Text style={historyStyles.gradeText}>{symptom.grade}</Text>
+                  <View style={historyStyles.circleContainer}>
+                    <View style={historyStyles.grade}>
+                      <Text style={historyStyles.gradeText}>{symptom.grade}</Text>
+                    </View>
                   </View>
                 </View>
               </View>

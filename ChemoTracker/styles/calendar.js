@@ -69,7 +69,7 @@ export const historyStyles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
   },
   historyContainer: {
-    width: width(97),
+    width: width(100),
     height: 80,
     marginLeft: 15,
     paddingRight: 15
@@ -78,7 +78,7 @@ export const historyStyles = StyleSheet.create({
     fontSize: 20,
     color: '#686661',
     marginLeft: 10,
-    width: width(70)
+    flex: 2,
   },
   symptomContainer: {
     borderBottomWidth: 2.5,
@@ -87,19 +87,30 @@ export const historyStyles = StyleSheet.create({
     paddingBottom: 15,
     paddingTop: 25,
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   grade: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#0B6767'
+    backgroundColor: '#0B6767',
+    borderColor: 'black'
   },
   gradeText: {
     fontSize: 18,
     color: '#FFFFFF',
     marginLeft: 15,
     marginTop: 7.5
+  },
+  circleContainer: {
+    flex: 0.5
+  },
+  symptomIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20
   }
 });
 
