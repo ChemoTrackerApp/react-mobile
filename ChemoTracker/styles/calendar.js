@@ -24,10 +24,10 @@ export const calStyles = StyleSheet.create({
     fontSize: 14
   },
   symptomIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 10
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 5
   },
   emptyDate: {
     padding: 10,
@@ -37,6 +37,10 @@ export const calStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'white'
+  },
+  iconContainer: {
+    flex: 0.5,
+    flexDirection: 'row'
   }
 });
 

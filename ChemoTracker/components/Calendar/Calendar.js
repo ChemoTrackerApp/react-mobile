@@ -173,17 +173,19 @@ class Calendar extends Component {
           </Text>
           <Text
             style={calStyles.itemText}>
-          {
-            item.symptoms.map(symptom => {
-              i++;
-              return (
-                <Image source={getFilePath(symptom.name.toLowerCase())}
-                style={calStyles.symptomIcon}
-                key={`${i}_${symptom.name}`}/>
-              )
-            })
-          }
           </Text>
+          <View style={calStyles.iconContainer}>
+            {
+              item.symptoms.map(symptom => {
+                i++;
+                return (
+                  <Image source={getFilePath(symptom.name.toLowerCase())}
+                  style={calStyles.symptomIcon}
+                  key={`${i}_${symptom.name}`}/>
+                )
+              })
+            }
+          </View>
         </TouchableOpacity>
       </View>
     );
