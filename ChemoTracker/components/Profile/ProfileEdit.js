@@ -17,12 +17,10 @@ class ProfileEdit extends Component {
   }
 
   dismissView = () => {
-    console.log("dismissView");
     this.props.navigation.goBack();
   }
 
   saveChanges = () => {
-    console.log("save changes");
     this.props.navigation.goBack();
   }
 
@@ -48,25 +46,11 @@ class ProfileEdit extends Component {
   }
 
   handleFormChange(formData){
-    /*
-    formData will contain all the values of the form,
-    in this example.
-
-    formData = {
-    first_name:"",
-    last_name:"",
-    gender: '',
-    birthday: Date,
-    has_accepted_conditions: bool
-    }
-    */
-
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
   }
 
   handleFormFocus(e, component){
-    //console.log(e, component);
   }
 
   render() {

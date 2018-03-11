@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View} from 'react-native';
+import { Text, View } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import styles from '../../styles/profile-main.js';
 import color from '../../styles/color.js';

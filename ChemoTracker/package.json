@@ -53,6 +53,8 @@
     "react-native-tag-input": "0.0.18",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.0-beta.11",
-    "react-select": "^1.2.1"
+    "react-select": "^1.2.1",
+    "react-native-tab-view": "^0.0.74",
+    "apsl-react-native-button": "^3.0.0"
   }
 }

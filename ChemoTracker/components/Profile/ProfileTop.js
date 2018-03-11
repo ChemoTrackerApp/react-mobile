@@ -9,7 +9,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class ProfileTop extends Component {
 	constructor(props) {
     super(props);
-		console.log("props of profile top", props);
 		this.state = {
 			image: null
 		}
@@ -21,15 +20,12 @@ class ProfileTop extends Component {
 			aspect: [4, 3],
   	});
 
-    console.log(result);
-
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
   };
 
 	openEditView = () => {
-		console.log("open edit view");
 		this.props.navigation.navigate('ProfileEdit');
 	}
 

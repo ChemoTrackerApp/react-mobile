@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
   overlayProfileImage: {
     position: 'absolute',
     alignSelf: 'center',
-    paddingTop: 50,
+    paddingTop: 60,
   },
   editProfileImage: {
     opacity: 0.5,
     alignSelf: 'center',
-    paddingTop: profileImageHeight-30,
+    paddingTop: profileImageHeight-25,
     paddingLeft: 110
   },
   profileNameText: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   profileNameTextBox: {
-    paddingTop: 15,
+    paddingTop: (profileTopHeight - profileImageHeight- 90)/2,
     alignSelf: 'center'
   },
   profileSectionCell: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     width: inputWidth,
   },
   editProfile: {
-    paddingTop:15,
+    paddingTop:20,
     alignSelf: 'flex-end',
   },
 });
