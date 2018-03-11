@@ -19,15 +19,13 @@ class Calendar extends Component {
     super(props);
     console.log("props of calendar", props);
     this.state = {
+      listOfItems: {},
       calendarItems: {}
     }
     this.onDayPress = this.onDayPress.bind(this);
-    this.onDayChange = this.onDayChange.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
     this.seeSymptomDetails = this.seeSymptomDetails.bind(this);
-    this.getTimeString = this.getTimeString.bind(this);
     this.convertToDoubleDigit = this.convertToDoubleDigit.bind(this);
-    this.getDateStringFromDay = this.getDateStringFromDay.bind(this);
     this.getItemsByMonth = this.getItemsByMonth.bind(this);
     this.loadItemsMonthly = this.loadItemsMonthly.bind(this);
   }
@@ -55,12 +53,8 @@ class Calendar extends Component {
   }
 
   getItemsByMonth(ds, symptomsList) {
-    console.log("ds: ", ds);
     const year = moment(ds).format('YYYY');
     const month = moment(ds).format('M');
-
-    console.log("ds.year", year);
-    console.log("ds.month", month);
     getSymptomsByMonth(year, month, token.key)
     .then(list => {
       // map the list with appropriate data for FE
@@ -121,38 +115,35 @@ class Calendar extends Component {
           itemList[dateString] = dateItem;
         }
       }
-      // let m = this.state.listOfItems;
-      // let tempMonth = month;
-      // if(month < 10) tempMonth = `0${month}`;
-      // m[`${year}${tempMonth}`] = itemList; // add to complete list of calendar items
-      // // only have list for 3 months
-      // let keyList = _.keys(m);
-      // let newList = {};
-      // keyList.forEach(key => {
-      //
-      //   console.log("key", key);
-      //   console.log(key - `${year}${tempMonth}`);
-      //   if((key - `${year}${tempMonth}`) >= -1 && (key - `${year}${tempMonth}`) <= 1) {
-      //     // within range of +1/-1 of the month
-      //     newList[key] = m[key];
-      //   }
-      // });
-      // // merge with new data from itemList
-      // let newCalendarItems = {};
-      // keyList = _.keys(newList);
-      // keyList.forEach(key => {
-      //   const listOfDates = _.keys(newList[key]);
-      //   listOfDates.forEach(date => {
-      //     newCalendarItems[date] = newList[key][date];
-      //   });
-      // });
-      // const keyItems = _.keys(itemList);
-      // keyItems.forEach(key => {
-      //   newCalendarItems[key] = itemList[key];
-      // });
-      // console.log("newCalendarItems", newCalendarItems);
+      let m = this.state.listOfItems;
+      let tempMonth = this.convertToDoubleDigit(month);
+      m[`${year}-${tempMonth}-01`] = itemList; // add to complete list of calendar items
+      // only have list for 3 months
+      const monthBefore = moment(`${year}-${tempMonth}-01`).subtract(1, 'months').format('YYYY-MM-DD');
+      const monthAfter = moment(`${year}-${tempMonth}-01`).add(1, 'months').format('YYYY-MM-DD');
+      let keyList = _.keys(m);
+      let newList = {};
+      keyList.forEach(key => {
+        if(key == monthBefore || key == monthAfter) {
+          // within range of +1/-1 of the month
+          newList[key] = m[key];
+        }
+      });
+      // merge with new data from itemList
+      let newCalendarItems = {};
+      keyList = _.keys(newList);
+      keyList.forEach(key => {
+        const listOfDates = _.keys(newList[key]);
+        listOfDates.forEach(date => {
+          newCalendarItems[date] = newList[key][date];
+        });
+      });
+      const keyItems = _.keys(itemList);
+      keyItems.forEach(key => {
+        newCalendarItems[key] = itemList[key];
+      });
       this.setState({
-        calendarItems: itemList
+        calendarItems: newCalendarItems
       });
     })
     .catch(err => {
@@ -161,7 +152,6 @@ class Calendar extends Component {
   }
 
   renderItem(item) {
-    console.log("item", item);
     let i = 0;
     return (
       <View style={[calStyles.itemView, {height: item.height}]}>
@@ -192,47 +182,7 @@ class Calendar extends Component {
   }
 
   renderEmptyDate(day) {
-    const dayEmpty = new Date(day);
-    let dateString = this.getDateStringFromDay(dayEmpty);
-    const timeString = this.getTimeString(dayEmpty);
-    if(timeString === "00:00") {
-      // add 1 to the day
-      dateString = moment(dateString).add(1, 'days').format('YYYY-MM-DD');
-    }
     return null;
-  }
-
-  getDateStringFromDay(date) {
-    const dateISO = date.toISOString();
-    const dateString = moment(dateISO, 'YYYY-MM-DD').format('YYYY-MM-DD');
-    return dateString;
-  }
-
-  getTimeString(d) {
-    let today = new Date();
-    let todayClone = _.clone(today);
-    const offset = new Date().getTimezoneOffset();
-    today.setMinutes(today.getMinutes() - offset); //turn into local time date object
-
-    const todayISO = today.toISOString();
-    const todaySubstring = todayISO.substring(0, todayISO.indexOf('T'));
-    const dateISO = d.toISOString();
-    const dateSubstring = dateISO.substring(0, dateISO.indexOf('T'));
-
-    let timeString = '';
-    if(dateSubstring === todaySubstring) {
-      // get time now + 1 hour, eg 22.00 if 21.36 right now
-      let hour = this.convertToDoubleDigit(todayClone.getHours() + 1);
-      if(hour === 24) {
-        hour = '00';
-      }
-      timeString = `${hour}:00`;
-    } else {
-      // set to 8 AM
-      timeString = '08:00';
-    }
-
-    return timeString;
   }
 
   convertToDoubleDigit(digit) {
@@ -253,26 +203,20 @@ class Calendar extends Component {
     this.props.navigation.setParams({date: day});
   }
 
-  onDayChange(day) {
-    console.log("day change", day);
-  }
-
   rowHasChanged(r1, r2) {
-    return r1.timeString !== r2.timeString;
+    return r1.dateString !== r2.dateString;
   }
 
   render() {
     const d = new Date();
     const today = moment(d).format('YYYY-MM-DD');
     const { calendarItems } = this.state;
-    console.log("calendarItems", calendarItems);
     return (
       <View style={styles.container}>
         <StatusBar hidden={true}/>
         <Agenda
           ref={(agenda) => { this.agenda = agenda; }}
           loadItemsForMonth={(m) => {
-            console.log("m in render", m)
             return this.loadItemsMonthly(m.dateString)
           }}
           items={calendarItems}
@@ -282,7 +226,6 @@ class Calendar extends Component {
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           onDayPress={(day)=> this.onDayPress(day)}
-          onDayChange={(day)=> this.onDayChange(day)}
           rowHasChanged={(r1, r2) => this.rowHasChanged(r1, r2)}
           style={calStyles.agenda}
           theme={{
