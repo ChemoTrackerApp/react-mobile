@@ -4,7 +4,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const Viewport = Dimensions.get('window');
 const inputWidth = Viewport.width - 75;
 const descriptionWidth = (Viewport.width - 80)/2;
-const profileTopHeight = Viewport.height*0.35;
+const profileTopHeight = Viewport.height*0.35 < 270 ? 270 : Viewport.height*0.35;
 const height = Viewport.height - profileTopHeight-50;
 const profileImageHeight = 150;
 if(profileTopHeight < 250){
@@ -150,6 +150,9 @@ const styles = StyleSheet.create({
   editProfile: {
     paddingTop:20,
     alignSelf: 'flex-end',
+  },
+  profileBackButton: {
+    marginLeft: 15,
   },
   profileButton: {
     color: "#FFFFFF",

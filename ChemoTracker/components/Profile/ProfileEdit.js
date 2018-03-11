@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView, TouchableWithoutFeedback, Button } from 'react-native';
+import { Text, View, Image, ScrollView, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import CategoryCell from './Cell.js';
 import styles from '../../styles/profile-main.js';
@@ -30,14 +30,15 @@ class ProfileEdit extends Component {
     return {
     tabBarLabel: "Profile" ,
 		tabBarIcon: () => (<Icon size={24} name="person" color={color.navBarIcon} />),
-    headerRight: <Button
-      onPress = {() => params.saveAndExit()}
-      title = "Save"
-      color = {color.white}/>,
-    headerLeft: <Button
-      onPress = {() => params.dismiss()}
-      title = "Cancel"
-      color = {color.white}/>
+    headerRight: <TouchableOpacity
+      onPress = {this.openEditView}>
+      <Text style={styles.profileButton}>Save</Text>
+    </TouchableOpacity>,
+    headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() }}
+                  style={styles.profileBackButton}>
+                  <Icon size={24} name="chevron-left"
+                      color='#FFFFFF'/>
+                </TouchableOpacity>
     }
  	}
 
