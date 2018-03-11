@@ -103,7 +103,8 @@ export const historyStyles = StyleSheet.create({
     fontSize: 18,
     color: '#FFFFFF',
     marginLeft: 15,
-    marginTop: 7.5
+    marginTop: 7.5,
+    backgroundColor: 'transparent'
   },
   circleContainer: {
     flex: 0.5
