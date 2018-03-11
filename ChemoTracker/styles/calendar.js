@@ -59,9 +59,6 @@ export const headerStyles = StyleSheet.create({
   headerLeft: {
     marginLeft: 15,
     marginBottom: 15
-  },
-  headerPlus: {
-    marginRight: 10
   }
 });
 
@@ -134,39 +131,5 @@ export const eventStyles = StyleSheet.create({
     fontSize: 24,
     flex: 1,
     width: width(80)
-  },
-  eventDateTimePickerText: {
-    height: 30,
-    fontSize: 18,
-    flex: 1,
-    width: width(80)
-  },
-  locationView: {
-    flexDirection: 'row',
-    height: 50,
-    marginTop: 10,
-    alignItems: 'center'
-  },
-  eventLocation: {
-    height: 50,
-    fontSize: 18,
-    width: width(75)
-  },
-  mapText: {
-    fontSize: 18
-  },
-  cancelSaveView: {
-    flexDirection: 'row'
-  },
-  cancelSaveButton: {
-    width: width(50),
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20
-  },
-  buttonText: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: '#FFFFFF'
   }
 });

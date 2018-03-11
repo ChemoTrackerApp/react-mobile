@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { Text, View, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import { Agenda } from 'react-native-calendars';
@@ -7,7 +7,6 @@ import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
 import { calStyles } from '../../styles/calendar.js';
 import CalendarEvent from './event.js';
-import CalendarHeader from './CalendarHeader.js';
 import _ from 'lodash';
 import moment from 'moment';
 import { getSymptoms, getSymptomsByMonth, login, getFilePath } from '../../services/symptomTracking.js';
@@ -17,7 +16,6 @@ let token = '';
 class Calendar extends Component {
   constructor(props){
     super(props);
-    console.log("props of calendar", props);
     this.state = {
       listOfItems: {},
       calendarItems: {}
@@ -199,7 +197,6 @@ class Calendar extends Component {
   }
 
   onDayPress(day) {
-    console.log("day pressed", day);
     this.props.navigation.setParams({date: day});
   }
 

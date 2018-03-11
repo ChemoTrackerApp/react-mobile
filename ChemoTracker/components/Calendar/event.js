@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, ScrollView, Button, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
 import styles from '../../styles/main.js';
 import color from '../../styles/color.js';
@@ -12,7 +12,6 @@ class CalendarEvent extends Component {
 
   constructor(props) {
     super(props);
-    console.log("props", this.props);
     const params = props.navigation.state.params;
     this.state = {
       symptomsList: params.symptoms,
@@ -25,7 +24,6 @@ class CalendarEvent extends Component {
   }
 
   render() {
-    console.log("state",this.state);
     const {symptomsList} = this.state;
     return (
       <View style={historyStyles.container}>

@@ -4,7 +4,6 @@ import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Octicons';
 import Calendar from './Calendar/Calendar.js';
 import CalendarEvent from './Calendar/event.js';
-import CalendarHeader from './Calendar/CalendarHeader.js';
 import { headerStyles } from '../styles/calendar.js';
 
 const navOptions = ({navigation}) => (
@@ -25,11 +24,7 @@ const navOptionsEvent = ({navigation}) => (
                   style={headerStyles.headerLeft}>
                   <Icon size={24} name="chevron-left"
                       color='#FFFFFF'/>
-                </TouchableOpacity>,
-    headerRight: <CalendarHeader
-      state={'event'}
-      navigation={navigation.state}
-      navigate={navigation.navigate}/>
+                </TouchableOpacity>
   }
 )
 
