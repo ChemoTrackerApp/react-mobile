@@ -64,7 +64,7 @@ class ProfileTop extends Component {
         <LinearGradient colors = {[color.profileBackgroundDarkBlue, color.profileBackgroundLightBlue]} style = {styles.profileTopContainer}>
 						<View style={styles.editProfile}>
 							<TouchableOpacity
-								onPress = {()=>{this.openEditView}}>
+								onPress = {this.openEditView}>
 								<Text style={styles.profileButton}>Edit</Text>
 							</TouchableOpacity>
 						</View>
