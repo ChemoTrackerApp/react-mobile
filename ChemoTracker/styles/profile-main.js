@@ -147,6 +147,12 @@ const styles = StyleSheet.create({
     paddingTop:20,
     alignSelf: 'flex-end',
   },
+  profileButton: {
+    color: "#FFFFFF",
+    backgroundColor: 'transparent',
+    marginRight: 15,
+    fontSize: 15
+  }
 });
 
 export default styles;

@@ -21,10 +21,7 @@ class Profile extends Component {
 	render() {
     	return (
 				<View style = { styles.profileMainContainer }>
-					<StatusBar
-						backgroundColor="transparent"
-						barStyle="light-content"
-						/>
+					<StatusBar hidden />
 					<ProfileTop navigation={this.props.navigation}/>
 					<ProfileDetailsTable />
       	</View>
