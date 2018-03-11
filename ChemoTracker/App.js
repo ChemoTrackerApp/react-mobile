@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import { TabNavigator } from 'react-navigation';
 import Home from './components/Home.js';
-import Profile from './components/Profile.js';
+import ProfileTab from './components/ProfileTab.js';
 import PatientEducationTab from './components/PatientEducationTab.js';
 import CalendarTab from './components/CalendarTab.js';
 import TrackTab from './components/TrackTab.js';
@@ -14,7 +14,7 @@ const App = TabNavigator({
   Track: { screen: TrackTab, path: 'track' },
   Search: { screen: PatientEducationTab, path: 'search' },
   Calendar: { screen: CalendarTab, path: 'calendar' },
-  Profile: { screen: Profile, path: 'profile' }
+  Profile: { screen: ProfileTab, path: 'profile' }
 }, {
   initialRouteName: 'Home',
   tabBarComponent: NavigationComponent,
