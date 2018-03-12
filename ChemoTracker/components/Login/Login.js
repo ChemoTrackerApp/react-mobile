@@ -71,13 +71,17 @@ export default class Login extends React.Component {
           style={styles.logo}
         />
         <TextInput
+          keyboardType="email-address"
+          underlineColorAndroid="transparent"
           style={styles.textFieldContainer}
           placeholder="email"
         />
-       <TextInput
-         style={styles.textFieldContainer}
-         placeholder="password"
-       />
+        <TextInput
+          secureTextEntry={true}
+          underlineColorAndroid="transparent"
+          style={styles.textFieldContainer}
+          placeholder="password"
+        />
        <TouchableOpacity
         style={{width: '70.55%',  height: 29}}
         onPress={this.loginClicked}>

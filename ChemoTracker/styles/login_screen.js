@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   logo: {
-    height: '20%',
-    width: '40%'
+    height: '30%',
+    width: '50%'
   },
   signUpLink: {
     color: "#6374f4",

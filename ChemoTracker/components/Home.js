@@ -42,7 +42,7 @@ class Home extends Component {
 
           ) : null
         }
-        <Image style={{marginTop: '20%', position: 'absolute',height: 150, width: '50%', resizeMode: 'contain'}} source={require('../assets/img/starfished.png')}/>
+        <Image style={{marginTop: '10%', position: 'absolute', height: "20%", width: '50%', resizeMode: 'contain'}} source={require('../assets/img/starfished.png')}/>
         {  this.state.fontLoaded ? (
           <View style={{ position: 'absolute',marginTop:20, width: '90%', alignSelf:'center', backgroundColor:'transparent'}}>
             <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}>
@@ -50,9 +50,9 @@ class Home extends Component {
             </View>
             <View style={{marginTop:'92%'}}>
               <Text style={{textAlign:'center'}}>
-                <Text style={{ fontSize:16, fontFamily: 'open-sans-light'}}>You&#39;ve tracked your health for</Text>
+                <Text style={{ fontSize:16, fontFamily: 'open-sans-light'}}>You&#39;ve tracked your health for </Text>
                 <Text style={{color:'rgb(251,91,27)', fontSize:16, fontFamily:'open-sans-semibold'}}>15 days</Text>
-                <Text> in a row</Text>
+                <Text style={{ fontSize:16, fontFamily: 'open-sans-light'}}> in a row</Text>
               </Text>
               <Text style={{marginTop:"4%", fontFamily: 'open-sans-light', fontSize: 30}}>
                  How are you feeling{"\n"}
