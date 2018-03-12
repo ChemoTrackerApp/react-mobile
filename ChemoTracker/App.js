@@ -5,7 +5,7 @@ import { TabNavigator } from 'react-navigation';
 import Home from './components/Home.js';
 import ProfileTab from './components/ProfileTab.js';
 import PatientEducationTab from './components/PatientEducationTab.js';
-import Calendar from './components/Calendar.js';
+import CalendarTab from './components/CalendarTab.js';
 import TrackTab from './components/TrackTab.js';
 import color from './styles/color.js';
 
@@ -13,9 +13,10 @@ const App = TabNavigator({
   Home: { screen: Home, path: '' },
   Track: { screen: TrackTab, path: 'track' },
   Search: { screen: PatientEducationTab, path: 'search' },
-  Calendar: { screen: Calendar, path: 'calendar' },
+  Calendar: { screen: CalendarTab, path: 'calendar' },
   Profile: { screen: ProfileTab, path: 'profile' }
 }, {
+  initialRouteName: 'Home',
   tabBarComponent: NavigationComponent,
   tabBarPosition: 'bottom',
   tabBarOptions: {
