@@ -12,7 +12,7 @@ export default class Login extends React.Component {
     fontLoaded: false,
     errorLabel: '',
     loginUsername: '',
-		loginPassword: '',
+    loginPassword: '',
     auth_token: ''
   };
   constructor(props){
