@@ -89,9 +89,9 @@ export default class Login extends React.Component {
           onSubmitEditing={()=>{this.onSubmit();}}
           placeholder="password"
         />
-        <Text style={styles.errorLabel} >{this.state.errorLabel}</Text>
+       <Text style={styles.errorLabel} >{this.state.errorLabel}</Text>
        <TouchableOpacity
-        style={{width: '70.55%',  height: 29}}
+        style={styles.loginButton}
         onPress={()=>{this.onSubmit();}}>
           <LinearGradient
             colors={['#59D0C2', '#066368']}
