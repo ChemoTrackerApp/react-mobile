@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
