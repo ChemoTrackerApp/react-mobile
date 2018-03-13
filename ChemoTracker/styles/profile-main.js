@@ -7,6 +7,9 @@ const descriptionWidth = (Viewport.width - 80)/2;
 const profileTopHeight = Viewport.height*0.35 < 270 ? 270 : Viewport.height*0.35;
 const height = Viewport.height - profileTopHeight-50;
 const profileImageHeight = 150;
+if(profileTopHeight < 250){
+  profileTopHeight = 250;
+}
 const styles = StyleSheet.create({
   profileMainContainer: {
     flex: 1,
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: profileImageHeight/2,
     width: profileImageHeight,
     alignSelf: 'center',
+    resizeMode: 'stretch',
   },
   overlayProfileImage: {
     position: 'absolute',

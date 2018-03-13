@@ -1,75 +1,81 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { width, height, totalSize } from 'react-native-dimension';
 import color from '../color.js';
 
-const styles = StyleSheet.create({
-  alignRight: {
-    textAlign: 'right'
-  }, 
-  alignLeft: {
-    textAlign: 'left'
-  },
+export const isIphoneX = () => {
+  let d = Dimensions.get('window');
+  const { height, width } = d;
+  return (
+    Platform.OS === 'ios' && (height === 812 || width === 812)
+  );
+}
+
+export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'column',
     backgroundColor: color.trackBackground,
+    flex: 1,
+    flexDirection: 'column'
   },
   content: {
-    color: color.trackContent,
-    textAlign: 'center',
-    paddingTop: 15,
-    paddingBottom: 10
+    color: color.searchText,
+    fontSize: isIphoneX() ? 22 : 19,
+    fontWeight: 'bold',   
+    paddingBottom: isIphoneX() ? height(0.5) : 0,
+    paddingTop: isIphoneX() ? height(3) : height(2),
+    textAlign: 'center'
+    
   },
   dismissButton: {
-    color: color.trackTitle,
-    fontWeight: '900', 
-    fontSize: 16
+    alignSelf: 'center',
+    backgroundColor: '#FB5B1B',
+    borderColor: '#FB5B1B',
+    height: height(5),
+    padding: height(2),
+    width: isIphoneX() ? width(40) : width(35)
   },
   dismissSection: {
-    flex: 0.10,
     alignItems: 'center',
     justifyContent: 'center'
   },
   interventionsContent: {
-    paddingTop: 15,
-    paddingLeft: 40,
-    paddingRight: 40
+    paddingLeft: width(7),
+    paddingRight: width(7),
+    paddingTop: height(1)    
   },
   interventionsText: {
     color: color.trackContent,
-    paddingBottom: 8,
+    fontSize: isIphoneX() ? 15 : 14,
+    paddingBottom: height(2),
     textAlign: 'center'
   },
   interventionsSection: {
-    flex: 0.3,
-    paddingTop: 30,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderColor: "#CECECE"
+    borderColor: "#CECECE",
+    paddingTop: isIphoneX() ? height(7) : height(3),
   },
   tipsContent: {
     flexDirection: 'column',
-    width: 300,
-    paddingRight: 30,
-    paddingLeft: 30
+    paddingLeft: width(8),
+    paddingRight: width(3),
+    width: width(80)
   },
   tipsSubsection: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderColor: "#CECECE"
+    borderColor: "#CECECE",
+    paddingBottom: height(2),
+    paddingRight: width(3),
+    paddingTop: height(2)    
   },
   tipsSection: {
-    flex: 0.6
+    paddingBottom: isIphoneX() ? height(3) : height(2)
   },
   tipsText: {
     color: color.trackContent,
-    fontSize: 12,
-    paddingTop: 3
+    fontSize: isIphoneX() ? 15 : 14,
+    paddingTop: height(0.5),
+    textAlign: 'left'
   }
 })
-
-export default styles;
