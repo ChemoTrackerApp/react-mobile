@@ -13,7 +13,7 @@ import color from './styles/color.js';
 
 const MainContainer = TabNavigator({
   Home: {
-    screen: HomeStackNav,
+    screen: props => <Home {...props}/>
     path: '',
     navigationOptions: {
       tabBarLabel: ({ focused, tintColor }) => (focused ? "Home" : null),

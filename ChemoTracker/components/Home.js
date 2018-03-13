@@ -5,6 +5,8 @@ import { Font } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
+import { getStreak } from '../services/symptomTracking.js';
+
 
 class Home extends Component {
 
@@ -15,9 +17,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token:''
       fontLoaded: false,
       token: props.screenProps.token
+      streak:0
     };
+    console.log("homeprops ", props);
   }
 
   async componentDidMount() {
@@ -27,6 +32,14 @@ class Home extends Component {
       'open-sans-light': require('../assets/fonts/OpenSans-Light.ttf'),
       'open-sans-regular': require('../assets/fonts/OpenSans-Regular.ttf')
     });
+    let streak = getStreak(this.state.token)
+    .then((responseJson) => {
+      console.log("responseJson", responseJson);
+      if(responseJson.streak) {
+        this.setState({
+          streak: responseJson.streak
+        });
+      }});
     this.setState({ fontLoaded: true });
   }
 
@@ -48,7 +61,7 @@ class Home extends Component {
         {this.state.fontLoaded ? (
           <View style={styles.homeContainer}>
             <View style={styles.streaksContainer}>
-              <Text style={[styles.streaksText, { fontFamily: 'open-sans-semibold' }]}>15</Text>
+              <Text style={[styles.streaksText, { fontFamily: 'open-sans-semibold' }]}>{this.state.streak}</Text>
             </View>
             <View style={styles.trackMargin}>
               <Text style={styles.centerText}>
