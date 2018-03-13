@@ -6,47 +6,61 @@ import HomeStackNav from './components/HomeStackNav.js';
 import ProfileTab from './components/ProfileTab.js';
 import PatientEducationTab from './components/PatientEducationTab.js';
 import CalendarTab from './components/CalendarTab.js';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import OctiIcon from 'react-native-vector-icons/Octicons';
 import color from './styles/color.js';
-import { DeviceEventEmitter } from 'react-native'
 
 const Menu = TabNavigator({
-  Home: { screen: HomeStackNav, path: '' },
-  Search: { screen: PatientEducationTab, path: 'search' },
-  Calendar: { screen: CalendarTab, path: 'calendar' },
-  Profile: { screen: ProfileTab, path: 'profile' }
+  Home: {
+    screen: HomeStackNav,
+    path: '',
+    navigationOptions: {
+      tabBarLabel: ({ focused, tintColor }) => (focused ? "Home" : null),
+      tabBarIcon: ({ focused, tintColor }) => (<FontAwesomeIcon size={24} name="home" color={tintColor} />)
+    },
+  },
+  Search: {
+    screen: PatientEducationTab,
+    path: 'search',
+    navigationOptions: {
+      tabBarLabel: ({ focused, tintColor }) => (focused ? "Search" : null),
+      tabBarIcon: ({ focused, tintColor }) => (<FontAwesomeIcon size={24} name="search" color={tintColor} />)
+    },
+  },
+  Calendar: {
+    screen: CalendarTab,
+    path: 'calendar',
+    navigationOptions: {
+      tabBarLabel: ({ focused, tintColor }) => (focused ? "Calendar" : null),
+      tabBarIcon: ({ focused, tintColor }) => (<OctiIcon size={24} name="calendar" color={tintColor} />)
+    },
+  },
+  Profile: {
+    screen: ProfileTab,
+    path: 'profile',
+    navigationOptions: {
+      tabBarLabel: ({ focused, tintColor }) => (focused ? "Profile" : null),
+      tabBarIcon: ({ focused, tintColor }) => (<MaterialIcon size={24} name="person" color={tintColor} />)
+    },
+  }
 }, {
-    initialRouteName: 'Home',
-    tabBarComponent: ({ jumpToIndex, ...props }) => (
-      <TabBarBottom
-        {...props}
-        jumpToIndex={index => {
-          const { dispatch, state } = props.navigation
-          if (state.index === index) {
-            const stackRouteName = ['Home', 'Search', 'Calendar', 'Profile'][index]
-
-            dispatch(NavigationActions.reset({
-              index: 0,
-              actions: [NavigationActions.navigate({ routeName: stackRouteName })],
-            }))
-          } else {
-            jumpToIndex(index)
-          }
-        }}
-      />
-    ),
     tabBarPosition: 'bottom',
     tabBarOptions: {
-      bottomNavigationOptions: {
-        labelColor: color.navBarLabel,
-        rippleColor: color.navBarRipple,
-        tabs: {
-          Home: { barBackgroundColor: color.navBarBackground },
-          Profile: { barBackgroundColor: color.navBarBackground },
-          Search: { barBackgroundColor: color.navBarBackground },
-          Calendar: { barBackgroundColor: color.navBarBackground }
-        }
-      }
-    }
-  });
+      showIcon: true,
+      showLabel: false,
+      activeTintColor: color.navBarIcon,
+      inactiveTintColor: color.navBarRipple,
+      indicatorStyle: {
+        backgroundColor: 'transparent'
+      },
+      style: {
+        backgroundColor: color.navBarBackground,
+      },
+    },
+    animationEnabled: false,
+    swipeEnabled: true,
+  }
+);
 
 export default Menu;
