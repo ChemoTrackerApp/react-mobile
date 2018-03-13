@@ -29,3 +29,18 @@ export const getFilePath = (name) => {
     case 'vomiting': return require('../res/vomiting_icon.png');
   }
 }
+
+
+export const getInterventions = (symptom, grade, token) => {
+  const queryparams = `symptom=${symptom}&grade=${grade}`;
+  return fetch(`${api}/symptom-tracker/interventions/?${queryparams}`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {
+    return res.json();
+  });
+}

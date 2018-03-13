@@ -7,6 +7,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { styles } from '../../styles/SymptomTracking/intervention.js';
 import color from '../../styles/color.js';
+import { getInterventions } from '../../services/symptomTracking.js';
+
 
 class InterventionScreen extends Component {
   static navigationOptions = {
@@ -33,6 +35,12 @@ class InterventionScreen extends Component {
     },
     error: null
   };
+
+  getAllInterventions() {
+
+    getInterventions(symptom, grade, token)
+    .then({});
+  }
 
   dismissButton() {
     this.props.navigation.navigate("Form");
@@ -65,15 +73,15 @@ class InterventionScreen extends Component {
                       })
                     }
                   </View>
-                  <MaterialIcon name={item.icon} size={40} color={color.searchIcon}/> 
+                  <MaterialIcon name={item.icon} size={40} color={color.searchIcon}/>
                 </View>
               );
             })
           }
         </View>
         <View style={styles.dismissSection}>
-          <Button 
-            style={styles.dismissButton} 
+          <Button
+            style={styles.dismissButton}
             textStyle={{color: '#fff'}}
             onPressIn={ this.dismissButton }>
               Got it!

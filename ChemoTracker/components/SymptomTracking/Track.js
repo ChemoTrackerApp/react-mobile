@@ -4,9 +4,19 @@ import { StackNavigator } from 'react-navigation';
 import FormScreen from './Form.js';
 import InterventionScreen from './Intervention.js';
 
+
+const mapNavigationStateParamsToProps = (SomeComponent) => {
+    return class extends Component {
+        static navigationOptions = SomeComponent.navigationOptions; // better use hoist-non-react-statics
+        render() {
+            const {navigation: {state: {params}}} = this.props
+            return <SomeComponent {...params} {...this.props} />
+        }
+    }
+}
 const trackStackNav = StackNavigator({
   Form: {
-    screen: FormScreen,
+    screen:  mapNavigationStateParamsToProps(FormScreen),
     navigationOptions: {
       header: null
     }
@@ -18,4 +28,5 @@ const trackStackNav = StackNavigator({
     }
   }
 })
+
 export default trackStackNav;

@@ -8,26 +8,31 @@ import color from '../../styles/color.js';
 
 var buttonbg;
 class FormScreen extends Component {
-  state = {
-    buttonbg1: color.white,
-    buttonbg2: color.transparent,
-    buttonbg3: color.transparent,
-    buttonbg4: color.transparent,
-    buttontxt1: color.trackOrange,
-    buttontxt2: color.white,
-    buttontxt3: color.white,
-    buttontxt4: color.white,
-    gradeMap: {
-      0: 'None',
-      1: 'Mild',
-      2: 'Moderate',
-      3: 'Severe'
-    },
-    selectedgrade: 0
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      buttonbg1: color.white,
+      buttonbg2: color.transparent,
+      buttonbg3: color.transparent,
+      buttonbg4: color.transparent,
+      buttontxt1: color.trackOrange,
+      buttontxt2: color.white,
+      buttontxt3: color.white,
+      buttontxt4: color.white,
+      gradeMap: {
+        0: 'None',
+        1: 'Mild',
+        2: 'Moderate',
+        3: 'Severe'
+      },
+      selectedgrade: 0,
+      selectedsymptom: ''
+    };
+    console.log(props);
+    console.log("screenProps", props.screenProps);
   }
-  buttonbg = this.state.buttonbg;
   render() {
-    // const {navigate} = this.props.navi
     return (
       <LinearGradient colors={['#59D0C2', '#066368']} style={styles.felx}>
         <View style={styles.felx}>
