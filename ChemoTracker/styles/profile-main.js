@@ -4,23 +4,27 @@ import { StyleSheet, Dimensions } from 'react-native';
 const Viewport = Dimensions.get('window');
 const inputWidth = Viewport.width - 75;
 const descriptionWidth = (Viewport.width - 80)/2;
-const profileTopHeight = Viewport.height*0.35 < 270 ? 270 : Viewport.height*0.35;
+console.log(Viewport.height*0.3);
+const profileTopHeight = Viewport.height*0.3 < 220 ? 220 : Viewport.height*0.3;
 const height = Viewport.height - profileTopHeight-50;
-const profileImageHeight = 150;
-if(profileTopHeight < 250){
-  profileTopHeight = 250;
-}
+const profileImageHeight = 125;
 const styles = StyleSheet.create({
   profileMainContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'stretch',
+    width: null,
+    height: null,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   profileTopContainer: {
     height: profileTopHeight,
     width: '100%',
-    backgroundColor: 'rgba(0,0,0,0.6)',
     top: 0,
     bottom: 0,
     left: 0,
@@ -44,21 +48,23 @@ const styles = StyleSheet.create({
   overlayProfileImage: {
     position: 'absolute',
     alignSelf: 'center',
-    paddingTop: 60,
+    paddingTop: 30,
   },
   editProfileImage: {
     opacity: 0.5,
     alignSelf: 'center',
-    paddingTop: profileImageHeight-25,
-    paddingLeft: 110
+    paddingTop: profileImageHeight-35,
+    paddingLeft: 110,
+    backgroundColor: 'transparent',
   },
   profileNameText: {
     fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
+    backgroundColor:'transparent'
   },
   profileNameTextBox: {
-    paddingTop: (profileTopHeight - profileImageHeight- 90)/2,
+    paddingTop: (profileTopHeight - profileImageHeight- 120)/2,
     alignSelf: 'center'
   },
   profileSectionCell: {
@@ -92,12 +98,14 @@ const styles = StyleSheet.create({
   profileTextInput: {
     height: 15,
     width: inputWidth,
-    fontSize: 15
+    fontSize: 15,
+    backgroundColor: 'transparent',
   },
   profileDetailTitle: {
     fontSize: 13,
     fontWeight: 'bold',
     color: '#d3d3d3',
+    backgroundColor: 'transparent',
   },
   profileDetailTitleTextBox: {
     height: 13,
@@ -108,6 +116,7 @@ const styles = StyleSheet.create({
   },
   profileDetailDescription: {
     fontSize: 15,
+    backgroundColor: 'transparent',
   },
   profileSectionTitleBox: {
     height: 18,
@@ -119,6 +128,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: color.orange,
     paddingRight: 5,
+    backgroundColor: 'transparent',
   },
   profileDetails: {
     flex: 1,
@@ -148,8 +158,9 @@ const styles = StyleSheet.create({
     width: inputWidth,
   },
   editProfile: {
-    paddingTop:20,
     alignSelf: 'flex-end',
+    paddingRight: 13,
+    paddingTop: 13
   },
   profileBackButton: {
     marginLeft: 15,
@@ -157,8 +168,7 @@ const styles = StyleSheet.create({
   profileButton: {
     color: "#FFFFFF",
     backgroundColor: 'transparent',
-    marginRight: 15,
-    fontSize: 15
+    fontSize: 22
   }
 });
 

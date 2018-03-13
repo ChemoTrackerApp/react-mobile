@@ -51,9 +51,10 @@ class ProfileTop extends Component {
 				if (response.status !== 201)
 			    throw new Error("Failed to upload image to S3");
 				imageUri = response.body.postResponse.location;
+				console.log(response.body.postResponse);
 				this.setState({ image: imageUri });
 				//send response to backend
-				
+
 			});
     }
   };
@@ -65,27 +66,25 @@ class ProfileTop extends Component {
 	render() {
 		return (
       <View style = {styles.profileTopContainer}>
-        <LinearGradient colors = {[color.profileBackgroundDarkBlue, color.profileBackgroundLightBlue]} style = {styles.profileTopContainer}>
-						<View style={styles.editProfile}>
-							<TouchableOpacity
-								onPress = {this.openEditView}>
-								<Text style={styles.profileButton}>Edit</Text>
-							</TouchableOpacity>
-						</View>
-						<View style={styles.overlayProfileImage}>
-							{
-									<Image source = {{ uri: this.state.image }} style = {styles.profileImage}></Image>
-							}
-						</View>
-						<View style={styles.editProfileImage}>
-							<TouchableWithoutFeedback onPress={this.onPress}>
-								<Icon size={25} name="camera" color={color.white}/>
-							</TouchableWithoutFeedback>
-						</View>
-						<View style={styles.profileNameTextBox}>
-							<Text style = {styles.profileNameText}>{this.state.name}</Text>
-						</View>
-				</LinearGradient>
+				<View style={styles.editProfile}>
+					<TouchableOpacity
+						onPress = {this.openEditView}>
+						<Text style={styles.profileButton}>Edit</Text>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.overlayProfileImage}>
+				{
+						<Image source = {{ uri: this.state.image }} style = {styles.profileImage}></Image>
+				}
+				</View>
+				<View style={styles.editProfileImage}>
+					<TouchableWithoutFeedback onPress={this.onPress}>
+						<Icon size={25} name="camera" color={color.white}/>
+					</TouchableWithoutFeedback>
+				</View>
+				<View style={styles.profileNameTextBox}>
+					<Text style = {styles.profileNameText}>{this.state.name}</Text>
+				</View>
       </View>
 		);
 	}
