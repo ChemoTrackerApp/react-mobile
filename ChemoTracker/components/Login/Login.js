@@ -38,21 +38,26 @@ export default class Login extends React.Component {
       this.setState({ errorLabel: 'Password is required' });
       return;
     }
-    let response = login(this.state.loginUsername, this.state.loginPassword)
+    login(this.state.loginUsername, this.state.loginPassword)
     .then((responseJson) => {
+      console.log("responseJson", responseJson);
+      if(responseJson.key) {
         this.setState({
           auth_token: responseJson.key
-        }, function(){
         });
+          this.props.navigation.navigate("Menu");
+      } else {
+        if(responseJson.email) {
+          console.log("email error: ", responseJson.email[0]);
+        } else if(responseJson.password) {
+          console.log("password error: ", responseJson.password[0]);
+        }
+      }
       })
-      .catch((error) =>{
-        console.error(error);
+    .catch((error) =>{
+      console.error(error);
+      this.setState({errorLabel: error});
     });
-    if (response.error === 'None'){
-      this.props.navigation.navigate("Menu");
-    }else{
-      this.setState({errorLabel:response.error});
-    }
   }
 
   signUpClicked = () => {
