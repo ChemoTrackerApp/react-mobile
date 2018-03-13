@@ -40,7 +40,8 @@ export const styles = StyleSheet.create({
     borderColor: '#FB5B1B',
     height: height(5),
     padding: height(2),
-    width: isIphoneX() || isIphonePlus() ? width(40) : width(35)
+    width: isIphoneX() || isIphonePlus() ? width(40) : width(35),
+    borderRadius: width(40) / 2,
   },
   dismissSection: {
     alignItems: 'center',

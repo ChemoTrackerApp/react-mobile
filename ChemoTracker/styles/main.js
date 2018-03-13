@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   trackButton: {
     height: height(7),
     width: width(70),
-    borderRadius: 15,
+    borderRadius: width(70) / 2,
     marginTop: "5%",
     marginLeft: "2%",
     justifyContent: 'center',
