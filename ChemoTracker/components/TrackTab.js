@@ -20,7 +20,7 @@ class TrackTab extends Component {
   state = {
     index: 0,
     routes: [
-      { key: 'nausea', title: 'Nausea' },
+      { key: 'nausea', title: 'Nausea', },
       { key: 'vomiting', title: 'Vomiting' },
       { key: 'fatigue', title: 'Fatigue' },
       { key: 'diarrhea', title: 'Diarrhea' },
@@ -58,6 +58,7 @@ class TrackTab extends Component {
   render() {
     return (
       <TabViewAnimated
+        screenProps={this.state}
         style={styles.container}
         navigationState={this.state}
         renderScene={this._renderScene}
