@@ -9,7 +9,8 @@ import { calStyles } from '../../styles/calendar.js';
 import CalendarEvent from './event.js';
 import _ from 'lodash';
 import moment from 'moment';
-import { getSymptoms, getSymptomsByMonth, login, getFilePath } from '../../services/symptomTracking.js';
+import { getSymptoms, getSymptomsByMonth, getFilePath } from '../../services/symptomTracking.js';
+import { login } from '../../services/login.js';
 
 let token = '';
 
@@ -34,7 +35,7 @@ class Calendar extends Component {
   }
 
   loadItemsMonthly(ds){
-    login()
+    login("seven@seven.com", "mustaqeem")
     .then(t => {
       token = t;
       getSymptoms()
