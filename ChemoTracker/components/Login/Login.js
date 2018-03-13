@@ -8,16 +8,14 @@ import { login } from '../../services/login.js';
 
 export default class Login extends React.Component {
 
-  state = {
-    fontLoaded: false,
-    errorLabel: '',
-    loginUsername: '',
-    loginPassword: '',
-    auth_token: ''
-  };
   constructor(props){
     super(props);
     this.state = {
+      fontLoaded: false,
+      errorLabel: '',
+      loginUsername: '',
+      loginPassword: '',
+      auth_token: ''
     }
   }
   async componentDidMount() {
