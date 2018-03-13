@@ -118,17 +118,16 @@ class Profile extends Component {
 	}
 
 	render() {
-			return (
-				<View style = { styles.profileMainContainer }>
-					<StatusBar
-						backgroundColor="transparent"
-						barStyle="light-content"
-						/>
-					<ProfileTop navigation={this.props.navigation} image={this.state.image} name={this.state.name}/>
-					<ProfileDetailsTable sections={this.state.profileDetailsData}/>
-      	</View>
-    	);
-  	}
+		return (
+			<View style = { styles.profileMainContainer }>
+				<StatusBar
+					backgroundColor="transparent"
+					barStyle="light-content"/>
+				<ProfileTop navigation={this.props.navigation} image={this.state.image} name={this.state.name}/>
+				<ProfileDetailsTable sections={this.state.profileDetailsData}/>
+      </View>
+    );
+  }
 }
 
 export default Profile;
