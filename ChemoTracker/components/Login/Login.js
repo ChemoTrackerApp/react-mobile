@@ -7,15 +7,12 @@ import styles from '../../styles/login_screen.js';
 
 export default class Login extends React.Component {
 
-  capi = 'http://ec2-52-15-106-40.us-east-2.compute.amazonaws.com:8000';
-
-
-
   state = {
     fontLoaded: false,
     errorLabel: '',
     loginUsername: '',
 		loginPassword: '',
+    auth_token: ''
   };
   async componentDidMount() {
    await Font.loadAsync({
@@ -26,6 +23,7 @@ export default class Login extends React.Component {
 }
 
   async onSubmit() {
+    const api = 'http://ec2-52-15-106-40.us-east-2.compute.amazonaws.com:8000';
     this.setState({errorLabel:''});
     if (this.state.loginUsername === ''){
       this.setState({errorLabel:'Username is required'});
@@ -35,28 +33,33 @@ export default class Login extends React.Component {
       this.setState({errorLabel:'Password is required'});
       return;
     }
-    const response = fetch(`${api}/rest-auth/login/`, {
+    var response = fetch(`${api}/rest-auth/login/`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      }
+      },
+      body: JSON.stringify({
+        email: this.state.loginUsername,
+        password: this.state.loginPassword
+      })
     }).then(res => {
       return res.json();
+    }).then((responseJson) => {
+        this.setState({
+          auth_token: responseJson.key
+        }, function(){
+
+        });
+      })
+      .catch((error) =>{
+        console.error(error);
     });
     if (response.error === 'None'){
-      utils.resetToScreen(this.state.navigation,'HomeView',{user:response.user,token:response.token});
+      this.props.navigation.navigate("Menu");
     }else{
       this.setState({errorLabel:response.error});
     }
-  }
-
-  onPress = () => {
-    Alert.alert("login pressed");
-  }
-
-  loginClicked = () => {
-    this.props.navigation.navigate("Menu");
   }
 
   signUpClicked = () => {
@@ -73,18 +76,26 @@ export default class Login extends React.Component {
         <TextInput
           keyboardType="email-address"
           underlineColorAndroid="transparent"
+          onChangeText={(text)=>{this.setState({loginUsername:text})}}
+          onSubmitEditing={(event) => {
+									this.refs.PasswordField.focus();
+					}}
           style={styles.textFieldContainer}
           placeholder="email"
         />
         <TextInput
+          ref ="PasswordField"
           secureTextEntry={true}
           underlineColorAndroid="transparent"
+          onChangeText={(text)=>{this.setState({loginPassword:text})}}
           style={styles.textFieldContainer}
+          onSubmitEditing={()=>{this.onSubmit();}}
           placeholder="password"
         />
+        <Text style={styles.errorLabel} >{this.state.errorLabel}</Text>
        <TouchableOpacity
         style={{width: '70.55%',  height: 29}}
-        onPress={this.loginClicked}>
+        onPress={()=>{this.onSubmit();}}>
           <LinearGradient
             colors={['#59D0C2','#066368']}
             start={[0, 1]}
