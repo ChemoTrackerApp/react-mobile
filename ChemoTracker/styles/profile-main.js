@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     borderRadius: profileImageHeight/2,
     width: profileImageHeight,
     alignSelf: 'center',
+    resizeMode: 'stretch',
   },
   overlayProfileImage: {
     position: 'absolute',
