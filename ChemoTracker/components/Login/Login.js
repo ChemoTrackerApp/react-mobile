@@ -4,6 +4,7 @@ import { LinearGradient, Font } from 'expo';
 
 
 import styles from '../../styles/login_screen.js';
+import { login } from '../../services/login.js';
 
 export default class Login extends React.Component {
 
@@ -14,6 +15,11 @@ export default class Login extends React.Component {
 		loginPassword: '',
     auth_token: ''
   };
+  constructor(props){
+    super(props);
+    this.state = {
+    }
+  }
   async componentDidMount() {
     await Font.loadAsync({
       'open-sans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
@@ -32,23 +38,11 @@ export default class Login extends React.Component {
       this.setState({ errorLabel: 'Password is required' });
       return;
     }
-    var response = fetch(`${api}/rest-auth/login/`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.loginUsername,
-        password: this.state.loginPassword
-      })
-    }).then(res => {
-      return res.json();
-    }).then((responseJson) => {
+    let response = login(this.state.loginUsername, this.state.loginPassword)
+    .then((responseJson) => {
         this.setState({
           auth_token: responseJson.key
         }, function(){
-
         });
       })
       .catch((error) =>{
