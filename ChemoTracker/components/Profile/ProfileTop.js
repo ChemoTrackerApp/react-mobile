@@ -32,7 +32,7 @@ class ProfileTop extends Component {
   	});
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+
 			file = {
 				uri: result.uri,
 				name: "profileImage.jpeg",
@@ -41,15 +41,19 @@ class ProfileTop extends Component {
 			options = {
 				keyPrefix: "profile-images/",
 			  bucket: "chemotracker",
-			  region: "us-east-1",
+			  region: "us-east-2",
 			  accessKey: "AKIAIL7EGGDCC47UKY7Q",
 			  secretKey: "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",
 			  successActionStatus: 201
 			}
 			RNS3.put(file, options).then(response => {
-			  if (response.status !== 201)
+				console.log(response);
+				if (response.status !== 201)
 			    throw new Error("Failed to upload image to S3");
-			  console.log(response.body);
+				imageUri = response.body.postResponse.location;
+				this.setState({ image: imageUri });
+				//send response to backend
+				
 			});
     }
   };
