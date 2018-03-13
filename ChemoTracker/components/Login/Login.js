@@ -72,11 +72,13 @@ export default class Login extends React.Component {
         />
         <TextInput
           keyboardType="email-address"
+          underlineColorAndroid="transparent"
           style={styles.textFieldContainer}
           placeholder="email"
         />
         <TextInput
           secureTextEntry={true}
+          underlineColorAndroid="transparent"
           style={styles.textFieldContainer}
           placeholder="password"
         />
