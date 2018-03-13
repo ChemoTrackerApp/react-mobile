@@ -43,7 +43,7 @@ export default class Login extends React.Component {
         this.setState({
           auth_token: responseJson.key
         });
-          this.props.navigation.navigate("Menu");
+          this.props.navigation.navigate("Menu", { token: this.state.auth_token });
       } else {
         if(responseJson.email) {
           console.log("email error: ", responseJson.email[0]);
