@@ -12,7 +12,7 @@ export default class Login extends React.Component {
     fontLoaded: false,
     errorLabel: '',
     loginUsername: '',
-		loginPassword: '',
+    loginPassword: '',
     auth_token: ''
   };
   constructor(props){
@@ -72,8 +72,8 @@ export default class Login extends React.Component {
           underlineColorAndroid="transparent"
           onChangeText={(text)=>{this.setState({loginUsername:text})}}
           onSubmitEditing={(event) => {
-									this.refs.PasswordField.focus();
-					}}
+		this.refs.PasswordField.focus();
+	  }}
           style={styles.textFieldContainer}
           placeholder="email"
         />
