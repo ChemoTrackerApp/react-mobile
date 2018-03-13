@@ -29,9 +29,10 @@ export default class Cell extends Component {
   }
 
   createViewFromDetailsData() {
+    count = 0;
     return this.details.data.map((detailItem) => {
       return (
-        <View key = {detailItem.title} style = {styles.profileDetailCell}>
+        <View key = {detailItem.title + count++} style = {styles.profileDetailCell}>
           <View style = {styles.profileDetailTitleTextBox}>
             <Text style = {styles.profileDetailTitle}> {detailItem.title.toUpperCase()} </Text>
           </View>
