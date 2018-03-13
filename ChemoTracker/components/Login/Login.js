@@ -4,19 +4,20 @@ import { LinearGradient, Font } from 'expo';
 
 
 import styles from '../../styles/login_screen.js';
+import { login } from '../../services/login.js';
 
 export default class Login extends React.Component {
 
-  capi = 'http://ec2-52-15-106-40.us-east-2.compute.amazonaws.com:8000';
-
-
-
-  state = {
-    fontLoaded: false,
-    errorLabel: '',
-    loginUsername: '',
-    loginPassword: '',
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      fontLoaded: false,
+      errorLabel: '',
+      loginUsername: '',
+      loginPassword: '',
+      auth_token: ''
+    }
+  }
   async componentDidMount() {
     await Font.loadAsync({
       'open-sans-bold': require('../../assets/fonts/OpenSans-Bold.ttf'),
@@ -26,37 +27,35 @@ export default class Login extends React.Component {
   }
 
   async onSubmit() {
-    this.setState({ errorLabel: '' });
-    if (this.state.loginUsername === '') {
-      this.setState({ errorLabel: 'Username is required' });
+    this.setState({errorLabel:''});
+    if (this.state.loginUsername === ''){
+      this.setState({errorLabel:'Username is required'});
       return;
     }
     if (this.state.loginPassword === '') {
       this.setState({ errorLabel: 'Password is required' });
       return;
     }
-    const response = fetch(`${api}/rest-auth/login/`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+    login(this.state.loginUsername, this.state.loginPassword)
+    .then((responseJson) => {
+      console.log("responseJson", responseJson);
+      if(responseJson.key) {
+        this.setState({
+          auth_token: responseJson.key
+        });
+          this.props.navigation.navigate("Menu");
+      } else {
+        if(responseJson.email) {
+          console.log("email error: ", responseJson.email[0]);
+        } else if(responseJson.password) {
+          console.log("password error: ", responseJson.password[0]);
+        }
       }
-    }).then(res => {
-      return res.json();
+      })
+    .catch((error) =>{
+      console.error(error);
+      this.setState({errorLabel: error});
     });
-    if (response.error === 'None') {
-      utils.resetToScreen(this.state.navigation, 'HomeView', { user: response.user, token: response.token });
-    } else {
-      this.setState({ errorLabel: response.error });
-    }
-  }
-
-  onPress = () => {
-    Alert.alert("login pressed");
-  }
-
-  loginClicked = () => {
-    this.props.navigation.navigate("Menu");
   }
 
   signUpClicked = () => {
@@ -74,18 +73,26 @@ export default class Login extends React.Component {
         <TextInput
           keyboardType="email-address"
           underlineColorAndroid="transparent"
+          onChangeText={(text)=>{this.setState({loginUsername:text})}}
+          onSubmitEditing={(event) => {
+		this.refs.PasswordField.focus();
+	  }}
           style={styles.textFieldContainer}
           placeholder="email"
         />
         <TextInput
+          ref ="PasswordField"
           secureTextEntry={true}
           underlineColorAndroid="transparent"
+          onChangeText={(text)=>{this.setState({loginPassword:text})}}
           style={styles.textFieldContainer}
+          onSubmitEditing={()=>{this.onSubmit();}}
           placeholder="password"
         />
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={this.loginClicked}>
+       <Text style={styles.errorLabel} >{this.state.errorLabel}</Text>
+       <TouchableOpacity
+        style={styles.loginButton}
+        onPress={()=>{this.onSubmit();}}>
           <LinearGradient
             colors={['#59D0C2', '#066368']}
             start={[0, 1]}

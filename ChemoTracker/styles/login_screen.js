@@ -62,6 +62,11 @@ const styles = StyleSheet.create({
   text:{
     color: 'rgb(251,91, 27)',
     fontWeight: '700',
+  },
+  errorLabel:{
+    fontSize: 14,
+    color: 'rgb(254, 40, 81)',
+    textAlign:'center'
   }
 });
 
