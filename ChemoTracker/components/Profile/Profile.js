@@ -4,7 +4,7 @@ import { TabNavigator } from 'react-navigation';
 import ProfileTop from './ProfileTop.js';
 import ProfileDetailsTable from './ProfileDetailsTable.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from '../../styles/main.js';
+import styles from '../../styles/profile-main.js';
 import color from '../../styles/color.js';
 import { StatusBar } from 'react-native';
 import { login, getProfile } from '../../services/profileServices.js';
@@ -119,13 +119,12 @@ class Profile extends Component {
 
 	render() {
 		return (
-			<View style = { styles.profileMainContainer }>
+			<Image style = {styles.backgroundImage} source={require('../../assets/img/home-bg.jpg')}>
 				<StatusBar
-					backgroundColor="transparent"
-					barStyle="light-content"/>
+					hidden = {true}/>
 				<ProfileTop navigation={this.props.navigation} image={this.state.image} name={this.state.name}/>
 				<ProfileDetailsTable sections={this.state.profileDetailsData}/>
-      </View>
+			</Image>
     );
   }
 }
