@@ -8,8 +8,6 @@ import color from '../../styles/color.js';
 class ProfileDetailsTable extends Component {
   constructor(props) {
     super(props);
-    console.log("Profile Details");
-    console.log(this.props);
     this.state = {
       sections: this.props.sections,
     }
