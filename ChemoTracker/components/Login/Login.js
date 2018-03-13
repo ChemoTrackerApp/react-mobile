@@ -27,9 +27,9 @@ export default class Login extends React.Component {
   }
 
   async onSubmit() {
-    this.setState({errorLabel:''});
-    if (this.state.loginUsername === ''){
-      this.setState({errorLabel:'Username is required'});
+    this.setState({ errorLabel: '' });
+    if (this.state.loginUsername === '') {
+      this.setState({ errorLabel: 'Username is required' });
       return;
     }
     if (this.state.loginPassword === '') {
