@@ -21,7 +21,10 @@ const navOptionsS = ({navigation}) => (
     headerStyle: headerStyles.headerContainer,
     headerTitleStyle: headerStyles.headerTitleStyle,
     headerTintColor: 'white',
-    headerLeft: <TouchableOpacity onPress={ () => {  DeviceEventEmitter.emit('refreshState',  {}); navigation.goBack(); }}
+    headerLeft: <TouchableOpacity onPress={ () => {  
+                    // DeviceEventEmitter.emit('refreshState',  {}); 
+                    navigation.goBack(); 
+                  }}
                   style={headerStyles.headerLeft}>
                   <Icon size={24} name="chevron-left"
                       color='#FFFFFF'/>
