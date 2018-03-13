@@ -7,6 +7,7 @@ import styles from '../styles/main.js';
 import color from '../styles/color.js';
 
 class Home extends Component {
+
   static navigationOptions = {
     tabBarLabel: "Home",
     tabBarIcon: () => (<Icon size={24} name="home" color={color.navBarIcon} />)
@@ -15,6 +16,7 @@ class Home extends Component {
     super(props);
     this.state = {
       fontLoaded: false,
+      token: props.screenProps.token
     };
   }
 

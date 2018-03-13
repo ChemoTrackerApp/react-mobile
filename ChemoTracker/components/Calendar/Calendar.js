@@ -10,16 +10,14 @@ import CalendarEvent from './event.js';
 import _ from 'lodash';
 import moment from 'moment';
 import { getSymptoms, getSymptomsByMonth, getFilePath } from '../../services/symptomTracking.js';
-import { login } from '../../services/login.js';
-
-let token = '';
 
 class Calendar extends Component {
   constructor(props){
     super(props);
     this.state = {
       listOfItems: {},
-      calendarItems: {}
+      calendarItems: {},
+      token: props.screenProps.token
     }
     this.onDayPress = this.onDayPress.bind(this);
     this.rowHasChanged = this.rowHasChanged.bind(this);
@@ -35,16 +33,9 @@ class Calendar extends Component {
   }
 
   loadItemsMonthly(ds){
-    login("seven@seven.com", "mustaqeem")
-    .then(t => {
-      token = t;
-      getSymptoms()
-      .then(symptomsList => {
-        this.getItemsByMonth(ds, symptomsList);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    getSymptoms()
+    .then(symptomsList => {
+      this.getItemsByMonth(ds, symptomsList);
     })
     .catch(err => {
       console.log(err);
@@ -54,7 +45,7 @@ class Calendar extends Component {
   getItemsByMonth(ds, symptomsList) {
     const year = moment(ds).format('YYYY');
     const month = moment(ds).format('M');
-    getSymptomsByMonth(year, month, token.key)
+    getSymptomsByMonth(year, month, this.state.token)
     .then(list => {
       // map the list with appropriate data for FE
       let mappedList = [];
