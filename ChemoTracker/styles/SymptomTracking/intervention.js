@@ -11,6 +11,14 @@ export const isIphoneX = () => {
   );
 }
 
+export const isIphonePlus = () => {
+  let d = Dimensions.get('window');
+  const { height, width } = d;
+  return (
+    Platform.OS === 'ios' && (height === 736 || width === 736)
+  );
+}
+
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: color.trackBackground,
@@ -19,10 +27,10 @@ export const styles = StyleSheet.create({
   },
   content: {
     color: color.searchText,
-    fontSize: isIphoneX() ? 22 : 19,
+    fontSize: isIphoneX() || isIphonePlus() ? 22 : 19,
     fontWeight: 'bold',   
-    paddingBottom: isIphoneX() ? height(0.5) : 0,
-    paddingTop: isIphoneX() ? height(3) : height(2),
+    paddingBottom: isIphoneX() || isIphonePlus() ? height(0.5) : 0,
+    paddingTop: isIphoneX() || isIphonePlus() ? height(3) : height(2),
     textAlign: 'center'
     
   },
@@ -32,7 +40,7 @@ export const styles = StyleSheet.create({
     borderColor: '#FB5B1B',
     height: height(5),
     padding: height(2),
-    width: isIphoneX() ? width(40) : width(35)
+    width: isIphoneX() || isIphonePlus() ? width(40) : width(35)
   },
   dismissSection: {
     alignItems: 'center',
@@ -45,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   interventionsText: {
     color: color.trackContent,
-    fontSize: isIphoneX() ? 15 : 14,
+    fontSize: isIphoneX() || isIphonePlus() ? 15 : 14,
     paddingBottom: height(2),
     textAlign: 'center'
   },
@@ -70,11 +78,11 @@ export const styles = StyleSheet.create({
     paddingTop: height(2)    
   },
   tipsSection: {
-    paddingBottom: isIphoneX() ? height(3) : height(2)
+    paddingBottom: isIphoneX() || isIphonePlus() ? height(3) : height(2)
   },
   tipsText: {
     color: color.trackContent,
-    fontSize: isIphoneX() ? 15 : 14,
+    fontSize: isIphoneX() || isIphonePlus() ? 15 : 14,
     paddingTop: height(0.5),
     textAlign: 'left'
   }

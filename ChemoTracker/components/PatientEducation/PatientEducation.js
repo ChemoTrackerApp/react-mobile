@@ -44,6 +44,7 @@ class PatientEducation extends Component {
           <FontAwesomeIcon name = "stethoscope" size={ 100 } color={ color.searchIcon } />
           <Text style={ searchStyles.label }>Questions?</Text>
           <TextInput 
+            underlineColorAndroid="transparent"
             style={ searchStyles.input } 
             value={ this.state.question }
             controlled={ true }
