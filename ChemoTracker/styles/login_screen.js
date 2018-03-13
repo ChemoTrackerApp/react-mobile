@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
   },
   textFieldContainer: {
     height: 60,
-    width: 300,
-    backgroundColor: "#FF6666",
-    color: "#FFFFFF",
+    width: 320,
+    backgroundColor: 'transparent',
+    color: "#000",
     marginBottom: 20,
-    padding: 10 ,
-    borderRadius: 5
+    padding: 0 ,
+    borderRadius: 0,
+    borderStyle: 'solid',
+    borderColor: '#066368',
+    borderBottomWidth:  1,
   },
   buttonContainer: {
     backgroundColor: "#6374f4",
@@ -28,17 +31,16 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   logo: {
-    height: 250,
-    width: 250
+    height: '30%',
+    width: '50%'
   },
   signUpLink: {
     color: "#6374f4",
     fontWeight: 'bold'
   },
   text:{
-    color: "#6374f4",
-    fontWeight: 'bold',
-    fontSize: 19
+    color: 'rgb(251,91, 27)',
+    fontWeight: '700',
   }
 });
 
