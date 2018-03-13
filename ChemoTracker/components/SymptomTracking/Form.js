@@ -4,18 +4,19 @@ import { StackNavigator } from 'react-navigation';
 import { LinearGradient } from 'expo';
 import Button from 'apsl-react-native-button'
 import { styles } from '../../styles/SymptomTracking/track.js';
+import color from '../../styles/color.js';
 
 var buttonbg;
 class FormScreen extends Component {
   state = {
-    buttonbg1: '#FFF',
-    buttonbg2: 'transparent',
-    buttonbg3: 'transparent',
-    buttonbg4: 'transparent',
-    buttontxt1: '#FB5B1B',
-    buttontxt2: '#FFF',
-    buttontxt3: '#FFF',
-    buttontxt4: '#FFF',
+    buttonbg1: color.white,
+    buttonbg2: color.transparent,
+    buttonbg3: color.transparent,
+    buttonbg4: color.transparent,
+    buttontxt1: color.trackOrange,
+    buttontxt2: color.white,
+    buttontxt3: color.white,
+    buttontxt4: color.white,
     gradeMap: {
       0: 'None',
       1: 'Mild',
@@ -46,32 +47,32 @@ class FormScreen extends Component {
             <Button style={[styles.button, { backgroundColor: this.state.buttonbg1 }]} textStyle={[styles.buttonText, { color: this.state.buttontxt1 }]}
               onPressIn={() => {
                 this.setState({
-                  buttonbg1: '#FFF', buttonbg2: 'transparent', buttonbg3: 'transparent', buttonbg4: 'transparent',
-                  buttontxt1: '#FB5B1B', buttontxt2: '#FFF', buttontxt3: '#FFF', buttontxt4: '#FFF',
+                  buttonbg1: color.white, buttonbg2: color.transparent, buttonbg3: color.transparent, buttonbg4: color.transparent,
+                  buttontxt1: color.trackOrange, buttontxt2: color.white, buttontxt3: color.white, buttontxt4: color.white,
                   selectedgrade: 0
                 });
               }} >0</Button>
             <Button style={[styles.button, { backgroundColor: this.state.buttonbg2 }]} textStyle={[styles.buttonText, { color: this.state.buttontxt2 }]}
               onPressIn={() => {
                 this.setState({
-                  buttonbg1: 'transparent', buttonbg2: '#FFF', buttonbg3: 'transparent', buttonbg4: 'transparent',
-                  buttontxt1: '#FFF', buttontxt2: '#FB5B1B', buttontxt3: '#FFF', buttontxt4: '#FFF',
+                  buttonbg1: color.transparent, buttonbg2: color.white, buttonbg3: color.transparent, buttonbg4: color.transparent,
+                  buttontxt1: color.white, buttontxt2: color.trackOrange, buttontxt3: color.white, buttontxt4: color.white,
                   selectedgrade: 1
                 });
               }} >1</Button>
             <Button style={[styles.button, { backgroundColor: this.state.buttonbg3 }]} textStyle={[styles.buttonText, { color: this.state.buttontxt3 }]}
               onPressIn={() => {
                 this.setState({
-                  buttonbg1: 'transparent', buttonbg2: 'transparent', buttonbg3: '#FFF', buttonbg4: 'transparent',
-                  buttontxt1: '#FFF', buttontxt2: '#FFF', buttontxt3: '#FB5B1B', buttontxt4: '#FFF',
+                  buttonbg1: color.transparent, buttonbg2: color.transparent, buttonbg3: color.white, buttonbg4: color.transparent,
+                  buttontxt1: color.white, buttontxt2: color.white, buttontxt3: color.trackOrange, buttontxt4: color.white,
                   selectedgrade: 2
                 });
               }} >2</Button>
             <Button style={[styles.button, { backgroundColor: this.state.buttonbg4 }]} textStyle={[styles.buttonText, { color: this.state.buttontxt4 }]}
               onPressIn={() => {
                 this.setState({
-                  buttonbg1: 'transparent', buttonbg2: 'transparent', buttonbg3: 'transparent', buttonbg4: '#FFF',
-                  buttontxt1: '#FFF', buttontxt2: '#FFF', buttontxt3: '#FFF', buttontxt4: '#FB5B1B',
+                  buttonbg1: color.transparent, buttonbg2: color.transparent, buttonbg3: color.transparent, buttonbg4: color.white,
+                  buttontxt1: color.white, buttontxt2: color.white, buttontxt3: color.white, buttontxt4: color.trackOrange,
                   selectedgrade: 3
                 });
               }} >3</Button>

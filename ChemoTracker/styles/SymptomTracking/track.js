@@ -21,13 +21,13 @@ export const isIphonePlus = () => {
 
 export const headerStyles = StyleSheet.create({
   headerBackground: {
-    backgroundColor: '#F4FAFC'
+    backgroundColor: color.trackHeader
   },
   headerTitleStyle: {
-    color: '#000000'
+    color: color.black
   },
   headerBackTitleStyle: {
-    color: '#000000'
+    color: color.black
   },
   headerPlus: {
     marginRight: 10
@@ -98,8 +98,8 @@ export const styles = StyleSheet.create({
     marginRight: width(1)
   },
   doneButton: {
-    backgroundColor: '#FB5B1B',
-    borderColor: '#FB5B1B',
+    backgroundColor: color.trackOrange,
+    borderColor: color.trackOrange,
     width: width(45),
     height: height(7),
     borderRadius: width(45) / 2,
@@ -107,7 +107,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   doneButtonText: {
-    color: '#FFF',
+    color: color.white,
     fontWeight: 'bold'
   },
   felx: {
@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     backgroundColor: 'transparent',
     textAlign: 'center',
-    color: '#00676D',
+    color: color.trackGreen,
     marginTop: height(6)
   },
   gradeButtons: {
