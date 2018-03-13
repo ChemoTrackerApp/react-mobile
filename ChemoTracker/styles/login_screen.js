@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     borderColor: '#066368',
     borderBottomWidth:  1,
   },
+  bottomSectionText: { 
+    fontSize: 18 
+  },
   buttonContainer: {
     backgroundColor: "#6374f4",
     borderRadius: 12,
@@ -30,7 +33,25 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20
   },
+  loginButton: {
+    width: '70.55%', 
+    height: '15%'
+  },
+  loginGradient: {
+    padding: 15, 
+    alignItems: 'center', 
+    borderRadius: 5, 
+    marginTop: '8%'
+  },
+  loginText: {
+    backgroundColor: 'transparent',
+    fontSize: 19,
+    fontFamily: 'open-sans-semibold',
+    color: '#fff',
+    fontWeight: 'bold',
+  },
   logo: {
+    marginTop: '2%',
     height: '30%',
     width: '50%'
   },
