@@ -17,9 +17,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token:''
       fontLoaded: false,
-      token: props.screenProps.token
+      token: props.screenProps.token,
       streak:0
     };
     console.log("homeprops ", props);
