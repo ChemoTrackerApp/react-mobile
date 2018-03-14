@@ -17,32 +17,57 @@ class TrackTab extends Component {
     tabBarIcon: () => (<Icon size={24} name="home" color={color.navBarIcon} />)
   }
 
-  state = {
-    index: 0,
-    routes: [
-      { key: 'nausea', title: 'Nausea', },
-      { key: 'vomiting', title: 'Vomiting' },
-      { key: 'fatigue', title: 'Fatigue' },
-      { key: 'diarrhea', title: 'Diarrhea' },
-      { key: 'constipation', title: 'Constipation' },
-      { key: 'mucositis', title: 'Mucositis' },
-      { key: 'handfootsyndrome', title: 'Hand Foot Syndrome' },
-      { key: 'rash', title: 'Rash' },
-      { key: 'nailchanges', title: 'Nail Changes'}
-    ],
-  };
+  constructor(props) {
+    super(props);
+    console.log("trackTab", props);
+
+    this.state = {
+      index: 0,
+      routes: [
+        { key: 'nausea', title: 'Nausea' },
+        { key: 'vomiting', title: 'Vomiting' },
+        { key: 'fatigue', title: 'Fatigue' },
+        { key: 'diarrhea', title: 'Diarrhea' },
+        { key: 'constipation', title: 'Constipation' },
+        { key: 'mucositis', title: 'Mucositis' },
+        { key: 'handfootsyndrome', title: 'Hand Foot Syndrome' },
+        { key: 'rash', title: 'Rash' },
+        { key: 'nailchanges', title: 'Nail Changes' }
+      ],
+      token: props.screenProps.token
+    };
+  }
 
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
     <TabBar
-    {...props}
-    scrollEnabled
-    style={styles.tabbar}
+      {...props}
+      scrollEnabled
+      style={styles.tabbar}
     />
   );
 
+  // _renderHeader = props => {
+  //   const token = this.props.screenProps.token;
+  //   const prop = {
+  //     ...props,
+  //     token: token
+  //   }
+  //   console.log()
+  //   return (<TabBar
+  //     props={prop}
+  //     scrollEnabled
+  //     style={styles.tabbar}
+  //   />);
+  // }
 
+  // _renderScene = ({ route }) => {
+  //   switch(route.key) {
+  //     default:
+  //       return <trackStackNav token={this.props.screenProps.token}/>
+  //   }
+  // }
   _renderScene = SceneMap({
     nausea: trackStackNav,
     vomiting: trackStackNav,
@@ -58,7 +83,11 @@ class TrackTab extends Component {
   render() {
     return (
       <TabViewAnimated
+<<<<<<< HEAD
         screenProps={this.state}
+=======
+        // screenProps={this.state}
+>>>>>>> f9ca5bd44c4b58c4e6fb7afd48999b32ccb2512d
         style={styles.container}
         navigationState={this.state}
         renderScene={this._renderScene}
@@ -76,7 +105,7 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     paddingTop: 20,
-    backgroundColor:'#066368'
+    backgroundColor: '#066368'
   }
 });
 

@@ -8,24 +8,29 @@ import color from '../../styles/color.js';
 
 var buttonbg;
 class FormScreen extends Component {
-  constructor(props){
+
+  constructor(props) {
     super(props);
     this.state = {
-      buttonbg1: 'transparent',
-      buttonbg2: 'transparent',
-      buttonbg3: 'transparent',
-      buttonbg4: 'transparent',
+      buttonbg1: color.white,
+      buttonbg2: color.transparent,
+      buttonbg3: color.transparent,
+      buttonbg4: color.transparent,
+      buttontxt1: color.trackOrange,
+      buttontxt2: color.white,
+      buttontxt3: color.white,
+      buttontxt4: color.white,
       gradeMap: {
-        0:'None',
+        0: 'None',
         1: 'Mild',
         2: 'Moderate',
         3: 'Severe'
       },
       selectedgrade: 0,
-      selectedsymptom:''
+      selectedsymptom: ''
     };
     console.log(props);
-    console.log("screenProps", props.screenProps);
+    console.log("Form screenProps", props.screenProps);
   }
   render() {
     return (
