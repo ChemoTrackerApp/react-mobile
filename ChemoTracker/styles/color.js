@@ -12,6 +12,15 @@ const color= {
   trackBackground: '#FFF',
   trackContent: '#4E4E4E',
   trackTitle: '#EF7A5A',
+  inputGray: '#C7C7CC',
+  eventIcon: '#bababa',
+  searchNavBar: '#00676D',
+  searchIcon: '#8A7A74',
+  searchPlaceholder: '#AEAEAE',
+  searchBackground: '#FFF',
+  searchText: '#FB5B1B',
+  arrowIcon: '#FFFCFB',
+  refresh: '#AEAEAE'
 };
 
 export default color;
