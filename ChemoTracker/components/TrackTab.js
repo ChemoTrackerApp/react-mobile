@@ -51,7 +51,7 @@ class TrackTab extends Component {
   _renderScene = ({ route }) => {
     switch(route.key) {
       default:
-        return <TrackStackNav route={route} token={this.props.screenProps.token}/>
+        return <TrackStackNav index={this.state.index} token={this.props.screenProps.token}/>
     }
   }
 

@@ -21,15 +21,8 @@ class InterventionScreen extends Component {
     this.dismissButton = this.dismissButton.bind(this);
     this.state = {
       data: {
-        interventions: [
-  	      "Take your antinausea medications as directed by your oncology team",
-  	      "Contact your oncology team for further management"
-        ],
-        tips: [
-          {descriptions: ["Eat small, frequent and bland meals", "Drink small amounts of fluid regularly between meals"], icon: "water"},
-          {descriptions: ["Eat at times of day when feelings of nausea are less", "Avoid spicy and fatty foods"], icon: "food-variant"},
-          {descriptions: ["Try eating cold foods if smells from hot food are bothersome", "Avoid cooking and strong smells"], icon: "pot"}
-        ]
+        interventions: [],
+        tips: []
       },
       error: null
     };
@@ -37,11 +30,17 @@ class InterventionScreen extends Component {
 
   async componentDidMount() {
     const token = this.props.screenProps.token;
-    const symptom = this.props.screenProps.route.key;
-    const grade = this.props.navigation.state.params.selectedgrade;
+    const symptom = this.props.screenProps.index+1;
+    const grade = this.props.navigation.state.params.selectedgrade+1;
     let response = getInterventions(symptom, grade, token)
     .then((responseJson) => {
       console.log("responseJson", responseJson);
+      this.setState({
+        data: {
+          interventions: responseJson.interventions,
+          tips: responseJson.tips,
+        }
+      });
     })
     .catch((error) => {
       console.error(error);
@@ -62,7 +61,7 @@ class InterventionScreen extends Component {
           <View style={styles.interventionsContent}>
             {
               this.state.data.interventions.map((desc, index) => {
-                return (<Text key={index} style={styles.interventionsText}> {desc} </Text>);
+                return (<Text key={index} style={styles.interventionsText}> {desc.description} </Text>);
               })
             }
           </View>
@@ -75,7 +74,7 @@ class InterventionScreen extends Component {
                 <View key={itemIndex} style={styles.tipsSubsection}>
                   <View key={itemIndex} style={styles.tipsContent}>
                     {
-                      item.descriptions.map((tip, tipIndex) => {
+                      item.description.map((tip, tipIndex) => {
                         return (<Text key={tipIndex} style={styles.tipsText}> {tip} </Text>);
                       })
                     }

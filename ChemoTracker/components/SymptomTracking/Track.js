@@ -36,7 +36,7 @@ class TrackStackNav extends Component {
   }
   render() {
     const token = this.props.token;
-    return <TrackContainer screenProps={{token: token, route:this.props.route}}/>;
+    return <TrackContainer screenProps={{token: token, index:this.props.index}}/>;
   }
 }
 
