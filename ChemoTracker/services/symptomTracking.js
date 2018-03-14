@@ -54,7 +54,19 @@ export const getInterventions = (symptom, grade, token) => {
       'Authorization': `Token ${token}`
     }
   }).then(res => {
-    console.log("interven res : ", res);
+    return res.json();
+  });
+}
+export const getGrades = (symptom, token) => {
+  const queryparams = `symptom=${symptom}`;
+  return fetch(`${api}/symptom-tracker/grades?${queryparams}`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {
     return res.json();
   });
 }

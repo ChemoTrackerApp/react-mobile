@@ -34,7 +34,6 @@ class InterventionScreen extends Component {
     const grade = this.props.navigation.state.params.selectedgrade+1;
     let response = getInterventions(symptom, grade, token)
     .then((responseJson) => {
-      console.log("responseJson", responseJson);
       this.setState({
         data: {
           interventions: responseJson.interventions,

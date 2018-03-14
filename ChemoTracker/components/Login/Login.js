@@ -12,8 +12,8 @@ export default class Login extends React.Component {
     this.state = {
       fontLoaded: false,
       errorLabel: '',
-      loginUsername: 'seven@seven.com',
-      loginPassword: 'mustaqeem',
+      loginUsername: '',
+      loginPassword: '',
       auth_token: ''
     }
   }
