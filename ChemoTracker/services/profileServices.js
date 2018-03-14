@@ -22,6 +22,18 @@ export const getAccessKey = (token) => {
   }).then(res => {return res.json()});
 }
 
+export const login = () => {
+  return fetch(`${api}/rest-auth/login/`, {
+    method: 'post',
+    headers: header,
+    body: JSON.stringify({
+      email: "seven@seven.com",
+      password: "mustaqeem"
+    })
+  }).then(res => {
+    return res.json()});
+}
+
 export const postProfile = (data, token) => {
   return fetch(`${api}/rest-auth/login/`, {
     method: 'post',
