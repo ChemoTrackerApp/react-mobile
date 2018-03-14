@@ -6,6 +6,7 @@ import styles from '../../styles/profile-main.js';
 import color from '../../styles/color.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RNS3 } from 'react-native-aws3';
+import { getAccessKey } from '../../services/profileServices.js';
 
 class ProfileTop extends Component {
 	constructor(props) {
@@ -13,6 +14,7 @@ class ProfileTop extends Component {
 		this.state = {
 			image: this.props.image,
 			name: this.props.name,
+			token: this.props.token
 		}
 	}
 
@@ -32,30 +34,33 @@ class ProfileTop extends Component {
   	});
 
     if (!result.cancelled) {
+			getAccessKey(this.state.token)
+			.then(res => {
+				console.log("profile res", res);
+				file = {
+					uri: result.uri,
+					name: "profileImage.jpeg",
+					type: "image/jpeg"
+				}
+				options = {
+					keyPrefix: "profile-images/",
+				  bucket: "chemotracker",
+				  region: res.region,
+				  accessKey: res.accessKey,
+				  secretKey: res.secretKey,
+				  successActionStatus: 201
+				}
+				RNS3.put(file, options).then(response => {
+					console.log(response);
+					if (response.status !== 201)
+				    throw new Error("Failed to upload image to S3");
+					imageUri = response.body.postResponse.location;
+					console.log(response.body.postResponse);
+					this.setState({ image: imageUri });
+					//send response to backend
 
-			file = {
-				uri: result.uri,
-				name: "profileImage.jpeg",
-				type: "image/jpeg"
-			}
-			options = {
-				keyPrefix: "profile-images/",
-			  bucket: "chemotracker",
-			  region: "us-east-2",
-			  accessKey: "AKIAIL7EGGDCC47UKY7Q",
-			  secretKey: "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",
-			  successActionStatus: 201
-			}
-			RNS3.put(file, options).then(response => {
-				console.log(response);
-				if (response.status !== 201)
-			    throw new Error("Failed to upload image to S3");
-				imageUri = response.body.postResponse.location;
-				console.log(response.body.postResponse);
-				this.setState({ image: imageUri });
-				//send response to backend
-
-			});
+				});
+			})
     }
   };
 

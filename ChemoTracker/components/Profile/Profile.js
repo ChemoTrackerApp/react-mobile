@@ -14,7 +14,8 @@ class Profile extends Component {
 		super(props);
 		this.state = {
 			profileDetailsData: null,
-			profileImage: null
+			profileImage: null,
+			token: props.screenProps.token
 		}
 		this.getProfileData();
 	}
@@ -101,20 +102,13 @@ class Profile extends Component {
 	}
 
 	getProfileData() {
-		login()
-		.then(t => {
-      token = t;
-			getProfile()
-			.then(profileData => {
-				this.setImageAndDetailsData(profileData)
-			})
-			.catch(err => {
-        console.log(err);
-      })
+		getProfile(this.state.token)
+		.then(profileData => {
+			this.setImageAndDetailsData(profileData)
 		})
 		.catch(err => {
-			console.log(err);
-		})
+      console.log(err);
+    })
 	}
 
 	render() {
@@ -122,7 +116,7 @@ class Profile extends Component {
 			<Image style = {styles.backgroundImage} source={require('../../assets/img/home-bg.jpg')}>
 				<StatusBar
 					hidden = {true}/>
-				<ProfileTop navigation={this.props.navigation} image={this.state.image} name={this.state.name}/>
+				<ProfileTop navigation={this.props.navigation} token={this.state.token} image={this.state.image} name={this.state.name}/>
 				<ProfileDetailsTable sections={this.state.profileDetailsData}/>
 			</Image>
     );

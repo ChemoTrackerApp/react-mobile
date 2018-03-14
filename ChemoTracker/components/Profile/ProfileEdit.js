@@ -11,8 +11,10 @@ import { Form, Separator,InputField, LinkField, SwitchField, PickerField, DatePi
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);
+    console.log("props edit", props);
     this.state = {
-      formData: null
+      formData: null,
+      token: props.screenProps.token
     }
   }
 
@@ -21,6 +23,7 @@ class ProfileEdit extends Component {
   }
 
   saveChanges = () => {
+    // call api to save changes
     this.props.navigation.goBack();
   }
 

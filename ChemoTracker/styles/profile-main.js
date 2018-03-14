@@ -1,6 +1,7 @@
 import React from 'react';
 import color from './color.js';
 import { StyleSheet, Dimensions } from 'react-native';
+import { totalSize } from 'react-native-dimension';
 const Viewport = Dimensions.get('window');
 const inputWidth = Viewport.width - 75;
 const descriptionWidth = (Viewport.width - 80)/2;
@@ -168,7 +169,8 @@ const styles = StyleSheet.create({
   profileButton: {
     color: "#FFFFFF",
     backgroundColor: 'transparent',
-    fontSize: 22
+    fontSize: 17,
+    marginRight: 15
   }
 });
 
