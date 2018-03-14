@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Login from './Login.js';
 import SignUp from './SignUp.js';
-import MenuNavigation from '../../MenuNavigation.js'
+import Menu from '../../MenuNavigation.js'
 
 const loginStackNav = StackNavigator({
   Login: {
@@ -19,7 +19,7 @@ const loginStackNav = StackNavigator({
     }
   },
   Menu: {
-    screen:  MenuNavigation,
+    screen: Menu,
     navigationOptions: {
       header: null
     }

@@ -30,7 +30,7 @@ class FormScreen extends Component {
       selectedsymptom: ''
     };
     console.log(props);
-    console.log("screenProps", props.screenProps);
+    console.log("Form screenProps", props.screenProps);
   }
   render() {
     return (
