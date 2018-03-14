@@ -29,4 +29,16 @@ const TrackContainer = StackNavigator({
   }
 })
 
+class trackStackNav extends Component {
+  constructor(props) {
+    super(props);
+    console.log("trackStackNav", props);
+  }
+  render() {
+    return null;
+    // const token = this.props.navigation.state.params;
+    // return <TrackContainer screenProps={token}/>;
+  }
+}
+
 export default trackStackNav;

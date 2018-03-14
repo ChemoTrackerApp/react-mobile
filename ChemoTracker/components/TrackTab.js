@@ -83,11 +83,7 @@ class TrackTab extends Component {
   render() {
     return (
       <TabViewAnimated
-<<<<<<< HEAD
         screenProps={this.state}
-=======
-        // screenProps={this.state}
->>>>>>> f9ca5bd44c4b58c4e6fb7afd48999b32ccb2512d
         style={styles.container}
         navigationState={this.state}
         renderScene={this._renderScene}
