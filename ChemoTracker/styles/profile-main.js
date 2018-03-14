@@ -5,7 +5,6 @@ import { totalSize } from 'react-native-dimension';
 const Viewport = Dimensions.get('window');
 const inputWidth = Viewport.width - 75;
 const descriptionWidth = (Viewport.width - 80)/2;
-console.log(Viewport.height*0.3);
 const profileTopHeight = Viewport.height*0.3 < 220 ? 220 : Viewport.height*0.3;
 const height = Viewport.height - profileTopHeight-50;
 const profileImageHeight = 125;
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   profileTopContainer: {
-    height: profileTopHeight,
+    height: 195,
     width: '100%',
     top: 0,
     bottom: 0,
@@ -49,14 +48,19 @@ const styles = StyleSheet.create({
   overlayProfileImage: {
     position: 'absolute',
     alignSelf: 'center',
-    paddingTop: 30,
   },
   editProfileImage: {
     opacity: 0.5,
     alignSelf: 'center',
-    paddingTop: profileImageHeight-35,
-    paddingLeft: 110,
+    paddingTop: profileImageHeight-25,
+    paddingLeft: 100,
     backgroundColor: 'transparent',
+  },
+  picTextLayout: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: 50,
   },
   profileNameText: {
     fontSize: 25,
@@ -65,7 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   profileNameTextBox: {
-    paddingTop: (profileTopHeight - profileImageHeight- 120)/2,
     alignSelf: 'center'
   },
   profileSectionCell: {
@@ -169,8 +172,7 @@ const styles = StyleSheet.create({
   profileButton: {
     color: "#FFFFFF",
     backgroundColor: 'transparent',
-    fontSize: 17,
-    marginRight: 15
+    fontSize: 20,
   }
 });
 

@@ -35,14 +35,15 @@ export const login = () => {
 }
 
 export const postProfile = (data, token) => {
-  return fetch(`${api}/rest-auth/login/`, {
+  console.log(data);
+  return fetch(`${api}/users/profile/`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Token ${token}`
     },
-    body: data
+    body: JSON.stringify(data)
   }).then(res => {
     return res.json()});
 }

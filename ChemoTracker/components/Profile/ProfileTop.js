@@ -6,7 +6,7 @@ import styles from '../../styles/profile-main.js';
 import color from '../../styles/color.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { RNS3 } from 'react-native-aws3';
-import { getAccessKey } from '../../services/profileServices.js';
+import { getAccessKey, getProfile, postProfile } from '../../services/profileServices.js';
 
 class ProfileTop extends Component {
 	constructor(props) {
@@ -36,7 +36,6 @@ class ProfileTop extends Component {
     if (!result.cancelled) {
 			getAccessKey(this.state.token)
 			.then(res => {
-				console.log("profile res", res);
 				file = {
 					uri: result.uri,
 					name: "profileImage.jpeg",
@@ -51,14 +50,26 @@ class ProfileTop extends Component {
 				  successActionStatus: 201
 				}
 				RNS3.put(file, options).then(response => {
-					console.log(response);
 					if (response.status !== 201)
 				    throw new Error("Failed to upload image to S3");
 					imageUri = response.body.postResponse.location;
-					console.log(response.body.postResponse);
 					this.setState({ image: imageUri });
 					//send response to backend
-
+					getProfile(this.state.token)
+					.then(profileData => {
+						profileData.image = imageUri;
+						postProfile(profileData, this.state.token)
+						.then(res => {
+							console.log("Result after profile post");
+							console.log(res);
+						})
+						.catch(err => {
+				      console.log(err);
+				    })
+					})
+					.catch(err => {
+			      console.log(err);
+			    })
 				});
 			})
     }
@@ -77,18 +88,22 @@ class ProfileTop extends Component {
 						<Text style={styles.profileButton}>Edit</Text>
 					</TouchableOpacity>
 				</View>
-				<View style={styles.overlayProfileImage}>
-				{
-						<Image source = {{ uri: this.state.image }} style = {styles.profileImage}></Image>
-				}
-				</View>
-				<View style={styles.editProfileImage}>
-					<TouchableWithoutFeedback onPress={this.onPress}>
-						<Icon size={25} name="camera" color={color.white}/>
-					</TouchableWithoutFeedback>
-				</View>
-				<View style={styles.profileNameTextBox}>
-					<Text style = {styles.profileNameText}>{this.state.name}</Text>
+				<View style = {styles.picTextLayout}>
+					<View>
+						<View style={styles.overlayProfileImage}>
+						{
+								<Image source = {{ uri: this.state.image }} style = {styles.profileImage}></Image>
+						}
+						</View>
+						<View style={styles.editProfileImage}>
+							<TouchableWithoutFeedback onPress={this.onPress}>
+								<Icon size={25} name="camera" color={color.white}/>
+							</TouchableWithoutFeedback>
+						</View>
+					</View>
+					<View style={styles.profileNameTextBox}>
+						<Text style = {styles.profileNameText}>{this.state.name}</Text>
+					</View>
 				</View>
       </View>
 		);
