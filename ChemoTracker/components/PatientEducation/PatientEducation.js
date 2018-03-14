@@ -11,22 +11,30 @@ import color from '../../styles/color.js';
 class PatientEducation extends Component {
   static navigationOptions = {
     tabBarLabel: "Search",
-    tabBarIcon: () => (<FontAwesomeIcon size={ 24 } name="search" color={ color.navBarIcon } />)
+    tabBarIcon: () => (<FontAwesomeIcon size={24} name="search" color={color.navBarIcon} />)
   }
 
   constructor(props) {
     super(props);
     this.state = {
+      isFocused: false,
+      searchInputEdited: false,
       question: ''
     };
   }
 
   componentWillMount() {
-    DeviceEventEmitter.addListener('refreshState', (e)=>{ this.setState({question: ''})})
+    DeviceEventEmitter.addListener('refreshState', (e) => {
+      this.setState({ searchInputEdited: false, question: '' })
+    })
   }
 
   handleTextChange = (text) => {
-    this.setState({ question: text })
+    if (text.length > 0) {
+      this.setState({ searchInputEdited: true, question: text })
+    } else {
+      this.setState({ searchInputEdited: false, question: text })
+    }
   }
 
   handleQuestionSubmit = (text) => {
@@ -37,27 +45,53 @@ class PatientEducation extends Component {
     this.props.navigation.navigate('Forum')
   }
 
+  handleInputFocus = () => this.setState({ isFocused: true })
+
+  handleInputBlur = () => this.setState({ isFocused: false })
+
+  handleClearInput = () => {
+    this.searchInput.clear();
+    this.setState({ searchInputEdited: false, question: '' });
+  }
+
+  renderClearButton() {
+    if (this.state.searchInputEdited && this.state.isFocused) {
+      return (
+        <View style={searchStyles.clearButton}>
+          <TouchableOpacity onPress={() => this.handleClearInput()}>
+            <FontAwesomeIcon name="remove" size={23} color={color.searchIcon} />
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
-      <View style={ searchStyles.container }>
-        <View style={ searchStyles.section }>
-          <FontAwesomeIcon name = "stethoscope" size={ 100 } color={ color.searchIcon } />
-          <Text style={ searchStyles.label }>Questions?</Text>
-          <TextInput 
+      <View style={searchStyles.container}>
+        <View style={searchStyles.section}>
+          <FontAwesomeIcon name="stethoscope" size={100} color={color.searchIcon} />
+          <Text style={searchStyles.label}>Questions?</Text>
+          <TextInput
+            ref={(ref) => { this.searchInput = ref }}
             underlineColorAndroid="transparent"
-            style={ searchStyles.input } 
-            value={ this.state.question }
-            controlled={ true }
+            style={searchStyles.input}
+            value={this.state.question}
             placeholder="Search resources"
-            placeholderTextColor={ color.searchPlaceholder }
-            onChangeText={ this.handleTextChange }
+            placeholderTextColor={color.searchPlaceholder}
+            onChangeText={this.handleTextChange}
+            onFocus={this.handleInputFocus}
+            onBlur={this.handleInputBlur}
           />
-          <Button 
-            style={searchStyles.submitButton} 
-            textStyle={{color: '#fff'}}
-            isDisabled={ !this.state.question }
-            onPressIn={ this.handleQuestionSubmit }>
-              Search
+          {this.renderClearButton()}
+          <Button
+            style={searchStyles.submitButton}
+            textStyle={{ color: '#fff' }}
+            isDisabled={!this.state.question}
+            onPressIn={this.handleQuestionSubmit}>
+            Search
           </Button>
         </View>
       </View>

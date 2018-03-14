@@ -32,6 +32,11 @@ export const searchStyles = StyleSheet.create({
     marginTop: 33,
     marginLeft: 15
   },
+  clearButton: {
+    marginLeft: '75%', 
+    marginTop: '-9%', 
+    paddingBottom: '3.3%'
+  },
   container: {
     flex: 1,
     backgroundColor: color.searchBackground
