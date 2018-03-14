@@ -4,7 +4,7 @@ import { TabView, TabNavigator, StackNavigator } from 'react-navigation';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import color from '../styles/color.js';
-import trackStackNav from './SymptomTracking/Track.js';
+import TrackStackNav from './SymptomTracking/Track.js';
 
 const initialLayout = {
   height: 0,
@@ -17,43 +17,55 @@ class TrackTab extends Component {
     tabBarIcon: () => (<Icon size={24} name="home" color={color.navBarIcon} />)
   }
 
-  state = {
-    index: 0,
-    routes: [
-      { key: 'nausea', title: 'Nausea' },
-      { key: 'vomiting', title: 'Vomiting' },
-      { key: 'fatigue', title: 'Fatigue' },
-      { key: 'diarrhea', title: 'Diarrhea' },
-      { key: 'constipation', title: 'Constipation' },
-      { key: 'mucositis', title: 'Mucositis' },
-      { key: 'handfootsyndrome', title: 'Hand Foot Syndrome' },
-      { key: 'rash', title: 'Rash' },
-      { key: 'nailchanges', title: 'Nail Changes'}
-    ],
-  };
+  constructor(props) {
+    super(props);
+    console.log("trackTab", props);
+
+    this.state = {
+      index: 0,
+      routes: [
+        { key: 'nausea', title: 'Nausea' },
+        { key: 'vomiting', title: 'Vomiting' },
+        { key: 'fatigue', title: 'Fatigue' },
+        { key: 'diarrhea', title: 'Diarrhea' },
+        { key: 'constipation', title: 'Constipation' },
+        { key: 'mucositis', title: 'Mucositis' },
+        { key: 'handfootsyndrome', title: 'Hand Foot Syndrome' },
+        { key: 'rash', title: 'Rash' },
+        { key: 'nailchanges', title: 'Nail Changes' }
+      ],
+      token: props.screenProps.token
+    };
+  }
 
   _handleIndexChange = index => this.setState({ index });
 
   _renderHeader = props => (
     <TabBar
-    {...props}
-    scrollEnabled
-    style={styles.tabbar}
+      {...props}
+      scrollEnabled
+      style={styles.tabbar}
     />
   );
 
+  _renderScene = ({ route }) => {
+    switch(route.key) {
+      default:
+        return <TrackStackNav index={this.state.index} routes={this.state.routes} token={this.props.screenProps.token}/>
+    }
+  }
 
-  _renderScene = SceneMap({
-    nausea: trackStackNav,
-    vomiting: trackStackNav,
-    fatigue: trackStackNav,
-    diarrhea: trackStackNav,
-    constipation: trackStackNav,
-    mucositis: trackStackNav,
-    handfootsyndrome: trackStackNav,
-    rash: trackStackNav,
-    nailchanges: trackStackNav
-  });
+  // _renderScene = SceneMap({
+  //   nausea: trackStackNav,
+  //   vomiting: trackStackNav,
+  //   fatigue: trackStackNav,
+  //   diarrhea: trackStackNav,
+  //   constipation: trackStackNav,
+  //   mucositis: trackStackNav,
+  //   handfootsyndrome: trackStackNav,
+  //   rash: trackStackNav,
+  //   nailchanges: trackStackNav
+  // });
 
   render() {
     return (
@@ -75,7 +87,7 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     paddingTop: 20,
-    backgroundColor:'#066368'
+    backgroundColor: '#066368'
   }
 });
 

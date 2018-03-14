@@ -7,6 +7,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { styles } from '../../styles/SymptomTracking/intervention.js';
 import color from '../../styles/color.js';
+import { getInterventions } from '../../services/symptomTracking.js';
+
 
 class InterventionScreen extends Component {
   static navigationOptions = {
@@ -17,22 +19,33 @@ class InterventionScreen extends Component {
   constructor(props){
     super(props);
     this.dismissButton = this.dismissButton.bind(this);
+    this.state = {
+      data: {
+        interventions: [],
+        tips: []
+      },
+      error: null
+    };
   }
 
-  state = {
-    data: {
-      interventions: [
-	      "Take your antinausea medications as directed by your oncology team",
-	      "Contact your oncology team for further management"
-      ],
-      tips: [
-        {descriptions: ["Eat small, frequent and bland meals", "Drink small amounts of fluid regularly between meals"], icon: "water"},
-        {descriptions: ["Eat at times of day when feelings of nausea are less", "Avoid spicy and fatty foods"], icon: "food-variant"},
-        {descriptions: ["Try eating cold foods if smells from hot food are bothersome", "Avoid cooking and strong smells"], icon: "pot"}
-      ]
-    },
-    error: null
-  };
+  async componentDidMount() {
+    const token = this.props.screenProps.token;
+    const symptom = this.props.screenProps.index+1;
+    const grade = this.props.navigation.state.params.selectedgrade+1;
+    let response = getInterventions(symptom, grade, token)
+    .then((responseJson) => {
+      this.setState({
+        data: {
+          interventions: responseJson.interventions,
+          tips: responseJson.tips,
+        }
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({ error: error });
+    });
+  }
 
   dismissButton() {
     this.props.navigation.navigate("Form");
@@ -47,7 +60,7 @@ class InterventionScreen extends Component {
           <View style={styles.interventionsContent}>
             {
               this.state.data.interventions.map((desc, index) => {
-                return (<Text key={index} style={styles.interventionsText}> {desc} </Text>);
+                return (<Text key={index} style={styles.interventionsText}> {desc.description} </Text>);
               })
             }
           </View>
@@ -60,20 +73,20 @@ class InterventionScreen extends Component {
                 <View key={itemIndex} style={styles.tipsSubsection}>
                   <View key={itemIndex} style={styles.tipsContent}>
                     {
-                      item.descriptions.map((tip, tipIndex) => {
+                      item.description.map((tip, tipIndex) => {
                         return (<Text key={tipIndex} style={styles.tipsText}> {tip} </Text>);
                       })
                     }
                   </View>
-                  <MaterialIcon name={item.icon} size={40} color={color.searchIcon}/> 
+                  <MaterialIcon name={item.icon} size={40} color={color.searchIcon}/>
                 </View>
               );
             })
           }
         </View>
         <View style={styles.dismissSection}>
-          <Button 
-            style={styles.dismissButton} 
+          <Button
+            style={styles.dismissButton}
             textStyle={{color: '#fff'}}
             onPressIn={ this.dismissButton }>
               Got it!

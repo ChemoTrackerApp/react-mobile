@@ -43,3 +43,30 @@ export const getStreak = (token) => {
     return res.json();
   });
 }
+
+export const getInterventions = (symptom, grade, token) => {
+  const queryparams = `symptom=${symptom}&grade=${grade}`;
+  return fetch(`${api}/symptom-tracker/interventions/?${queryparams}`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {
+    return res.json();
+  });
+}
+export const getGrades = (symptom, token) => {
+  const queryparams = `symptom=${symptom}`;
+  return fetch(`${api}/symptom-tracker/grades?${queryparams}`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {
+    return res.json();
+  });
+}

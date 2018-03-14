@@ -2,13 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, Button, View, Alert, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { LinearGradient, Font } from 'expo';
 
-
 import styles from '../../styles/login_screen.js';
 import { login } from '../../services/login.js';
 
 export default class Login extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       fontLoaded: false,
@@ -37,25 +36,25 @@ export default class Login extends React.Component {
       return;
     }
     login(this.state.loginUsername, this.state.loginPassword)
-    .then((responseJson) => {
-      console.log("responseJson", responseJson);
-      if(responseJson.key) {
-        this.setState({
-          auth_token: responseJson.key
-        });
+      .then((responseJson) => {
+        console.log("responseJson", responseJson);
+        if (responseJson.key) {
+          this.setState({
+            auth_token: responseJson.key
+          });
           this.props.navigation.navigate("Menu", { token: this.state.auth_token });
-      } else {
-        if(responseJson.email) {
-          console.log("email error: ", responseJson.email[0]);
-        } else if(responseJson.password) {
-          console.log("password error: ", responseJson.password[0]);
+        } else {
+          if (responseJson.email) {
+            console.log("email error: ", responseJson.email[0]);
+          } else if (responseJson.password) {
+            console.log("password error: ", responseJson.password[0]);
+          }
         }
-      }
       })
-    .catch((error) =>{
-      console.error(error);
-      this.setState({errorLabel: error});
-    });
+      .catch((error) => {
+        console.error(error);
+        this.setState({ errorLabel: error });
+      });
   }
 
   signUpClicked = () => {
@@ -65,7 +64,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar hidden={true}/>
+        <StatusBar hidden={true} />
         <Image
           source={require('../../assets/img/chemotracker.png')}
           style={styles.logo}
@@ -73,26 +72,26 @@ export default class Login extends React.Component {
         <TextInput
           keyboardType="email-address"
           underlineColorAndroid="transparent"
-          onChangeText={(text)=>{this.setState({loginUsername:text})}}
+          onChangeText={(text) => { this.setState({ loginUsername: text }) }}
           onSubmitEditing={(event) => {
-		this.refs.PasswordField.focus();
-	  }}
+            this.refs.PasswordField.focus();
+          }}
           style={styles.textFieldContainer}
           placeholder="email"
         />
         <TextInput
-          ref ="PasswordField"
+          ref="PasswordField"
           secureTextEntry={true}
           underlineColorAndroid="transparent"
-          onChangeText={(text)=>{this.setState({loginPassword:text})}}
+          onChangeText={(text) => { this.setState({ loginPassword: text }) }}
           style={styles.textFieldContainer}
-          onSubmitEditing={()=>{this.onSubmit();}}
+          onSubmitEditing={() => { this.onSubmit(); }}
           placeholder="password"
         />
-       <Text style={styles.errorLabel} >{this.state.errorLabel}</Text>
-       <TouchableOpacity
-        style={styles.loginButton}
-        onPress={()=>{this.onSubmit();}}>
+        <Text style={styles.errorLabel} >{this.state.errorLabel}</Text>
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={() => { this.onSubmit(); }}>
           <LinearGradient
             colors={['#59D0C2', '#066368']}
             start={[0, 1]}
