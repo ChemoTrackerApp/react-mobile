@@ -1,15 +1,26 @@
-const api = 'http://ec2-52-15-106-40.us-east-2.compute.amazonaws.com:8000';
-const header = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
-}
+import { api, header } from './common.js';
 
-export const getProfile = () => {
+export const getProfile = (token) => {
   return fetch(`${api}/users/profile/`, {
     method: 'get',
-    headers: header
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
   }).then(res => {return res.json()});
 };
+
+export const getAccessKey = (token) => {
+  return fetch(`${api}/users/s3-info/`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {return res.json()});
+}
 
 export const login = () => {
   return fetch(`${api}/rest-auth/login/`, {
@@ -23,10 +34,14 @@ export const login = () => {
     return res.json()});
 }
 
-export const postProfile = (data) => {
+export const postProfile = (data, token) => {
   return fetch(`${api}/rest-auth/login/`, {
     method: 'post',
-    headers: header,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    },
     body: data
   }).then(res => {
     return res.json()});
