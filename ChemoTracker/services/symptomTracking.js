@@ -31,6 +31,19 @@ export const getFilePath = (name) => {
 }
 
 
+export const getStreak = (token) => {
+  return fetch(`${api}/symptom-tracker/streak/`, {
+    method: 'get',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  }).then(res => {
+    return res.json();
+  });
+}
+
 export const getInterventions = (symptom, grade, token) => {
   const queryparams = `symptom=${symptom}&grade=${grade}`;
   return fetch(`${api}/symptom-tracker/interventions/?${queryparams}`, {

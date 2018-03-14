@@ -5,6 +5,8 @@ import { Font } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
+import { getStreak } from '../services/symptomTracking.js';
+
 
 class Home extends Component {
 
@@ -16,8 +18,10 @@ class Home extends Component {
     super(props);
     this.state = {
       fontLoaded: false,
-      token: props.screenProps.token
+      token: props.screenProps.token,
+      streak:0
     };
+    console.log("homeprops ", props);
   }
 
   async componentDidMount() {
@@ -27,6 +31,14 @@ class Home extends Component {
       'open-sans-light': require('../assets/fonts/OpenSans-Light.ttf'),
       'open-sans-regular': require('../assets/fonts/OpenSans-Regular.ttf')
     });
+    let streak = getStreak(this.state.token)
+    .then((responseJson) => {
+      console.log("responseJson", responseJson);
+      if(responseJson.streak) {
+        this.setState({
+          streak: responseJson.streak
+        });
+      }});
     this.setState({ fontLoaded: true });
   }
 
@@ -48,12 +60,12 @@ class Home extends Component {
         {this.state.fontLoaded ? (
           <View style={styles.homeContainer}>
             <View style={styles.streaksContainer}>
-              <Text style={[styles.streaksText, { fontFamily: 'open-sans-semibold' }]}>15</Text>
+              <Text style={[styles.streaksText, { fontFamily: 'open-sans-semibold' }]}>{this.state.streak}</Text>
             </View>
             <View style={styles.trackMargin}>
               <Text style={styles.centerText}>
                 <Text style={[{ fontFamily: 'open-sans-light' }, styles.trackTextFont]}>You&#39;ve tracked your health for </Text>
-                <Text style={[{ fontFamily: 'open-sans-semibold' }, styles.trackTextFont, styles.trackTextColor]}>15 days</Text>
+                <Text style={[{ fontFamily: 'open-sans-semibold' }, styles.trackTextFont, styles.trackTextColor]}>{this.state.streak} days</Text>
                 <Text style={[{ fontFamily: 'open-sans-light' }, styles.trackTextFont]}> in a row</Text>
               </Text>
               <Text style={[{ fontFamily: 'open-sans-light' }, styles.feelingTextFont, styles.feelingTextMargin]}>
