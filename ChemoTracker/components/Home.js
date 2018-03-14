@@ -65,7 +65,7 @@ class Home extends Component {
             <View style={styles.trackMargin}>
               <Text style={styles.centerText}>
                 <Text style={[{ fontFamily: 'open-sans-light' }, styles.trackTextFont]}>You&#39;ve tracked your health for </Text>
-                <Text style={[{ fontFamily: 'open-sans-semibold' }, styles.trackTextFont, styles.trackTextColor]}>15 days</Text>
+                <Text style={[{ fontFamily: 'open-sans-semibold' }, styles.trackTextFont, styles.trackTextColor]}>{this.state.streak} days</Text>
                 <Text style={[{ fontFamily: 'open-sans-light' }, styles.trackTextFont]}> in a row</Text>
               </Text>
               <Text style={[{ fontFamily: 'open-sans-light' }, styles.feelingTextFont, styles.feelingTextMargin]}>
