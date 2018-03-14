@@ -4,7 +4,7 @@ import { TabView, TabNavigator, StackNavigator } from 'react-navigation';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import color from '../styles/color.js';
-import trackStackNav from './SymptomTracking/Track.js';
+import TrackStackNav from './SymptomTracking/Track.js';
 
 const initialLayout = {
   height: 0,
@@ -48,42 +48,28 @@ class TrackTab extends Component {
     />
   );
   
-  // _renderHeader = props => {
-  //   const token = this.props.screenProps.token;
-  //   const prop = {
-  //     ...props,
-  //     token: token
-  //   }
-  //   console.log()
-  //   return (<TabBar
-  //     props={prop}
-  //     scrollEnabled
-  //     style={styles.tabbar}
-  //   />);
-  // }
+  _renderScene = ({ route }) => {
+    switch(route.key) {
+      default:
+        return <TrackStackNav token={this.props.screenProps.token}/>
+    }
+  }
 
-  // _renderScene = ({ route }) => {
-  //   switch(route.key) {
-  //     default:
-  //       return <trackStackNav token={this.props.screenProps.token}/>
-  //   }
-  // }
-  _renderScene = SceneMap({
-    nausea: trackStackNav,
-    vomiting: trackStackNav,
-    fatigue: trackStackNav,
-    diarrhea: trackStackNav,
-    constipation: trackStackNav,
-    mucositis: trackStackNav,
-    handfootsyndrome: trackStackNav,
-    rash: trackStackNav,
-    nailchanges: trackStackNav
-  });
+  // _renderScene = SceneMap({
+  //   nausea: trackStackNav,
+  //   vomiting: trackStackNav,
+  //   fatigue: trackStackNav,
+  //   diarrhea: trackStackNav,
+  //   constipation: trackStackNav,
+  //   mucositis: trackStackNav,
+  //   handfootsyndrome: trackStackNav,
+  //   rash: trackStackNav,
+  //   nailchanges: trackStackNav
+  // });
 
   render() {
     return (
       <TabViewAnimated
-        // screenProps={this.state}
         style={styles.container}
         navigationState={this.state}
         renderScene={this._renderScene}
