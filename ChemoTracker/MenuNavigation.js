@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform } from 'react-native';
 import { NavigationComponent } from 'react-native-material-bottom-navigation';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
@@ -11,7 +11,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import OctiIcon from 'react-native-vector-icons/Octicons';
 import color from './styles/color.js';
 
-const Menu = TabNavigator({
+const MainContainer = TabNavigator({
   Home: {
     screen: HomeStackNav,
     path: '',
@@ -45,22 +45,31 @@ const Menu = TabNavigator({
     },
   }
 }, {
-    tabBarPosition: 'bottom',
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: false,
-      activeTintColor: color.navBarIcon,
-      inactiveTintColor: color.navBarRipple,
-      indicatorStyle: {
-        backgroundColor: 'transparent'
-      },
-      style: {
-        backgroundColor: color.navBarBackground,
-      },
+  tabBarPosition: 'bottom',
+  tabBarOptions: {
+    showIcon: true,
+    showLabel: false,
+    activeTintColor: color.navBarIcon,
+    inactiveTintColor: color.navBarRipple,
+    indicatorStyle: {
+      backgroundColor: 'transparent'
     },
-    animationEnabled: false,
-    swipeEnabled: true,
+    style: {
+      backgroundColor: color.navBarBackground,
+    },
+  },
+  animationEnabled: false,
+  swipeEnabled: true,
+});
+
+class Menu extends Component {
+  constructor(props) {
+    super(props);
   }
-);
+  render() {
+    const token = this.props.navigation.state.params;
+    return <MainContainer screenProps={token}/>;
+  }
+}
 
 export default Menu;

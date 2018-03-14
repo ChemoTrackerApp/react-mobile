@@ -28,11 +28,11 @@ export const styles = StyleSheet.create({
   content: {
     color: color.searchText,
     fontSize: isIphoneX() || isIphonePlus() ? 22 : 19,
-    fontWeight: 'bold',   
+    fontWeight: 'bold',
     paddingBottom: isIphoneX() || isIphonePlus() ? height(0.5) : 0,
     paddingTop: isIphoneX() || isIphonePlus() ? height(3) : height(2),
     textAlign: 'center'
-    
+
   },
   dismissButton: {
     alignSelf: 'center',
@@ -40,7 +40,8 @@ export const styles = StyleSheet.create({
     borderColor: '#FB5B1B',
     height: height(5),
     padding: height(2),
-    width: isIphoneX() || isIphonePlus() ? width(40) : width(35)
+    width: isIphoneX() || isIphonePlus() ? width(40) : width(35),
+    borderRadius: width(40) / 2,
   },
   dismissSection: {
     alignItems: 'center',
@@ -49,7 +50,7 @@ export const styles = StyleSheet.create({
   interventionsContent: {
     paddingLeft: width(7),
     paddingRight: width(7),
-    paddingTop: height(1)    
+    paddingTop: height(1)
   },
   interventionsText: {
     color: color.trackContent,
@@ -75,7 +76,7 @@ export const styles = StyleSheet.create({
     borderColor: "#CECECE",
     paddingBottom: height(2),
     paddingRight: width(3),
-    paddingTop: height(2)    
+    paddingTop: height(2)
   },
   tipsSection: {
     paddingBottom: isIphoneX() || isIphonePlus() ? height(3) : height(2)
