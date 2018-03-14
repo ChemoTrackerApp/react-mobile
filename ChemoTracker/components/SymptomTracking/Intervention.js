@@ -19,27 +19,34 @@ class InterventionScreen extends Component {
   constructor(props){
     super(props);
     this.dismissButton = this.dismissButton.bind(this);
+    this.state = {
+      data: {
+        interventions: [
+  	      "Take your antinausea medications as directed by your oncology team",
+  	      "Contact your oncology team for further management"
+        ],
+        tips: [
+          {descriptions: ["Eat small, frequent and bland meals", "Drink small amounts of fluid regularly between meals"], icon: "water"},
+          {descriptions: ["Eat at times of day when feelings of nausea are less", "Avoid spicy and fatty foods"], icon: "food-variant"},
+          {descriptions: ["Try eating cold foods if smells from hot food are bothersome", "Avoid cooking and strong smells"], icon: "pot"}
+        ]
+      },
+      error: null
+    };
   }
 
-  state = {
-    data: {
-      interventions: [
-	      "Take your antinausea medications as directed by your oncology team",
-	      "Contact your oncology team for further management"
-      ],
-      tips: [
-        {descriptions: ["Eat small, frequent and bland meals", "Drink small amounts of fluid regularly between meals"], icon: "water"},
-        {descriptions: ["Eat at times of day when feelings of nausea are less", "Avoid spicy and fatty foods"], icon: "food-variant"},
-        {descriptions: ["Try eating cold foods if smells from hot food are bothersome", "Avoid cooking and strong smells"], icon: "pot"}
-      ]
-    },
-    error: null
-  };
-
-  getAllInterventions() {
-
-    getInterventions(symptom, grade, token)
-    .then({});
+  async componentDidMount() {
+    const token = this.props.screenProps.token;
+    const symptom = this.props.screenProps.route.key;
+    const grade = this.props.navigation.state.params.selectedgrade;
+    let response = getInterventions(symptom, grade, token)
+    .then((responseJson) => {
+      console.log("responseJson", responseJson);
+    })
+    .catch((error) => {
+      console.error(error);
+      this.setState({ error: error });
+    });
   }
 
   dismissButton() {

@@ -54,6 +54,7 @@ export const getInterventions = (symptom, grade, token) => {
       'Authorization': `Token ${token}`
     }
   }).then(res => {
+    console.log("interven res : ", res);
     return res.json();
   });
 }

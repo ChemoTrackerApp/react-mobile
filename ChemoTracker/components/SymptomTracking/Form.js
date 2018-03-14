@@ -84,7 +84,7 @@ class FormScreen extends Component {
           </View>
           <Button style={styles.doneButton} textStyle={styles.doneButtonText}
             onPressIn={() => {
-              this.props.navigation.navigate("Intervention");
+              this.props.navigation.navigate("Intervention", {selectedgrade: this.state.selectedgrade});
             }}>
             Done
           </Button>

@@ -47,11 +47,11 @@ class TrackTab extends Component {
       style={styles.tabbar}
     />
   );
-  
+
   _renderScene = ({ route }) => {
     switch(route.key) {
       default:
-        return <TrackStackNav token={this.props.screenProps.token}/>
+        return <TrackStackNav route={route} token={this.props.screenProps.token}/>
     }
   }
 
