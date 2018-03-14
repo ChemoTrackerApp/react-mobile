@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../styles/main.js';
 import color from '../styles/color.js';
 import { getStreak } from '../services/symptomTracking.js';
+import {  getProfile } from '../services/profileServices.js';
 
 
 class Home extends Component {
@@ -19,7 +20,9 @@ class Home extends Component {
     this.state = {
       fontLoaded: false,
       token: props.screenProps.token,
-      streak:0
+      streak:0,
+      nameLoaded: false,
+      name:''
     };
     console.log("homeprops ", props);
   }
@@ -39,6 +42,15 @@ class Home extends Component {
           streak: responseJson.streak
         });
       }});
+    let name = getProfile(this.state.token)
+    .then((responseJson) => {
+      if(responseJson.firstName){
+        this.setState({
+          name: "\n" + responseJson.firstName,
+          nameLoaded:true
+        });
+      }
+    });
     this.setState({ fontLoaded: true });
   }
 
@@ -52,8 +64,10 @@ class Home extends Component {
         source={require('../assets/img/home-bg.jpg')}>
         {this.state.fontLoaded ? (
           <Text style={[{ fontFamily: 'open-sans-light' }, styles.headerText]}>
-            Hello{"\n"}
-            <Text style={{ fontFamily: 'open-sans-semibold' }}> Angela! </Text>
+            Hello
+            {this.state.nameLoaded ? (
+              <Text style={{ fontFamily: 'open-sans-semibold' }}>{this.state.name}</Text>
+            ) : null}!
           </Text>
         ) : null}
         <Image style={styles.starfishImage} source={require('../assets/img/starfished.png')} />
